@@ -1,0 +1,26 @@
+
+div.banner {
+position: fixed;
+z-index: 1000;
+width: 1020px;
+top: 0px;
+left: 7.5%;
+font-size: 3em;
+text-align: center;
+font-weight: bold;
+font-family: verdana;
+background: url("../img/chrome.jpg") #f5f5f5 repeat;
+padding: 6px;
+}
+
+div.banner span {
+position: relative;
+top: 3px;
+}
+
+a.bClose:focus {
+font-size: 0.6em;
+position: relative;
+z-index: 1001;
+top: -40px;
+}

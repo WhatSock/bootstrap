@@ -1,0 +1,130 @@
+<html>
+<body>
+
+<div id="pg-tooltip">
+
+<div class="intro heading">
+<p>
+A tooltip control displays custom information as an overlay.
+</p>
+</div>
+
+<div class="hd">
+<h2>
+<span>
+Accessible Tooltip
+</span>
+</h2>
+</div>
+
+<div class="intro tal">
+<p>
+<a id="tooltipId" href="#" class="accTooltip helpIcon" data-src="files/tooltip.html#tooltip-help"><img
+src="img/help.png"
+alt="What is the greatest secret known to man?"
+title="What is the greatest secret known to man?"
+/></a>
+</p>
+</div>
+
+<div class="hd">
+<h2>
+<span>
+Bootstrap Syntax
+</span>
+</h2>
+</div>
+
+<div class="intro tal">
+<p>
+<code>
+&lt;a href="#"<br />
+class="accTooltip"<br />
+data-src="path/file.html#tooltipIdContent"<br />
+data-role="ContentRole"<br />
+data-autoposition="#"<br />
+data-offsetleft="#"<br />
+data-offsettop="#"<br />
+id="uniqueID"<br />
+&gt; ... &lt;/a&gt;
+</code>
+</p>
+<p>
+Or
+</p>
+<p>
+<code>
+&lt;a href="#"<br />
+class="accTooltip"<br />
+data-internal="tooltipIdContent"<br />
+data-role="ContentRole"<br />
+data-autoposition="#"<br />
+data-offsetleft="#"<br />
+data-offsettop="#"<br />
+id="uniqueID"<br />
+&gt; ... &lt;/a&gt;
+</code>
+</p>
+</div>
+
+<div class="hd">
+<h2>
+<span>
+Attributes
+</span>
+</h2>
+</div>
+
+<div class="intro tal">
+<ul class="lsn"><li>
+class="accTooltip" :
+The bootstrap class name that specifies an accessible tooltip.
+</li><li>
+data-src :
+The resource path and pointer to the ID attribute of the tooltip container element.
+If set, data-internal should be blank or not included.
+</li><li>
+data-internal :
+The ID attribute of the tooltip container element within the same document.<br />
+Syntax of tooltips within the same document:<br />
+<code>
+&lt;div class="hidden"&gt;<br />
+&lt;div id="tooltipIdContent"&gt;<br />
+...<br />
+&lt;/div&gt;<br />
+...<br />
+&lt;/div&gt;
+</code><br />
+If data-internal is set, data-src should be blank or not included.
+</li><li>
+data-role :
+The role name that is conveyed to screen reader users as beginning and ending boundary text for the new content.
+"Tooltip" is set by default if no value is specified.
+</li><li>
+data-autoposition :
+The autoPosition override, which dynamically positions the new content relative to the triggering element.
+This reflects the autoPosition property documented within AccDC, and may be a value between 0 and 12.
+The default is 3 if left blank or not included.
+</li><li>
+data-offsetleft :
+The offsetLeft override, which dynamically positions the new content relative to the triggering element.
+The default is 10 if left blank or not included.
+</li><li>
+data-offsettop :
+The offsetTop override, which dynamically positions the new content relative to the triggering element.
+The default is 0 if left blank or not included.
+</li><li>
+id :
+The unique ID of the element.
+This value is also registered as the ID of the tooltip AccDC Object, making it possible to invoke the object programmatically.<br />
+<code>
+$A.reg.uniqueID.open();<br />
+// All other AccDC API properties and methods are similarly available.
+</code>
+</li></ul>
+</div>
+
+</div>
+
+</body>
+</html>

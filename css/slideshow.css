@@ -1,0 +1,39 @@
+
+#slideshowId div.carouselCls {
+text-align: center;
+}
+
+#slideshowId div.lNav, #slideshowId div.rNav {
+width: 30px;
+height: 480px;
+float: left;
+}
+
+#slideshowId .navButton {
+padding: 6px 0px;
+background-color: #000;
+color: #f5f5f5;
+cursor: pointer;
+width: 25px;
+}
+
+#slideshowId div.rNav .navButton {
+float: right;
+margin-top: 440px;
+}
+
+#slideshowId .navButton:focus {
+outline: orange 2px inset;
+}
+
+#slideshowId .navButton > span {
+position: relative;
+top: 3px;
+}
+
+#slideshowId div.centerContent {
+width: 265px;
+height: 480px;
+float: left;
+overflow: hidden;
+}

@@ -1,0 +1,92 @@
+<html>
+<body>
+
+<div id="pg-menus">
+
+<div class="intro heading">
+<p>
+A menu control simulates the nested menu behavior of context menus in the operating system.
+</p>
+</div>
+
+<div class="hd">
+<h2>
+<span>
+Accessible Menus
+</span>
+</h2>
+</div>
+
+<div class="intro tal">
+<p>
+<button class="accMenu menu" data-src="files/menus.html#menu-options">Options</button>
+</p>
+</div>
+
+<div class="hd">
+<h2>
+<span>
+Bootstrap Syntax
+</span>
+</h2>
+</div>
+
+<div class="intro tal">
+<p>
+<code>
+&lt;a href="#"<br />
+class="accMenu"<br />
+data-src="path/file.html#topLevelMenuID"<br />
+&gt; ... &lt;/a&gt;
+</code>
+</p>
+<p>
+Or
+</p>
+<p>
+<code>
+&lt;a href="#"<br />
+class="accMenu"<br />
+data-internal="menusContainerElementID"<br />
+data-src="topLevelMenuID"<br />
+&gt; ... &lt;/a&gt;
+</code>
+</p>
+</div>
+
+<div class="hd">
+<h2>
+<span>
+Attributes
+</span>
+</h2>
+</div>
+
+<div class="intro tal">
+<ul class="lsn"><li>
+class="accMenu" :
+The bootstrap class name that specifies an accessible menu.
+</li><li>
+data-src :
+The resource path and pointer to the ID attribute of the top level menu list.
+If pointing to a menu list within the same document, only the ID attribute should be included here.
+</li><li>
+data-internal :
+The ID attribute of the container element for all menu lists within the same document.<br />
+Syntax of menu lists within the same document:<br />
+<code>
+&lt;div id="menusContainerElementID" class="hidden"&gt;<br />
+&lt;ul id="topLevelMenuID"&gt;<br />
+...<br />
+&lt;/ul&gt;<br />
+...<br />
+&lt;/div&gt;
+</code><br />
+If data-src is set to an external source, data-internal should be blank or not included.
+</li></ul>
+</div>
+
+</div>
+
+</body>
+</html>

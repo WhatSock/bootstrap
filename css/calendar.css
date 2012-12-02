@@ -1,0 +1,49 @@
+
+div.calendar {
+width: 16%;
+text-align: center;
+background-color: #000;
+color: #f5f5f5;
+font-weight: bold;
+}
+
+table.calendar {
+table-layout: fixed;
+width: 100%;
+}
+
+table.calendar td, table.calendar th {
+padding: 6px 0px;
+}
+
+table.calendar td span, table.calendar th span {
+position: relative;
+top: 15%;
+}
+
+td.nav, th.week, td.day, td.empty {
+border: solid thin #f5f5f5;
+}
+
+td.nav, td.day {
+cursor: pointer;
+}
+
+div.calendar *:focus {
+outline: red 2px inset;
+}
+
+td.disabled {
+background-color: #2f4f4f;
+color: #778899;
+cursor: auto;
+}
+
+td.comment > span {
+background-color: #228b22;
+border: solid thin #f5f5f5;
+}
+
+td.selected {
+border: solid thin #ff4500;
+}

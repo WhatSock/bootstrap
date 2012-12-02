@@ -1,0 +1,82 @@
+<html>
+<body>
+
+<div id="pg-banner">
+
+<div class="intro heading">
+<p>
+A banner control displays important information by fixing it to a specific area of the viewport.
+</p>
+</div>
+
+<div class="hd">
+<h2>
+<span>
+Accessible Banner
+</span>
+</h2>
+</div>
+
+<div id="bannerId" data-src="files/banner.html#banner-welcome" data-role="Banner" class="accBanner"></div>
+
+<div class="intro tal">
+<p>
+<button onclick="$A.reg.bannerId.open();" class="banner">Reopen the Accessible Banner</button>
+For testing purposes, mouse out of the banner to close it, or Tab to and activate the hidden Close link.
+</p>
+</div>
+
+<div class="hd">
+<h2>
+<span>
+Bootstrap Syntax
+</span>
+</h2>
+</div>
+
+<div class="intro tal">
+<p>
+<code>
+&lt;div class="accBanner"<br />
+data-src="path/file.html#containerId"<br />
+data-role="ContentPanelRoleName"<br />
+id="uniqueID"<br />
+&gt;&lt;/div&gt;
+</code>
+</p>
+</div>
+
+<div class="hd">
+<h2>
+<span>
+Attributes
+</span>
+</h2>
+</div>
+
+<div class="intro tal">
+<ul class="lsn"><li>
+class="accBanner" :
+The bootstrap class name that specifies an accessible banner.
+</li><li>
+data-src :
+The resource path and pointer to the ID attribute of the banner container element.
+</li><li>
+data-role :
+The role name that is conveyed to screen reader users as beginning and ending boundary text for the new content.
+"Banner" is set by default if no value is specified.
+</li><li>
+id :
+The unique ID of the element.
+This value is also registered as the ID of the banner AccDC Object, making it possible to invoke the object programmatically.<br />
+<code>
+$A.reg.uniqueID.open();<br />
+// All other AccDC API properties and methods are similarly available.
+</code>
+</li></ul>
+</div>
+
+</div>
+
+</body>
+</html>

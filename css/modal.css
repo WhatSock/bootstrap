@@ -1,0 +1,46 @@
+
+div.modal {
+position: fixed;
+z-index: 1000;
+background-color: #000;
+-moz-opacity: 0.7;
+opacity: .70;
+filter: alpha(opacity=70);
+left: 0;
+top: 0;
+height: 100%;
+width: 100%;
+}
+
+div.modal > div.containerDiv {
+position: relative;
+height: 180px;
+width: 305px;
+top: 35%;
+left: 37%;
+overflow: auto;
+background-color: #fff;
+-moz-opacity: 1;
+opacity: 1;
+filter: alpha(opacity=100);
+}
+
+div#modal-login {
+text-align: left;
+font-size: 2.3em;
+}
+
+div#modal-login form > span {
+text-align: center;
+float: left;
+width: 49%;
+}
+
+div#modal-login button {
+background-color: #000;
+color: #f5f5f5;
+}
+
+div#modal-login form *:focus {
+outline: orange 2px inset;
+}

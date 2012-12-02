@@ -1,0 +1,106 @@
+<html>
+<body>
+
+<div id="pg-accordion">
+
+<div class="intro heading">
+<p>
+An accordion control groups related information within expandable and collapsable sections.
+</p>
+</div>
+
+<div class="hd">
+<h2>
+<span>
+Accessible Accordion
+</span>
+</h2>
+</div>
+
+<div class="intro tal viewport">
+
+<div class="accAccordion" data-src="files/accordion.xml" data-defaultopen="0" id="container"></div>
+
+</div>
+
+<div class="hd">
+<h2>
+<span>
+Bootstrap Syntax
+</span>
+</h2>
+</div>
+
+<div class="intro tal">
+<p>
+<code>
+&lt;div class="accAccordion"<br />
+data-src="path/file.xml"<br />
+data-defaultopen="#"<br />
+data-role="ContentPanelRoleName"<br />
+data-tabrole="TriggeringElementRoleName"<br />
+data-tabstate="TriggeringElementOpenState"<br />
+&gt;&lt;/div&gt;
+</code>
+</p>
+</div>
+
+<div class="hd">
+<h2>
+<span>
+Attributes
+</span>
+</h2>
+</div>
+
+<div class="intro tal">
+<ul class="lsn"><li>
+class="accAccordion" :
+The bootstrap class name that specifies an accessible accordion.
+</li><li>
+data-src :
+The resource path.
+</li><li>
+data-defaultopen :
+The array index number of the accordion branch to open automatically when loaded.
+Leave blank to specify none.
+</li><li>
+data-role :
+The role name that is conveyed to screen reader users as beginning and ending boundary text for the expanded content.
+"Accordion" is set by default if no value is specified.
+</li><li>
+data-tabrole :
+The role name that is conveyed to screen reader users within the triggering link, which is appended to the visible link text.
+"Accordion" is set by default if no value is specified.
+</li><li>
+data-tabstate :
+The state name that is conveyed to screen reader users within the triggering link after activation, which is appended to the data-tabrole value.
+"Open" is set by default if no value is specified.
+</li></ul>
+</div>
+
+<div class="hd">
+<h2>
+<span>
+XML Syntax
+</span>
+</h2>
+</div>
+
+<div class="intro tal">
+<p>
+<code>
+&lt;?xml version="1.0" encoding="UTF-8" ?&gt;<br />
+&lt;group&gt;<br />
+&lt;link name="Link Text Name" class="linkClassName" &gt;&lt;![CDATA[<br />
+HTML markup for accordion content here.<br />
+]]&gt;&lt;/link&gt;<br />
+&lt;/group&gt;
+</code>
+</p>
+</div>
+
+</div>
+
+</body>
+</html>

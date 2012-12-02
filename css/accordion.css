@@ -1,0 +1,8 @@
+
+a.aLink:after {
+content: '\2192';
+}
+
+a.aLink.open:after {
+content: '\2190';
+}

@@ -1,0 +1,115 @@
+<html>
+<body>
+
+<div id="pg-modal">
+
+<div class="intro heading">
+<p>
+A modal control displays information or interactive content that must be dismissed before further interaction with the background page can occur.
+</p>
+</div>
+
+<div class="hd">
+<h2>
+<span>
+Accessible Modal
+</span>
+</h2>
+</div>
+
+<div class="intro tal">
+<p>
+<button id="modalId" data-src="files/modal.html#modal-login" data-role="Login" class="accModal lightbox">Login</button>
+</p>
+</div>
+
+<div class="hd">
+<h2>
+<span>
+Bootstrap Syntax
+</span>
+</h2>
+</div>
+
+<div class="intro tal">
+<p>
+<code>
+&lt;a href="#"<br />
+class="accModal"<br />
+data-src="path/file.html#modalIdContent"<br />
+data-role="ContentRole"<br />
+id="uniqueID"<br />
+&gt; ... &lt;/a&gt;
+</code>
+</p>
+<p>
+Or
+</p>
+<p>
+<code>
+&lt;a href="#"<br />
+class="accModal"<br />
+data-internal="modalIdContent"<br />
+data-role="ContentRole"<br />
+id="uniqueID"<br />
+&gt; ... &lt;/a&gt;
+</code>
+</p>
+</div>
+
+<div class="hd">
+<h2>
+<span>
+Attributes
+</span>
+</h2>
+</div>
+
+<div class="intro tal">
+<ul class="lsn"><li>
+class="accModal" :
+The bootstrap class name that specifies an accessible modal.
+</li><li>
+data-src :
+The resource path and pointer to the ID attribute of the modal container element.
+If set, data-internal should be blank or not included.
+</li><li>
+data-internal :
+The ID attribute of the modal container element within the same document.<br />
+Syntax of modals within the same document:<br />
+<code>
+&lt;div class="hidden"&gt;<br />
+&lt;div id="modalIdContent"&gt;<br />
+...<br />
+&lt;/div&gt;<br />
+...<br />
+&lt;/div&gt;
+</code><br />
+If data-internal is set, data-src should be blank or not included.
+</li><li>
+data-role :
+The role name that is conveyed to screen reader users as beginning and ending boundary text for the new content.
+"Modal" is set by default if no value is specified.
+</li><li>
+id :
+The unique ID of the element.
+This value is also registered as the ID of the modal AccDC Object, making it possible to invoke the object programmatically.<br />
+<code>
+$A.reg.uniqueID.open();<br />
+// All other AccDC API properties and methods are similarly available.
+</code>
+</li><li>
+data-first="true" :
+Within the modal content, this specifies the first active element within the modal.
+When pressing Tab to navigate past the last active element in the modal, focus will automatically be moved to the first active element.
+</li><li>
+data-last="true" :
+Within the modal content, this specifies the last active element within the modal.
+When pressing Shift+Tab to navigate past the first active element in the modal, focus will automatically be moved to the last active element.
+</li></ul>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+
+div.tabs {
+width: 70%;
+margin-left: 15%;
+}
+
+div.tab, a.tab {
+width: 24%;
+float: left;
+padding: 15px 0px;
+font-size: 1.4em;
+font-weight: bold;
+}
+
+div.tab span, a.tab span {
+padding: 10px 20px;
+border: solid thin black;
+color: #000;
+background-color: #f5f5f5;
+}
+
+div.tab.active span, a.tab.active span {
+color: #f5f5f5;
+background-color: #000000;
+}
