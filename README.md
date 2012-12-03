@@ -1,4 +1,5 @@
-# AccDC Bootstrap
+AccDC Bootstrap
+=====
 
 AccDC Bootstrap is an HTML parser that renders advanced, fully accessible interactive controls using semantic HTML markup.
 
@@ -36,6 +37,7 @@ Bootstrapping can also be manually invoked using the $A.bootstrap method for ind
 
 AccDC Bootstrap is distributed under the terms of the GNU LGPL.
 
-## Project home page:
+Project home:
+-----
 
 http://whatsock.com/bootstrap
