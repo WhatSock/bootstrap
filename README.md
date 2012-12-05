@@ -1,7 +1,7 @@
 AccDC Bootstrap
 =====
 
-AccDC Bootstrap is an HTML parser that renders advanced, fully accessible interactive controls using semantic HTML markup.
+AccDC Bootstrap is an HTML parser that renders advanced, accessible interactive controls using semantic HTML markup.
 
 Bootstrapping refers to the use of semantic HTML markup to configure advanced controls, which are then magically converted into dynamic interactive components when the content finishes loading.
 
@@ -21,7 +21,7 @@ The style sheets for all bootstrap components are fully configurable, so they ca
 
 The bootstrap module itself is also fully configurable, so that new features and components can easily be added and customized for global integration.
 
-All AccDC Bootstrap components are fully WCAG 2.0 compliant, ARIA standards compliant, and Section-508 compliant.
+All AccDC Bootstrap components are WCAG 2.0 compliant, ARIA standards compliant, and Section-508 compliant.
 
 Tested using:
 
