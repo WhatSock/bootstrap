@@ -41,3 +41,11 @@ Project home:
 -----
 
 http://whatsock.com/bootstrap
+
+Related projects:
+-----
+
+Standalone AccDC API: https://github.com/accdc/accdc
+AccDC API for jQuery: https://github.com/accdc/accdc-jquery
+Standalone AccDC Bootstrap: https://github.com/accdc/bootstrap
+AccDC Bootstrap for jQuery: https://github.com/accdc/bootstrap-jquery
