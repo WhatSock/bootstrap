@@ -35,7 +35,7 @@ Recursive processing is also supported, so that new content, when rendered, will
 
 Bootstrapping can also be manually invoked using the $A.bootstrap method for individual DOM nodes.<br />
 
-AccDC Bootstrap is distributed under the terms of the GNU LGPL.
+AccDC Bootstrap is distributed under the terms of the Open Source Initiative OSI - MIT License.
 
 Project home:
 -----
