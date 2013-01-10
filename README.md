@@ -37,6 +37,26 @@ Bootstrapping can also be manually invoked using the $A.bootstrap method for ind
 
 AccDC Bootstrap is distributed under the terms of the Open Source Initiative OSI - MIT License.
 
+Bootstrapped Modules
+-----
+
+Bootstrapping occurs using modules from the AccDC Component Library.
+
+The AccDC Component Library is a collection of accessible control types that automate the structural and functional accessibility of each control according to relevant accessibility best practices. The controls can be populated with any type of content, and can be styled to fit any type of user interface layout, in any language, without negatively impacting accessibility. The controls tap into the accessibility features of the AccDC API to render content in an accessible manner, then apply supporting markup and scripting to automatically ensure accessibility for screen reader and keyboard only users. This makes it possible for developers to add fully customizable components, that look and feel exactly as they desire, while ensuring functional accessibility at the same time without the risk of coding misinterpretation by those who are unfamiliar with ATs. 
+
+The following modules are included:
+
+* Accessible Modal controls.
+* Accessible Banner controls.
+* Accessible Tooltip controls.
+* Accessible Popup controls.
+* ARIA Tab controls.
+* ARIA context sensitive dropdown Menu controls. 
+* ARIA Tree controls. 
+* ARIA Date Picker controls. 
+* Accessible Accordion controls. 
+* Accessible Carousel, Slideshow, and Wizard controls. 
+
 Project home:
 -----
 
