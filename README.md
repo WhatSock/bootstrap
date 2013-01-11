@@ -56,6 +56,7 @@ The following modules are included:
 * ARIA Date Picker controls. 
 * Accessible Accordion controls. 
 * Accessible Carousel, Slideshow, and Wizard controls. 
+* Keyboard accessible Scrollable Div controls.  
 
 Project home:
 -----

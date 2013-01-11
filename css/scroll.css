@@ -1,0 +1,25 @@
+
+#scrollPane {
+height: 350px;
+width: 400px;
+font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+text-align: left;
+font-size: 1.2em;
+background: url("../img/scroll/backdrop.jpg") #000 no-repeat;
+color: #fff;
+margin-left: 26%;
+}
+
+#scrollPane > * {
+width: 390px;
+margin-left: 5px;  
+}
+
+div.accScrollable {
+overflow: auto;
+border: solid thin black;
+}
+
+div.accScrollable:focus {
+outline: 2px red inset;
+}

@@ -1,5 +1,5 @@
 /*!
-AccDC Bootstrap R1.0
+AccDC Bootstrap R1.1
 Copyright 2010-2013 Bryan Garaventa (WhatSock.com)
 Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under the terms of the Open Source Initiative OSI - MIT License
 */
@@ -258,6 +258,13 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 				});
 			}
 		}
+
+		// Keyboard Accessible Scrollable Div
+		// Parse all div tags that include the class 'accScrollable'
+		if ($A.makeScrollable)
+			$A.query('div.accScrollable', context, function(i, o){
+				$A.makeScrollable(o);
+			});
 	};
 
 	$A.bind(window, 'load', $A.bootstrap);

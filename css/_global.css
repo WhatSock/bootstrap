@@ -73,7 +73,7 @@ font-size: 1.4em;
 margin: 20px 20px 20px 20%;
 padding: 10px 0px;
 text-align: center;
-width: 55%;
+width: 60%;
 outline-style: none;
 font-weight: bold;
 background: url("../img/black_metal_b.jpg") #000 repeat;
@@ -136,7 +136,7 @@ width: 100%;
 
 ul.menuList > li {
 height: 45px;
-width: 8%;
+width: 7.6%;
 float: left;
 border: none;
 }
@@ -235,4 +235,16 @@ a.helpIcon, a.helpIcon img {
 display: block;
 width: 40px;
 height: 83px;
+}
+
+#scrollPane div.title {
+font-size: 1.4em;
+padding: 8px 0px;
+text-align: center;
+}
+
+#scrollPane i {
+padding: 8px 0px;
+font-size: 0.7em;
+float: right;
 }
