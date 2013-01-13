@@ -1,5 +1,5 @@
 /*!
-AccDC Bootstrap R1.1
+AccDC Bootstrap R1.2
 Copyright 2010-2013 Bryan Garaventa (WhatSock.com)
 Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under the terms of the Open Source Initiative OSI - MIT License
 */
@@ -27,7 +27,15 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 		// A and Button tags were chosen because they are always active elements, to ensure keyboard accessibility.
 		if ($A.setModal)
 			$A.query('a.accModal, button.accModal', context, function(i, o){
-				var p = $A.getAttr(o, 'data-src'), cid = $A.getEl($A.getAttr(o, 'data-internal'));
+				if ($A.reg[o.id] && $A.reg[o.id].loaded){
+					var tdc = $A.reg[o.id];
+					tdc.returnFocus = false;
+					tdc.close();
+					tdc.returnFocus = true;
+				}
+
+				var p = $A.getAttr(o, 'data-src'),
+					cid = $A.getEl($A.getAttr(o, 'data-internal')) || (p ? null : $A.reg[o.id] && $A.reg[o.id].source);
 
 				if (cid || p)
 					$A.setModal(
@@ -52,7 +60,15 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 		// A and Button tags were chosen because they are always active elements, to ensure keyboard accessibility.
 		if ($A.setPopup)
 			$A.query('a.accPopup, button.accPopup', context, function(i, o){
-				var p = $A.getAttr(o, 'data-src'), cid = $A.getEl($A.getAttr(o, 'data-internal')),
+				if ($A.reg[o.id] && $A.reg[o.id].loaded){
+					var tdc = $A.reg[o.id];
+					tdc.returnFocus = false;
+					tdc.close();
+					tdc.returnFocus = true;
+				}
+
+				var p = $A.getAttr(o, 'data-src'),
+					cid = $A.getEl($A.getAttr(o, 'data-internal')) || (p ? null : $A.reg[o.id] && $A.reg[o.id].source),
 					autoPosition = parseInt($A.getAttr(o, 'data-autoposition')),
 					offsetLeft = parseInt($A.getAttr(o, 'data-offsetleft')), offsetTop = parseInt($A.getAttr(o, 'data-offsettop'));
 
@@ -76,7 +92,15 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 		// A and Button tags were chosen because they are always active elements, to ensure keyboard accessibility.
 		if ($A.setTooltip)
 			$A.query('a.accTooltip, button.accTooltip', context, function(i, o){
-				var p = $A.getAttr(o, 'data-src'), cid = $A.getEl($A.getAttr(o, 'data-internal')),
+				if ($A.reg[o.id] && $A.reg[o.id].loaded){
+					var tdc = $A.reg[o.id];
+					tdc.returnFocus = false;
+					tdc.close();
+					tdc.returnFocus = true;
+				}
+
+				var p = $A.getAttr(o, 'data-src'),
+					cid = $A.getEl($A.getAttr(o, 'data-internal')) || (p ? null : $A.reg[o.id] && $A.reg[o.id].source),
 					autoPosition = parseInt($A.getAttr(o, 'data-autoposition')),
 					offsetLeft = parseInt($A.getAttr(o, 'data-offsetleft')), offsetTop = parseInt($A.getAttr(o, 'data-offsettop'));
 
@@ -264,6 +288,75 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 		if ($A.makeScrollable)
 			$A.query('div.accScrollable', context, function(i, o){
 				$A.makeScrollable(o);
+			});
+
+		// Accessible Toggle
+		// Parse all tags that include the class 'accToggle'
+		// Must be a container element that includes label text, even if offscreen positioned.
+		// Required: Accessible Popup Module
+		if ($A.setPopup)
+			$A.query('.accToggle', context, function(i, o){
+				if ($A.reg[o.id] && $A.reg[o.id].loaded)
+					$A.reg[o.id].close();
+
+				var p = $A.getAttr(o, 'data-src'),
+					cid = $A.getEl($A.getAttr(o, 'data-internal')) || (p ? null : $A.reg[o.id] && $A.reg[o.id].source),
+					isStatic = $A.getEl($A.getAttr(o, 'data-insert')), state = $A.getAttr(o, 'data-defaultopen') ? true : false,
+					toggleClass = $A.getAttr(o, 'data-toggleclass') || 'togglePressed';
+
+				if ((cid || p) && isStatic){
+					$A.setAttr(o,
+									{
+									tabindex: '0',
+									'aria-pressed': 'false'
+									});
+
+					// Ensure keyboard accessibility for non-active elements such as Divs, Spans, and A tags with no href attribute
+					$A.bind(o, 'keydown', function(ev){
+						var k = ev.which || ev.keyCode;
+
+						if (k == 13 || k == 32){
+							$A.trigger(o, 'click');
+							ev.preventDefault();
+						}
+					});
+
+					$A.setPopup(
+									{
+									// Set the ID of the AccDC Object to match the ID of the triggering element.
+									id: o.id,
+									role: 'Region',
+									bind: 'click',
+									trigger: o,
+									isToggle: true,
+									source: cid && cid.nodeType === 1 ? cid.parentNode.removeChild(cid) : p.replace('#', ' #'),
+									mode: cid && cid.nodeType === 1 ? 0 : null,
+									isStatic: isStatic,
+									autoStart: $A.getAttr(o, 'data-defaultopen') ? true : false,
+									// Manually override defaults
+									autoPosition: 0,
+									cssObj:
+													{
+													position: ''
+													},
+									runDuring: function(dc){},
+									runBeforeClose: function(dc){},
+									runAfter: function(dc){
+										$A.addClass(o, toggleClass);
+										$A.setAttr(dc.triggerObj, 'aria-pressed', 'true');
+									},
+									runAfterClose: function(dc){
+										$A.remClass(o, toggleClass);
+										$A.setAttr(dc.triggerObj, 'aria-pressed', 'false');
+									},
+									keyDown: function(ev, dc){},
+									announce: false,
+									forceFocus: false,
+									returnFocus: false,
+									className: 'toggle-section',
+									showHiddenBounds: false
+									});
+				}
 			});
 	};
 

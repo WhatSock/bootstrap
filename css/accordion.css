@@ -1,4 +1,8 @@
 
+.accAccordion {
+text-align: left;
+}
+
 a.aLink:after {
 content: '\2192';
 }

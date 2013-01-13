@@ -57,6 +57,7 @@ The following modules are included:
 * Accessible Accordion controls. 
 * Accessible Carousel, Slideshow, and Wizard controls. 
 * Keyboard accessible Scrollable Div controls.  
+* ARIA Toggle controls.  
 
 Project home:
 -----

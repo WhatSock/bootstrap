@@ -1,0 +1,28 @@
+
+.accToggle {
+font-size: 1.2em;
+float: left;
+}
+
+.accToggle .icon {
+height: 20px;
+width: 19px;
+background: url("../img/toggle/right.png") #f5f5f5 no-repeat;
+float: left;
+margin-right: 10px;
+}
+
+.accToggle.togglePressed .icon {
+background: url("../img/toggle/left.png") #f5f5f5 no-repeat;
+}
+
+.accToggle .lbl {
+float: left;
+color: #000;
+background-color: #f5f5f5;
+}
+
+.accToggle.togglePressed .lbl {
+color: #f5f5f5;
+background-color: #000;
+}
