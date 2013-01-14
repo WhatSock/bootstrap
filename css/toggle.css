@@ -2,6 +2,8 @@
 .accToggle {
 font-size: 1.2em;
 float: left;
+cursor: pointer;
+border: solid thin black;
 }
 
 .accToggle .icon {
