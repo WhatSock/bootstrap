@@ -1,5 +1,5 @@
 /*!
-AccDC Bootstrap R1.2
+AccDC Bootstrap R1.3
 Copyright 2010-2013 Bryan Garaventa (WhatSock.com)
 Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under the terms of the Open Source Initiative OSI - MIT License
 */
@@ -51,6 +51,15 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 
 										// Configure specific controls when detected
 										$A.getScript('js/config/modals.js');
+
+										// Add a background div for the filtered opasity, with class='modalBackdrop'
+										dc.backdrop = $A.createEl('div', null, null, 'modalBackdrop', document.createTextNode(' '));
+										dc.accDCObj.parentNode.insertBefore(dc.backdrop, dc.accDCObj);
+									},
+									runAfterClose: function(dc){
+										// Remove the backdrop div after the modal closes
+										if (dc.backdrop)
+											dc.backdrop.parentNode.removeChild(dc.backdrop);
 									}
 									});
 			});
@@ -147,18 +156,36 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 
 		// Accessible Accordions
 		// Parse all Div tags that include the class 'accAccordion'
-		if ($A.generateAccordion)
+		if ($A.generateAccordion){
+			var track = {};
 			$A.query('div.accAccordion', context, function(i, o){
-				var p = $A.getAttr(o, 'data-src'), d = $A.getAttr(o, 'data-defaultopen');
+				var g = $A.getAttr(o, 'data-group');
 
-				if (p)
-					$A.generateAccordion(o, p, d === '' ? '' : parseInt(d),
-									{
-									role: $A.getAttr(o, 'data-role') || 'Accordion',
-									tabRole: $A.getAttr(o, 'data-tabrole') || 'Accordion',
-									tabState: $A.getAttr(o, 'data-tabstate') || 'Open'
-									});
+				if (g){
+					if (!track[g])
+						track[g] = [];
+					track[g].push(o);
+				}
 			});
+
+			for (n in track){
+
+				$A.generateAccordion(track[n],
+								{
+								accordionRole: $A.getAttr(track[n][0], 'data-role') || 'Accordion',
+								accordionState: $A.getAttr(track[n][0], 'data-openstate') || 'Expanded',
+								toggleClass: 'open',
+								preload: true,
+								preloadImages: true
+								}, context, function(dc){
+				// Optionally perform an action after each accordion finishes expanding.
+				// dc.containerDiv is the DOM node that contains the newly loaded content,
+				// and 'this' or dc.triggerObj is the triggering element.
+				// dc is an AccDC Object, and all AccDC API properties and methods apply.
+				// E.G dc.close() will close the accordion.
+				});
+			}
+		}
 
 		// Accessible Carousels/Slideshows
 		// Parse all Div tags that include the class 'accCarousel'

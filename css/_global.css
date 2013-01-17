@@ -250,3 +250,7 @@ float: right;
 #pg-toggle dt {
 text-align: left;
 }
+
+dt {
+margin-top: 15px;
+}

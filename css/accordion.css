@@ -1,12 +1,30 @@
 
 .accAccordion {
-text-align: left;
+font-size: 1.2em;
+float: left;
+cursor: pointer;
+border: solid thin black;
 }
 
-a.aLink:after {
-content: '\2192';
+.accAccordion .icon {
+height: 20px;
+width: 19px;
+background: url("../img/accordion/right.png") #f5f5f5 no-repeat;
+float: left;
+margin-right: 10px;
 }
 
-a.aLink.open:after {
-content: '\2190';
+.accAccordion.open .icon {
+background: url("../img/accordion/left.png") #f5f5f5 no-repeat;
+}
+
+.accAccordion .lbl {
+float: left;
+color: #000;
+background-color: #f5f5f5;
+}
+
+.accAccordion.open .lbl {
+color: #f5f5f5;
+background-color: #000;
 }

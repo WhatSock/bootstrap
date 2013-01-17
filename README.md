@@ -1,4 +1,4 @@
-AccDC Bootstrap R1.2
+AccDC Bootstrap R1.3
 =====
 
 AccDC Bootstrap is an HTML parser that renders advanced, accessible interactive controls using semantic HTML markup.
