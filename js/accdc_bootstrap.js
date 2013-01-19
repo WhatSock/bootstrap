@@ -1,5 +1,5 @@
 /*!
-AccDC Bootstrap R1.3
+AccDC Bootstrap R1.3.1
 Copyright 2010-2013 Bryan Garaventa (WhatSock.com)
 Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under the terms of the Open Source Initiative OSI - MIT License
 */
@@ -14,8 +14,15 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 // A and Button tags were chosen because they are always active elements, to ensure keyboard accessibility.
 		if ($A.setCalendar)
 			$A.query('a.accCalendar, button.accCalendar', context, function(i, o){
+				if ($A.reg[o.id] && $A.reg[o.id].loaded){
+					var tdc = $A.reg[o.id];
+					tdc.returnFocus = false;
+					tdc.close();
+					tdc.returnFocus = true;
+				}
+
 				var targ = $A.query('input[name="' + $A.getAttr(o, 'data-name') + '"]', context)[0];
-				$A.setCalendar(o.id || $A.genId(), o, targ, false, function(ev, dc){
+				$A.setCalendar(o.id, o, targ, false, function(ev, dc){
 					targ.value = dc.range.wDays[dc.range.current.wDay].lng + ' ' + dc.range[dc.range.current.month].name + ' '
 						+ dc.range.current.mDay + ', ' + dc.range.current.year;
 					dc.close();
