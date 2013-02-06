@@ -1,7 +1,7 @@
 
 div.modal {
 position: fixed;
-height: 180px;
+height: 100px;
 width: 305px;
 top: 35%;
 left: 37%;
@@ -25,7 +25,7 @@ width: 100%;
 
 div#modal-login {
 text-align: left;
-font-size: 2.3em;
+font-size: 1.3em;
 }
 
 div#modal-login form > span {
@@ -39,6 +39,6 @@ background-color: #000;
 color: #f5f5f5;
 }
 
-div#modal-login form *:focus {
+#modal-login form *:focus {
 outline: orange 2px inset;
 }
