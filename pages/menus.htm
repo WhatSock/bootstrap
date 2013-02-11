@@ -19,7 +19,31 @@ Accessible Menus
 
 <div class="intro tal">
 <p>
-<button class="accMenu menu" data-src="files/menus.html#menu-options">Options</button>
+
+<a role="button" class="accMenu menu2"
+data-internal="hiddenDivId"
+data-src="menu-options2"
+data-containerclass="foMenu"
+data-menutag="ul"
+data-menuclass="menu2"
+data-menuitemtag="a"
+data-menufolderclass="submenu2"
+data-menulinkclass="link2"
+data-flyout="true"
+>Options (Horizontal Flyout)</a>
+
+<button class="accMenu menu"
+data-src="files/menus.html#menu-options"
+>Options (Vertical Dropdown)</button>
+
+</p>
+</div>
+
+<div class="intro tal">
+<p>
+View the article
+"<a href="http://lnkd.in/uxin9T">The ARIA Menu generator now supports variable tag structures, horizontal and vertical menu keyboard handling, customizable setting overrides, and graceful degradation.</a>"
+for instructions regarding menu ID mappings.
 </p>
 </div>
 
@@ -37,6 +61,14 @@ Bootstrap Syntax
 &lt;a href="#"<br />
 class="accMenu"<br />
 data-src="path/file.html#topLevelMenuID"<br />
+data-role="Menu"<br />
+data-openstate="Open"<br />
+data-containerclass="containerClassName"<br />
+data-menutag="ol"<br />
+data-menuclass="menuTagClassName"<br />
+data-menuitemtag="a"<br />
+data-menufolderclass="menuItemTagClassNameForSubfolders"<br />
+data-menulinkclass="menuItemTagClassNameForMenuLinks"<br />
 &gt; ... &lt;/a&gt;
 </code>
 </p>
@@ -76,14 +108,293 @@ The ID attribute of the container element for all menu lists within the same doc
 Syntax of menu lists within the same document:<br />
 <code>
 &lt;div id="menusContainerElementID" class="hidden"&gt;<br />
-&lt;ul id="topLevelMenuID"&gt;<br />
-...<br />
-&lt;/ul&gt;<br />
-...<br />
+<br />
+&lt;ol id="topLevelMenuID" class="menu"&gt;<br />
+&lt;li&gt;<br />
+&lt;a href="#" class="submenu" id="-SubmenuPointer"&gt;<br />
+Open Submenu<br />
+&lt;/a&gt;<br />
+&lt;/li&gt;<br />
+&lt;li&gt;<br />
+&lt;a href="URL" class="link" id="uniqueID"&gt;<br />
+Open Link<br />
+&lt;/a&gt;<br />
+&lt;/li&gt;<br />
+&lt;/ol&gt;<br />
+<br />
+&lt;ol id="topLevelMenuID-SubmenuPointer" class="menu"&gt;<br />
+&lt;li&gt;<br />
+&lt;a href="URL" class="link" id="uniqueID"&gt;<br />
+Open Level2 Link<br />
+&lt;/a&gt;<br />
+&lt;/li&gt;<br />
+&lt;/ol&gt;<br />
+<br />
 &lt;/div&gt;
 </code><br />
 If data-src is set to an external source, data-internal should be blank or not included.
+</li><li>
+data-role :
+The role name that is conveyed to screen reader users at the beginning and end of each menu section.
+"Menu" is set by default if no value is specified.
+</li><li>
+data-starttext :
+The role state that is conveyed to screen reader users at the beginning of each menu section.
+"Start" is set by default if no value is specified.
+</li><li>
+data-endtext :
+The role state that is conveyed to screen reader users at the end of each menu section.
+"End" is set by default if no value is specified.
+</li><li>
+data-openstate :
+The open state text that is conveyed to screen reader users within the triggering link when open.
+"Open" is set by default if no value is specified.
+</li><li>
+data-containerclass :
+The class name that will be added dynamically to the surrounding Div tag for each menu group when rendered.
+"menu" is set by default if no value is specified.
+</li><li>
+data-menutag :
+The tag name for the container element that contains all menu item tags.
+All menu item tags must be contained within this container element, even if they are not first level child nodes.
+"ol" is set by default if no value is specified.
+</li><li>
+data-menuclass :
+The shared class name that is contained within every menu container element.
+All menu tags specified by data-menutag must include this class name.
+"menu" is set by default if no value is specified.
+</li><li>
+data-menuitemtag :
+The shared tag name that specifies all menu item tags.
+All menu item tags must be contained within the container element specified by data-menutag, even if they are not first level child nodes.
+"a" is set by default if no value is specified.
+</li><li>
+data-menufolderclass :
+The shared class name that is contained within every menu tag that opens a submenu.
+"submenu" is set by default if no value is specified.
+</li><li>
+data-menulinkclass :
+The shared class name that is contained within every menu tag that does not open a submenu.
+"link" is set by default if no value is specified.
+</li><li>
+data-flyout="true" :
+Specifies a horizontal flyout menu where the Left and Right arrow keys will be used to navigate menu item nodes, and Up and Down will be used to close or open submenus.
+If data-flyout is not included within the markup, the default vertically oriented keyboard assignments will be applied automatically.
 </li></ul>
+</div>
+
+<div class="hd">
+<h2>
+<span>
+Menu Tag Attributes
+</span>
+</h2>
+</div>
+
+<div class="intro tal">
+<p>
+The following attributes may be set within the menu tag markup to enhance functionality on a once-per-menu instance basis.
+</p>
+<ul class="lsn"><li>
+data-horizontal="true" or "false" :
+Sets or unsets a horizontal flyout menu where the Left and Right arrow keys will be used to navigate menu item nodes, and Up and Down will be used to close or open submenus.<br />
+Syntax:<br />
+<code>
+&lt;ol id="topLevelMenuID-SubmenuPointer" class="menu" data-horizontal="true"&gt;<br />
+...<br />
+&lt;/ol&gt;<br />
+</code>
+</li><li>
+data-offsetleft :
+Specifies a positive or negative offsetLeft value that will be applied to the menu after it is rendered.<br />
+Syntax:<br />
+<code>
+&lt;ol id="topLevelMenuID-SubmenuPointer" class="menu" data-offsetleft="-30"&gt;<br />
+...<br />
+&lt;/ol&gt;<br />
+</code>
+</li><li>
+data-offsettop :
+Specifies a positive or negative offsetTop value that will be applied to the menu after it is rendered.<br />
+Syntax:<br />
+<code>
+&lt;ol id="topLevelMenuID-SubmenuPointer" class="menu" data-offsettop="20"&gt;<br />
+...<br />
+&lt;/ol&gt;<br />
+</code>
+</li><li>
+data-autoposition :
+Specifies a custom autoPosition value that will control where the menu is visually positioned relative to the triggering element.<br />
+Syntax:<br />
+<code>
+&lt;ol id="topLevelMenuID-SubmenuPointer" class="menu" data-autoposition="9"&gt;<br />
+...<br />
+&lt;/ol&gt;<br />
+</code><br />
+Accepted values:<br />
+<ul class="lsn"><li>
+0: Disabled 
+</li><li>
+1: Above/Center/Left Edge Aligned 
+</li><li>
+2: Above/Right/Right Edge Aligned 
+</li><li>
+3: Level/Right/Right Edge Aligned 
+</li><li>
+4: Below/Right/Right Edge Aligned 
+</li><li>
+5: Below/Center/Left Edge Aligned 
+</li><li>
+6: Below/Left/Left Edge Aligned 
+</li><li>
+7: Level/Left/Left Edge Aligned 
+</li><li>
+8: Above/Left/Left Edge Aligned 
+</li><li>
+9: Level/Center/Left Edge Aligned 
+</li><li>
+10: Above/Center/Right Edge Aligned 
+</li><li>
+11: Level/Center/Right Edge Aligned 
+</li><li>
+12: Below/Center/Right Edge Aligned  
+</li></ul>
+</li></ul>
+</div>
+
+<div id="hiddenDivId" class="hidden">
+
+<ul data-autoposition="9" title="Options" class="menu2 clearfix" id="menu-options2">
+<li>
+<a href="#" class="submenu2" id="-profile2">
+Profile
+</a>
+</li>
+<li>
+<a href="#" class="submenu2" id="-settings2">
+Settings
+</a>
+</li>
+<li>
+<a href="#" class="submenu2" id="-account2">
+Account
+</a>
+</li>
+<li>
+<a href="#" class="submenu2" id="-services2">
+Services
+</a>
+</li>
+<li>
+<a href="#" class="link2" id="-properties2">
+Properties...
+</a>
+</li>
+<li>
+<a href="#" class="link2" id="-help2">
+Help...
+</a>
+</li>
+</ul>
+
+<ul title="Profile" class="menu2 clearfix" id="menu-options2-profile2">
+<li>
+<a href="#" class="submenu2" id="-personal2">
+Personal
+</a>
+</li>
+<li>
+<a href="#" class="submenu2" id="-business2">
+Business
+</a>
+</li>
+</ul>
+
+<ul title="Personal" class="menu2 clearfix" id="menu-options2-profile2-personal2">
+<li>
+<a href="#" class="link2" id="-name2">
+Name
+</a>
+</li>
+<li>
+<a href="#" class="link2" id="-interests2">
+Interests
+</a>
+</li>
+<li>
+<a href="#" class="link2" id="-education2">
+Education
+</a>
+</li>
+</ul>
+
+<ul title="Business" class="menu2 clearfix" id="menu-options2-profile2-business2">
+<li>
+<a href="#" class="link2" id="business-name2">
+Name
+</a>
+</li>
+<li>
+<a href="#" class="link2" id="business-contact2">
+Contact
+</a>
+</li>
+</ul>
+
+<ul title="Settings" class="menu2 clearfix" id="menu-options2-settings2">
+<li>
+<a href="#" class="link2" id="settings-search2">
+Search
+</a>
+</li>
+<li>
+<a href="#" class="link2" id="settings-cookies2">
+Cookies
+</a>
+</li>
+<li>
+<a href="#" class="link2" id="settings-layout2">
+Layout
+</a>
+</li>
+</ul>
+
+<ul title="Account" class="menu2 clearfix" id="menu-options2-account2">
+<li>
+<a href="#" class="link2" id="account-username2">
+Username
+</a>
+</li>
+<li>
+<a href="#" class="link2" id="account-password2">
+Password
+</a>
+</li>
+<li>
+<a href="#" class="link2" id="account-email2">
+Email
+</a>
+</li>
+</ul>
+
+<ul title="Services" class="menu2 clearfix" id="menu-options2-services2">
+<li>
+<a href="#" class="link2" id="services-campaigns2">
+Campaigns
+</a>
+</li>
+<li>
+<a href="#" class="link2" id="services-payments2">
+Payments
+</a>
+</li>
+<li>
+<a href="#" class="link2" id="services-billing2">
+Billing
+</a>
+</li>
+</ul>
+
 </div>
 
 </div>

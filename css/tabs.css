@@ -10,6 +10,7 @@ float: left;
 padding: 15px 0px;
 font-size: 1.4em;
 font-weight: bold;
+cursor: pointer;
 }
 
 div.tab span, a.tab span {

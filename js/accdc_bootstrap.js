@@ -1,5 +1,5 @@
 /*!
-AccDC Bootstrap R1.3.1
+AccDC Bootstrap R1.4
 Copyright 2010-2013 Bryan Garaventa (WhatSock.com)
 Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under the terms of the Open Source Initiative OSI - MIT License
 */
@@ -274,16 +274,72 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 		// Button and A tags were chosen because they are always active elements, to ensure keyboard accessibility.
 		if ($A.setMenu)
 			$A.query('button.accMenu, a.accMenu', context, function(i, o){
-				var p = $A.getAttr(o, 'data-src'), cid = $A.getAttr(o, 'data-internal');
+				var p = $A.getAttr(o, 'data-src'), cid = $A.getAttr(o, 'data-internal'), flyout = $A.getAttr(o, 'data-flyout');
 
 				if (cid || p)
-					$A.setMenu(o, cid || p.substring(0, p.indexOf('#')), cid ? p : p.substring(p.indexOf('#') + 1),
-						function(ev, domNode){
-						// Do something with the DOM node when it is activated
-						// E.G
-						// top.location.href = $A.getAttr(this, 'data-href');
-						alert(domNode.id);
-					}, cid ? true : false, context);
+					$A.setMenu(o, cid || p.substring(0, p.indexOf('#')), cid ? p : p.substring(p.indexOf('#') + 1), function(ev, dc){
+						// Do something with the menu item A tag when it is activated
+						alert('Do something with this.href or id="' + this.id
+							+ '" Modify "accdc_bootstrap.js" to configure this functionality.');
+					}, cid ? true : false, context,
+									{
+
+									// Assign a role name for screen reader users
+									role: $A.getAttr(o, 'data-role') || 'Menu',
+									// Assign beginning and ending text to be appended to the role name for screen reader users
+									accStart: $A.getAttr(o, 'data-starttext') || 'Start',
+									accEnd: $A.getAttr(o, 'data-endtext') || 'End',
+
+// Assign the state text, which will be appended to the triggering element text when a menu is open for screen reader users
+									openState: $A.getAttr(o, 'data-openstate') || 'Open',
+									// Set the starting menu level, (this is automatically incremented when submenus are opened)
+									ariaLevel: 3,
+
+									// Set the main container class, (which will surround the menu as a Div tag when rendered)
+									containerClass: $A.getAttr(o, 'data-containerclass') || 'menu',
+
+									// Specify the menu tag name in the markup
+									menuTag: $A.getAttr(o, 'data-menutag') || 'ol',
+									// Specify the menu class name on the above tag in the markup
+									menuClass: $A.getAttr(o, 'data-menuclass') || 'menu',
+
+// Specify the active element that will be used as each menu node
+// Important, if nesting A tags within LIs, only the A tag should be used for this purpose
+// Active elements should never be nested.
+// The following tag will receive keyboard focus within the menu structure when using the arrow keys to navigate
+// Event bindings are also tied to this tag
+									itemTag: $A.getAttr(o, 'data-menuitemtag') || 'a',
+									// Specify the class name that indicates when a menu item opens a submenu
+									folderClass: $A.getAttr(o, 'data-menufolderclass') || 'submenu',
+									// Specify the class name that indicates when a menu item is to be triggered directly
+									// This should not be the same as the folderClass declaration
+									linkClass: $A.getAttr(o, 'data-menulinkclass') || 'link',
+
+									// Specify if the menu is a flyout menu
+									// If true, the Left and Right arrow keys will scroll the open menu
+									// If false, the Up and Down arrow keys will scroll the open menu instead
+									horizontal: flyout ? true : false,
+
+									// 0 = don't apply forced autoPositioning
+									autoPosition: 0,
+									// Set custom offset values to adjust the positioning calculation
+									// May return a positive or negative number
+									offsetLeft: function(dc){
+										return 0;
+									},
+									offsetTop: function(dc){
+										return 0;
+									},
+									overrides:
+													{
+													cssObj:
+																	{
+																	position: 'absolute',
+																	zIndex: 1
+													}
+													// Additional AccDC API properties and methods can be applied here.
+													}
+									});
 			});
 
 		// Accessible Tabs
