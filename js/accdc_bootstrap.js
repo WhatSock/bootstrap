@@ -185,11 +185,27 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 								preload: true,
 								preloadImages: true
 								}, context, function(dc){
-				// Optionally perform an action after each accordion finishes expanding.
+				// Optional callback
+
+				// This function is executed every time a section opens or closes.
+				// 'this' refers to the triggering element
+
+				// This is how to differentiate between them at runtime
+
+				// if (dc.loaded)
+				// The alert applies only to the currently open section
+				// alert(this.id);
+
+				// if (!dc.loaded)
+				// The alert applies only to the newly closed section
+				// alert(this.id);
+
 				// dc.containerDiv is the DOM node that contains the newly loaded content,
 				// and 'this' or dc.triggerObj is the triggering element.
+
 				// dc is an AccDC Object, and all AccDC API properties and methods apply.
 				// E.G dc.close() will close the accordion.
+
 				});
 			}
 		}
@@ -336,7 +352,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 																	{
 																	position: 'absolute',
 																	zIndex: 1
-													}
+																	}
 													// Additional AccDC API properties and methods can be applied here.
 													}
 									});
