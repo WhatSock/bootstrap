@@ -1,5 +1,5 @@
 /*!
-AccDC Bootstrap R1.4
+AccDC Bootstrap R1.4.1
 Copyright 2010-2013 Bryan Garaventa (WhatSock.com)
 Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under the terms of the Open Source Initiative OSI - MIT License
 */
@@ -162,10 +162,10 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 			});
 
 		// Accessible Accordions
-		// Parse all Div tags that include the class 'accAccordion'
+		// Parse all tags that include the class 'accAccordion'
 		if ($A.generateAccordion){
 			var track = {};
-			$A.query('div.accAccordion', context, function(i, o){
+			$A.query('.accAccordion', context, function(i, o){
 				var g = $A.getAttr(o, 'data-group');
 
 				if (g){
@@ -258,8 +258,9 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 									container: o,
 									/* More optional overrides
 									treeTag: 'ul',
+dividerTag: 'li',
 									treeClass: 'branch',
-									treeItemTag: 'li',
+									treeItemTag: 'a',
 									treeItemClass: 'leaf',
 									topClass: 'TreeView',
 									*/
