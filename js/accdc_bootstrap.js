@@ -1,5 +1,5 @@
 /*!
-AccDC Bootstrap R1.4.1
+AccDC Bootstrap R1.4.2
 Copyright 2010-2013 Bryan Garaventa (WhatSock.com)
 Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under the terms of the Open Source Initiative OSI - MIT License
 */
@@ -141,7 +141,14 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 			$A.query('div.accBanner', context, function(i, o){
 				var p = $A.getAttr(o, 'data-src');
 
-				if (p)
+				if (p){
+					if ($A.reg[o.id] && $A.reg[o.id].loaded){
+						var tdc = $A.reg[o.id];
+						tdc.returnFocus = false;
+						tdc.close();
+						tdc.returnFocus = true;
+					}
+
 					$A.setBanner(
 									{
 									// Set the ID of the AccDC Object to match the ID of the triggering element.
@@ -150,15 +157,22 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 									source: p.replace('#', ' #'),
 									// Insert the banner content within the div
 									isStatic: o,
+									// Configure a hidden close link for screen reader users
+									showHiddenClose: true,
+									// Choose whether the hidden close link appears in the tab order
+									displayHiddenClose: false,
+									// Set a class name for the hidden close link
+									closeClassName: 'closeLnk',
 									// Clear inline styling and prevent auto positioning, to use a style sheet instead
 									cssObj: {},
 									autoFix: 0,
 									// Configure a mouse event handler for the AccDC Object
 									mouseOut: function(ev, dc){
-										// Remove this if you don't want to close the banner onMouseOut
-										dc.close();
+									// Remove this if you don't want to close the banner onMouseOut
+									//										dc.close();
 									}
 									});
+				}
 			});
 
 		// Accessible Accordions

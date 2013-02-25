@@ -1,3 +1,5 @@
+@import url("http://fonts.googleapis.com/css?family=Alfa+Slab+One");
+@import url("http://fonts.googleapis.com/css?family=Boogaloo");
 
 .clearfix:after {
 visibility: hidden;
@@ -21,8 +23,8 @@ body {
 text-align: center;
 font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
 font-size: 0.93em;
-background-color: #000;
-color: #f5f5f5;
+background-color: #f5f5f5;
+color: #000;
 }
 
 a:link, a:visited, a:active, a:hover {
@@ -44,47 +46,45 @@ text-align: left;
 }
 
 #pgContent {
-background-color: #f5f5f5;
-color: #000;
 width: 90%;
 margin-left: 5%;
 }
 
 div.hd {
-text-align: left;
-width: 60%;
-margin: 10px auto 10px 20%;
+padding: 20px 30px 10px 30px;
+margin: 20px 20px 20px 20%;
+position: relative;
+display: block;
+text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+text-align: center;
 }
 
 h1 {
-font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black", sans-serif;
 font-size: 1.6em;
-text-align: center;
 outline-style: none;
-margin: 20px 0px;
-padding: 10px 0px;
-font-weight: bold;
-background: url("../img/black_metal_b.jpg") #000 repeat;
+font-family: 'Alfa Slab One', 'Arial Narrow', Arial, sans-serif;
+position: relative;
+font-weight: 400;
+color: #483d8b;
+text-shadow: 1px 1px 1px rgba(112,128,144,0.8);
+padding: 0px 0px 5px 0px;
+}
+
+h1 span {
+text-shadow: 0px 1px 1px rgba(112,128,144,0.8);
 }
 
 h2, h3, h4, h5, h6 {
-font-family: Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
 font-size: 1.4em;
-margin: 20px 20px 20px 20%;
-padding: 10px 0px;
-text-align: center;
-width: 60%;
 outline-style: none;
-font-weight: bold;
-background: url("../img/black_metal_b.jpg") #000 repeat;
+font-family: 'Boogaloo', 'Arial Narrow', Arial, sans-serif;
+font-style: italic;
+color: #483d8b;
+text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
 }
 
-h1 span, h2 span {
-background-color: #000000;
-color: #f5f5f5;
--moz-box-shadow: 3px 3px 3px 3px #888;
--webkit-box-shadow: 3px 3px 3px 3px #888;
-box-shadow: 3px 3px 3px 3px #888;
+h2 span {
+text-shadow: 0px 1px 1px rgba(112,128,144,0.8);
 }
 
 i {
@@ -122,7 +122,7 @@ border: solid thin black;
 div.menuLinks {
 width: 18%;
 text-align: center;
-float: left;
+position: absolute;
 }
 
 ul.menuList {

@@ -17,12 +17,16 @@ Accessible Banner
 </h2>
 </div>
 
-<div id="bannerId" data-src="files/banner.html#banner-welcome" data-role="Banner" class="accBanner"></div>
+<div id="uniqueBannerId" data-src="files/banner.html#ad-2" data-role="Banner" class="accBanner"><!--
+Position this tag where you want the banner content to appear in the DOM reading order for screen reader users.
+(Preferably towards the top of the page so it's more likely to be encountered during navigation)
+--></div>
 
 <div class="intro tal">
 <p>
-<button onclick="$A.reg.bannerId.open();" class="banner">Reopen the Accessible Banner</button>
-For testing purposes, mouse out of the banner to close it, or Tab to and activate the hidden Close link.
+
+<button onclick="if ($A.reg.uniqueBannerId.loaded) $A.reg.uniqueBannerId.close(); else $A.reg.uniqueBannerId.open();" class="toggleBtn"> Toggle Banner </button>
+
 </p>
 </div>
 
