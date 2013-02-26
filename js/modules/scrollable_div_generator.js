@@ -1,5 +1,5 @@
 /*!
-Scrollable Div Generator R1.1
+Scrollable Div Generator R1.0
 Copyright 2010-2013 Bryan Garaventa (WhatSock.com)
 Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under the terms of the Open Source Initiative OSI - MIT License
 */
@@ -11,12 +11,6 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 			return;
 
 		var f = firstChild(o), track = {}, update = function(){
-			if (!f)
-				f = firstChild(o);
-
-			if (!f)
-				return;
-			track.top = track.left = o.scrollTop = o.scrollLeft = 0;
 			track.p =
 							{
 							h: o.clientHeight,
@@ -172,6 +166,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 
 		$A.bind(window, 'resize', update);
 		update();
+		track.top = track.left = o.scrollTop = o.scrollLeft = 0;
 	};
 
 	var firstChild = function(e, t){
