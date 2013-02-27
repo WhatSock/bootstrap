@@ -4,10 +4,22 @@ text-align: center;
 }
 
 #slideshowId div.lNav, #slideshowId div.rNav {
+position: absolute;
 height: 468px;
-position: relative;
-float: left;
 padding: 6px;
+}
+
+#slideshowId div.centerContent {
+position: absolute;
+left: 50px;
+width: 265px;
+height: 480px;
+overflow: hidden;
+border: solid thin black;
+}
+
+#slideshowId div.rNav {
+left: 327px;
 }
 
 #slideshowId .navButton {
@@ -40,12 +52,4 @@ box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #ced8e0;
 
 #slideshowId div.rNav .navButton {
 margin-top: 438px;
-}
-
-#slideshowId div.centerContent {
-width: 265px;
-height: 480px;
-float: left;
-overflow: hidden;
-border: solid thin black;
 }

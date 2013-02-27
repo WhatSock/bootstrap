@@ -4,10 +4,22 @@ text-align: center;
 }
 
 #carouselId div.lNav, #carouselId div.rNav {
+position: absolute;
 height: 158px;
-position: relative;
-float: left;
 padding: 6px;
+}
+
+#carouselId div.centerContent {
+position: absolute;
+left: 50px;
+width: 165px;
+height: 170px;
+overflow: hidden;
+border: solid thin black;
+}
+
+#carouselId div.rNav {
+left: 227px;
 }
 
 #carouselId .navButton {
@@ -44,14 +56,6 @@ margin-top: 80px;
 
 #carouselId .navGroupButton {
 margin-top: 10px;
-}
-
-#carouselId div.centerContent {
-width: 165px;
-height: 170px;
-float: left;
-overflow: hidden;
-border: solid thin black;
 }
 
 #carouselId div.groupName {
