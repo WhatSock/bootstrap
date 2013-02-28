@@ -1,4 +1,9 @@
 
+#slideshowId {
+display: block;
+height: 480px;
+}
+
 #slideshowId div.carouselCls {
 text-align: center;
 }

@@ -1,4 +1,9 @@
 
+#carouselId {
+display: block;
+height: 170px;
+}
+
 #carouselId div.carouselCls {
 text-align: center;
 }
