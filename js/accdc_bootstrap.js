@@ -1,5 +1,5 @@
 /*!
-AccDC Bootstrap R1.4.2
+AccDC Bootstrap R1.5
 Copyright 2010-2013 Bryan Garaventa (WhatSock.com)
 Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under the terms of the Open Source Initiative OSI - MIT License
 */
@@ -49,10 +49,15 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 									{
 									// Set the ID of the AccDC Object to match the ID of the triggering element.
 									id: o.id,
+									// Set screen reader accessible boundary text values
 									role: $A.getAttr(o, 'data-role') || 'Modal',
+									accStart: 'Start',
+									accEnd: 'End',
 									source: cid && cid.nodeType === 1 ? cid.parentNode.removeChild(cid) : p.replace('#', ' #'),
 									mode: cid && cid.nodeType === 1 ? 0 : null,
 									trigger: o,
+									// Set the heading level that will be accessible for screen reader users
+									ariaLevel: 1,
 									runAfter: function(dc){
 										// Run script every time after the content completes rendering
 
@@ -67,7 +72,13 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 										// Remove the backdrop div after the modal closes
 										if (dc.backdrop)
 											dc.backdrop.parentNode.removeChild(dc.backdrop);
-									}
+									},
+									// Set the class name for the top level container element
+									className: 'modal',
+// Set the class name for the screen reader accessible close link
+// This must match the class name for any close links or buttons within the modal content, which will cause Close Method Binding to automatically occur when the content is rendered.
+									closeClassName: 'lbClose'
+									// (Other AccDC API properties and methods can be declared here also to customize functionality and behavior)
 									});
 			});
 
@@ -93,21 +104,32 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 									{
 									// Set the ID of the AccDC Object to match the ID of the triggering element.
 									id: o.id,
+									// Set screen reader accessible boundary text values
 									role: $A.getAttr(o, 'data-role') || 'Popup',
+									accStart: 'Start',
+									accEnd: 'End',
 									source: cid && cid.nodeType === 1 ? cid.parentNode.removeChild(cid) : p.replace('#', ' #'),
 									mode: cid && cid.nodeType === 1 ? 0 : null,
 									trigger: o,
 									autoPosition: isNaN(autoPosition) ? 3 : autoPosition,
 									offsetLeft: isNaN(offsetLeft) ? 10 : offsetLeft,
-									offsetTop: isNaN(offsetTop) ? -20 : offsetTop
+									offsetTop: isNaN(offsetTop) ? -20 : offsetTop,
+									// Set the class name for the top level container element
+									className: 'popup',
+// Set the class name for the screen reader accessible close link
+// This must match the class name for any close links or buttons within the popup content, which will cause Close Method Binding to automatically occur when the content is rendered.
+									closeClassName: 'popupClose',
+// Set the heading level that will be accessible for screen reader users
+ariaLevel: 2
+									// (Other AccDC API properties and methods can be declared here also to customize functionality and behavior)
 									});
 			});
 
 		// Accessible Tooltips
-		// Parse all A and Button tags that include the class 'accTooltip'
+		// Parse all A, Button, and form field tags that include the class 'accTooltip'
 		// A and Button tags were chosen because they are always active elements, to ensure keyboard accessibility.
 		if ($A.setTooltip)
-			$A.query('a.accTooltip, button.accTooltip', context, function(i, o){
+			$A.query('a.accTooltip, button.accTooltip, input.accTooltip, select.accTooltip', context, function(i, o){
 				if ($A.reg[o.id] && $A.reg[o.id].loaded){
 					var tdc = $A.reg[o.id];
 					tdc.returnFocus = false;
@@ -125,13 +147,18 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 									{
 									// Set the ID of the AccDC Object to match the ID of the triggering element.
 									id: o.id,
+									// Set screen reader accessible boundary text values
 									role: $A.getAttr(o, 'data-role') || 'Tooltip',
+									accStart: 'Start',
+									accEnd: 'End',
 									source: cid && cid.nodeType === 1 ? cid.parentNode.removeChild(cid) : p.replace('#', ' #'),
 									mode: cid && cid.nodeType === 1 ? 0 : null,
 									trigger: o,
 									autoPosition: isNaN(autoPosition) ? 3 : autoPosition,
 									offsetLeft: isNaN(offsetLeft) ? 10 : offsetLeft,
-									offsetTop: isNaN(offsetTop) ? 0 : offsetTop
+									offsetTop: isNaN(offsetTop) ? 0 : offsetTop,
+// Set the heading level that will be accessible for screen reader users
+ariaLevel: 2
 									});
 			});
 
@@ -153,7 +180,10 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 									{
 									// Set the ID of the AccDC Object to match the ID of the triggering element.
 									id: o.id,
+									// Set screen reader accessible boundary text values
 									role: $A.getAttr(o, 'data-role') || 'Banner',
+									accStart: 'Start',
+									accEnd: 'End',
 									source: p.replace('#', ' #'),
 									// Insert the banner content within the div
 									isStatic: o,
@@ -166,6 +196,8 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 									// Clear inline styling and prevent auto positioning, to use a style sheet instead
 									cssObj: {},
 									autoFix: 0,
+// Set the heading level that will be accessible for screen reader users
+ariaLevel: 2,
 									// Configure a mouse event handler for the AccDC Object
 									mouseOut: function(ev, dc){
 									// Remove this if you don't want to close the banner onMouseOut
@@ -479,6 +511,26 @@ dividerTag: 'li',
 									});
 				}
 			});
+
+		// Accessible Footnotes
+		// Parse all Span tags that include the class 'accFootnote'
+		if ($A.setFootnotes){
+			// Get the first object simply to configure shared parameters
+			var o = $A.query('span.accFootnote', context)[0];
+
+			$A.setFootnotes('span.accFootnote', context,
+							{
+
+							// Set the tooltip text for the footnote (this will also be the accessible name for screen reader users)
+							fnText: $A.getAttr(o, 'data-fntext') || 'Footnote',
+
+							// Set the footnote character or text that will comprise the visual link text for returning footnotes
+							fnChar: $A.getAttr(o, 'data-fnchar') || '&#8224;',
+
+// Set the tooltip text for the footnote back links (this will also be the accessible name for screen reader users)
+							backText: $A.getAttr(o, 'data-backtext') || 'Back to Footnote'
+							});
+		}
 	};
 
 	$A.bind(window, 'load', $A.bootstrap);
