@@ -1,4 +1,4 @@
-AccDC Bootstrap R1.4.2
+AccDC Bootstrap R1.5
 =====
 
 AccDC Bootstrap is an HTML parser that renders advanced, accessible interactive controls using semantic HTML markup.
@@ -58,6 +58,13 @@ The following modules are included:
 * Accessible Carousel, Slideshow, and Wizard controls. 
 * Keyboard accessible Scrollable Div controls.  
 * ARIA Toggle controls.  
+* Accessible Footnote controls
+
+For specific coding guidance, visit: http://whatsock.com/tsg
+
+Distributed under the terms of the Open Source Initiative OSI - MIT License.
+
+Developed and maintained by: Bryan Garaventa
 
 Project home:
 -----
@@ -67,6 +74,7 @@ http://whatsock.com/bootstrap
 Related projects:
 -----
 
+AccDC Technical Style Guide: https://github.com/accdc/tsg
 Standalone AccDC API: https://github.com/accdc/accdc
 AccDC API for jQuery: https://github.com/accdc/accdc-jquery
 Standalone AccDC Bootstrap: https://github.com/accdc/bootstrap
