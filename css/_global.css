@@ -1,5 +1,4 @@
 @import url("http://fonts.googleapis.com/css?family=Alfa+Slab+One");
-@import url("http://fonts.googleapis.com/css?family=Boogaloo");
 
 .clearfix:after {
 visibility: hidden;
@@ -107,7 +106,7 @@ text-align: center;
 div.heading {
 font-size: 1.1em;
 font-style: italic;
-color: #8fbc8f;
+color: #000099;
 }
 
 div.logo a {
