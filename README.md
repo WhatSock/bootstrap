@@ -3,6 +3,8 @@ AccDC Bootstrap R1.5
 
 AccDC Bootstrap is an HTML parser that renders advanced, accessible interactive controls using semantic HTML markup.
 
+AccDC was awarded the "Above and Beyond Accessibility Award" from the United States Department of Labor, and was presented at the Developing with Accessibility Event, hosted by the Federal Communications Commission in Washington DC in 2012.
+
 Bootstrapping refers to the use of semantic HTML markup to configure advanced controls, which are then magically converted into dynamic interactive components when the content finishes loading.
 
 This allows developers to include complex functionality that is fully configurable across thousands of web pages, without having to program individual components using JavaScript.
