@@ -255,3 +255,13 @@ text-align: left;
 dt {
 margin-top: 15px;
 }
+
+p.honors > * {
+float: left;
+margin: 10px;
+width: 220px;
+}
+
+p.honors img {
+width: 100%;
+}
