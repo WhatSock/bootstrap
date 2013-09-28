@@ -34,6 +34,19 @@
 <script type="text/javascript" src="js/modules/aria_tree_module.min.js"></script>
 <script type="text/javascript" src="js/modules/scrollable_div_generator.min.js"></script>
 <script type="text/javascript" src="js/accdc_bootstrap.js"></script>
+<script type="text/javascript">
+$A.bind(window, 'load', function(){
+	var verNode = $A.getEl('AccDCCurrentVerS1');
+
+	if (verNode && $A.version){
+		verNode.innerHTML = ('Currently running AccDC API version: ' + $A.version).announce();
+	}
+
+	if (window.navigator.onLine)
+		// Check for updates
+		$A.getScript('http://api.whatsock.com/bootstrap-updates.js');
+});
+</script>
 
 </head>
 <body>
@@ -53,6 +66,11 @@
 AccDC Bootstrap
 </span>
 </h1>
+</div>
+
+<div class="intro tal" id="AccDCCurrentVer">
+<span id="AccDCCurrentVerS1"></span>
+<span id="AccDCCurrentVerS2"></span>
 </div>
 
 <ul role="tablist" class="menuList clearfix">
@@ -113,6 +131,13 @@ Popup
 </a>
 </li>
 <li>
+<a id="tb13" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="2" data-role="Content" data-insert="pgContent" data-src="pages/scroll.htm#pg-scroll">
+<span>
+Scroll
+</span>
+</a>
+</li>
+<li>
 <a id="tb9" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="2" data-role="Content" data-insert="pgContent" data-src="pages/slideshow.htm#pg-slideshow">
 <span>
 Slideshow
@@ -127,6 +152,13 @@ Tabs
 </a>
 </li>
 <li>
+<a id="tb14" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="2" data-role="Content" data-insert="pgContent" data-src="pages/toggle.htm#pg-toggle">
+<span>
+Toggle
+</span>
+</a>
+</li>
+<li>
 <a id="tb11" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="2" data-role="Content" data-insert="pgContent" data-src="pages/tooltip.htm#pg-tooltip">
 <span>
 Tooltip
@@ -137,20 +169,6 @@ Tooltip
 <a id="tb12" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="2" data-role="Content" data-insert="pgContent" data-src="pages/tree.htm#pg-tree">
 <span>
 Tree
-</span>
-</a>
-</li>
-<li>
-<a id="tb13" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="2" data-role="Content" data-insert="pgContent" data-src="pages/scroll.htm#pg-scroll">
-<span>
-Scroll
-</span>
-</a>
-</li>
-<li>
-<a id="tb14" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="2" data-role="Content" data-insert="pgContent" data-src="pages/toggle.htm#pg-toggle">
-<span>
-Toggle
 </span>
 </a>
 </li>

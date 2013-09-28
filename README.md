@@ -1,4 +1,4 @@
-AccDC Bootstrap R1.5
+AccDC Bootstrap 1.5 (09/23/2013)
 =====
 
 AccDC Bootstrap is an HTML parser that renders advanced, accessible interactive controls using semantic HTML markup.
@@ -76,8 +76,11 @@ http://whatsock.com/bootstrap
 Related projects:
 -----
 
-AccDC Technical Style Guide: https://github.com/accdc/tsg
 Standalone AccDC API: https://github.com/accdc/accdc
 AccDC API for jQuery: https://github.com/accdc/accdc-jquery
+AccDC API for Dojo: https://github.com/accdc/accdc-dojo
 Standalone AccDC Bootstrap: https://github.com/accdc/bootstrap
 AccDC Bootstrap for jQuery: https://github.com/accdc/bootstrap-jquery
+AccDC Bootstrap for Dojo: https://github.com/accdc/bootstrap-dojo
+Standalone and jQuery AccDC Technical Style Guide: https://github.com/accdc/tsg
+AccDC Technical Style Guide for Dojo: https://github.com/accdc/tsg-dojo
