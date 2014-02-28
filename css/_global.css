@@ -114,7 +114,7 @@ display: block;
 }
 
 div.logo img {
-width: 98%;
+max-width: 60%;
 border: solid thin black;
 }
 
