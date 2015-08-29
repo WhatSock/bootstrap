@@ -288,3 +288,12 @@ font-style: italic;
 font-weight: bold;
 font-size: 1.2em;
 }
+
+.gAd {
+position: fixed;
+z-index: 100;
+width: 120px;
+height: 240px;
+bottom: 0px;
+left: 0px;
+}
