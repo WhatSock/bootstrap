@@ -1,112 +1,86 @@
 <html>
-<body>
-
-<div id="pg-calendar">
-
-<div class="intro heading">
-<p>
-A calendar picker control simplifies the task of selecting dates by rendering a minature calendar.
-</p>
-</div>
-
-<div class="hd">
-<h2>
-<span>
-Accessible Calendar Picker
-</span>
-</h2>
-</div>
-
-<div class="intro tal">
-<div>
-<label for="date">Set Birth Date:</label>
-<input id="date" type="text" name="bd" />
-<a href="#" id="dateLnk" class="accCalendar datePicker" data-name="bd"><img
-src="img/calendar/calendar.png"
-alt="Birth Date Calendar Picker"
-title="Birth Date Calendar Picker"
-/></a>
-</div>
-<div>
-<label for="party">Set Party Date:</label>
-<input id="party" type="text" name="pd" />
-<a href="#" id="partyLnk" class="accCalendar datePicker" data-name="pd"><img
-src="img/calendar/calendar.png"
-alt="Party Date Calendar Picker"
-title="Party Date Calendar Picker"
-/></a>
-</div>
-</div>
-
-<div class="intro tal">
-<p>
-The calendar is keyboard accessible.
-</p>
-<p><pre>
-When the calendar is opened, focus is set on the current date.
-Press the Left and Right arrow keys to navigate the row by week day.
-Press the Home and End keys to jump to the beginning or end of the current row.
-Press the Up and Down arrow keys to navigate between weeks on the same week day.
-Press the PageDown and PageUp keys to navigate backwards or forwards by month.
-Press Alt+PageDown and Alt+PageUp to navigate backwards or forwards by year.
-Press the Enter key to activate the selected date.
-Press Escape to close the calendar without making a selection.
-Mouse users can click the desired date buttons as usual.
-</pre></p>
-</div>
-
-<div class="hd">
-<h2>
-<span>
-Bootstrap Syntax
-</span>
-</h2>
-</div>
-
-<div class="intro tal">
-<p>
-<code>
-&lt;input<br />
-name="MatchingTextInputName"<br />
-... /&gt;<br />
-<br />
-&lt;a class="accCalendar"<br />
-data-name="MatchingTextInputName"<br />
-id="uniqueID"<br />
-&gt; ... &lt;/a&gt;
-</code>
-</p>
-</div>
-
-<div class="hd">
-<h2>
-<span>
-Attributes
-</span>
-</h2>
-</div>
-
-<div class="intro tal">
-<ul class="lsn"><li>
-class="accCalendar" :
-The bootstrap class name that specifies an accessible calendar picker.
-</li><li>
-data-name :
-The name value for the calendar picker.
-The Name attribute of the accompanying text field must match the data-name attribute value.
-The selected date will then be inserted into the text field.
-</li><li>
-id :
-The unique ID of the element.
-This value is also registered as the ID of the calendar AccDC Object, making it possible to invoke the object programmatically.<br />
-<code>
-$A.reg.uniqueID.open();<br />
-// All other AccDC API properties and methods are similarly available.
-</code>
-</li></ul>
-</div>
-
-</div>
-
-</body>
+    <body>
+        <div id="pg-calendar">
+            <div class="hd">
+                <h3><span> Accessible Calendar Picker</span></h3>
+            </div>
+            <div class="intro highlight">
+                <p> A calendar picker control simplifies the task of selecting dates by rendering a miniature calendar.</p>
+            </div>
+            <div class="intro tal demo-block">
+                <p><label for="date">Set Birth Date:</label> 
+                    <input id="date" type="text" name="bd" />
+					<a href="#" id="dateLnk" class="accCalendar datePicker" data-name="bd">
+						<img src="img/calendar/calendar-button.svg" alt="Birth Date Calendar Picker" title="Birth Date Calendar Picker" /></a>
+                </p>
+                <p><label for="party">Set Party Date:</label> 
+                    <input id="party" type="text" name="pd" /> 
+					<a href="#" id="partyLnk" class="accCalendar datePicker" data-name="pd">
+						<img src="img/calendar/calendar-button.svg" alt="Party Date Calendar Picker" title="Party Date Calendar Picker" /></a>
+                </p>
+            </div>
+            <div class="intro tal keyboard">
+                <p>The calendar is keyboard accessible:</p>
+				<ul>
+					<li>When the calendar is opened, focus is set on the current date.</li>
+					<li>Press the <kbd class="left">Left</kbd> and <kbd class="right">Right</kbd> arrow keys to navigate the row by week day.</li>
+					<li>Press the <kbd class="home">Home</kbd> and <kbd class="end">End</kbd> keys to jump to the beginning or end of the current row.</li>
+					<li>Press the <kbd class="up">Up</kbd> and <kbd class="down">Down</kbd> arrow keys to navigate between weeks on the same week day.</li>
+					<li>Press the <kbd>PageDown</kbd> and <kbd>PageUp</kbd> keys to navigate backwards or forwards by month.</li>
+					<li>Press <kbd><kbd>Alt</kbd>+<kbd>PageDown</kbd></kbd> and <kbd><kbd>Alt</kbd>+<kbd>PageUp</kbd></kbd> to navigate backwards or forwards by year.</li>
+					<li>Press the <kbd>Enter</kbd> key to activate the selected date.</li>
+					<li>Press <kbd>Escape</kbd> to close the calendar without making a selection.</li>
+					<li>Mouse users can click the desired date buttons as usual.</li>
+				</ul>
+            </div>
+            <div class="hd">
+                <h4>Bootstrap Syntax</h4>
+            </div>
+            <div class="intro tal">
+                <p>
+                    <code>
+                        &lt;input
+                        <br/>
+                        name="MatchingTextInputName"
+                        <br/>
+                        ... /&gt;
+                        <br/>
+                        <br/>
+                        &lt;a class="accCalendar"
+                        <br/>
+                        data-name="MatchingTextInputName"
+                        <br/>
+                        id="uniqueID"
+                        <br/>
+                        &gt; ... &lt;/a&gt;
+                    </code>
+                </p>
+            </div>
+            <div class="hd">
+                <h4>Attributes</h4>
+            </div>
+            <div class="intro tal">
+                <ul class="lsn">
+                    <li><strong>class="accCalendar":</strong>
+                        The bootstrap class name that specifies an accessible calendar picker.</li>
+                    <li><strong>data-name:</strong>
+                        The name value for the calendar picker.
+                        The Name attribute of the accompanying text field must match the <code class="inline">data-name</code> 
+						attribute value.
+                        The selected date will then be inserted into the text field.</li>
+                    <li><strong>id:</strong>
+                        The unique ID of the element.
+                        This value is also registered as the ID of the calendar AccDC Object, making it possible to invoke 
+						the object programmatically.
+                        <br/>
+                        <code>
+                            $A.reg.uniqueID.open();
+                            <br/>
+                            // All other AccDC API properties and methods are similarly available.
+                        </code>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
 </html>

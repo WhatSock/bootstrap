@@ -1,62 +1,58 @@
 <html>
-<body>
-
-<div id="toggle-attributes">
-
-<div class="hd">
-<h2>
-<span>
-Attributes
-</span>
-</h2>
-</div>
-
-<div class="intro tal">
-<ul class="lsn"><li>
-class="accToggle" :
-The bootstrap class name that specifies an accessible toggle.
-</li><li>
-role="button" :
-The ARIA role that specifies a toggle button control.
-To ensure accessibility, this element must not contain any other active elements.
-</li><li>
-data-src :
-The resource path and pointer to the ID attribute of the toggle content container element.
-If set, data-internal should be blank or not included.
-</li><li>
-data-internal :
-The ID attribute of the toggle content container element within the same document.<br />
-Syntax of toggles within the same document:<br />
-<code>
-&lt;div class="hidden"&gt;<br />
-&lt;div id="toggleIdContent"&gt;<br />
-...<br />
-&lt;/div&gt;<br />
-...<br />
-&lt;/div&gt;
-</code><br />
-If data-internal is set, data-src should be blank or not included.
-</li><li>
-data-insert :
-The ID attribute of the container element where toggle content will be inserted.
-</li><li>
-data-defaultopen="true" :
-Specifies that the referenced toggle will open automatically.
-</li><li>
-data-toggleclass :
-The class name that will be toggled when open.
-</li><li>
-id :
-The unique ID of the element.
-This value is also registered as the ID of the toggle AccDC Object, making it possible to invoke the object programmatically.<br />
-<code>
-$A.reg.uniqueID.open();<br />
-// All other AccDC API properties and methods are similarly available.
-</code>
-</li></ul>
-</div>
-
-</div>
-
-</body>
+    <body>
+        <div id="toggle-attributes">
+            <div class="hd">
+                <h4>Attributes</h4>
+            </div>
+            <div class="intro tal">
+                <ul class="lsn">
+                    <li><strong>class="accToggle":</strong>
+                        The bootstrap class name that specifies an accessible toggle.</li>
+                    <li><strong>role="button":</strong>
+                        The ARIA role that specifies a toggle button control.
+                        To ensure accessibility, this element must not contain any other active elements.</li>
+                    <li><strong>data-src:</strong>
+                        The resource path and pointer to the ID attribute of the toggle content container element.
+                        If set, data-internal should be blank or not included.</li>
+                    <li><strong>data-internal:</strong>
+                        The ID attribute of the toggle content container element within the same document.
+                        <br/>
+                        Syntax of toggles within the same document:
+                        <br/>
+                        <code>
+                            &lt;div class="hidden"&gt;
+                            <br/>
+                            &lt;div id="toggleIdContent"&gt;
+                            <br/>
+                            ...
+                            <br/>
+                            &lt;/div&gt;
+                            <br/>
+                            ...
+                            <br/>
+                            &lt;/div&gt;
+                        </code>
+                        <br/>
+                        If data-internal is set, data-src should be blank or not included.
+                    </li>
+                    <li><strong>data-insert:</strong>
+                        The ID attribute of the container element where toggle content will be inserted.</li>
+                    <li> data-defaultopen="true":</strong>
+                        Specifies that the referenced toggle will open automatically.</li>
+                    <li><strong>data-toggleclass:</strong>
+                        The class name that will be toggled when open.</li>
+                    <li><strong>id:</strong>
+                        The unique ID of the element.
+                        This value is also registered as the ID of the toggle AccDC Object, making it possible to invoke the object programmatically.
+                        <br/>
+                        <code>
+                            $A.reg.uniqueID.open();
+                            <br/>
+                            // All other AccDC API properties and methods are similarly available.
+                        </code>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
 </html>

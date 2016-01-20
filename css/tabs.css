@@ -1,26 +1,44 @@
+/* WHATSOCK, 2016 */
+/* Specific styles for Tabs */
 
-div.tabs {
-width: 70%;
-margin-left: 15%;
+
+ul.tabs {margin: 0; border-bottom: 3px solid #2E3135;}
+ul.tabs + div.content {margin-bottom: 2rem;}
+
+
+ul.tabs.nonARIA li {
+	display: inline-block;
+	list-style-type: none;
+	margin: 0;
 }
 
-div.tab, a.tab {
-width: 24%;
-float: left;
-padding: 15px 0px;
-font-size: 1.4em;
-font-weight: bold;
-cursor: pointer;
+.tab {display: inline-block; margin: 0;}
+
+.tab a, .tab a:link, .tab a:visited, a.tab, a.tab:link, a.tab:visited, li.tab {
+	display: inline-block;
+	color: #FFF;
+	background: #5D1F2C;
+	padding: 0.3em 0.5em 0.5em;
+	border-top-right-radius: 2px;
+	border-top-left-radius: 2px;
+	cursor: pointer;
 }
 
-div.tab span, a.tab span {
-padding: 10px 20px;
-border: solid thin black;
-color: #000;
-background-color: #f5f5f5;
+.tab a:hover, .tab a:focus, a.tab:hover, a.tab:focus, .tab:hover, .tab:focus {
+	text-decoration: none;
+	color: #FFF;
+	background-color: #2E3135;
 }
 
-div.tab.active span, a.tab.active span {
-color: #f5f5f5;
-background-color: #000000;
+.tab.active a, .tab.active a:link, .tab.active a:visited, a.tab.active, li.tab.active {
+	color: #FFF;
+	background-color: #2E3135;
 }
+
+#tabInsertId {
+	text-align: center;
+	background: #FFF:
+	padding: 1rem;
+	border-bottom: 3px solid #2E3135;
+}
+	#tabInsertId div {padding: 0.5rem;}
