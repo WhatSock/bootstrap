@@ -1,24 +1,17 @@
+/* WHATSOCK, 2016 */
+/* Specific styles for Accessible Scroll */
 
 #scrollPane {
-height: 340px;
-width: 390px;
-padding: 5px;
-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
-text-align: left;
-font-size: 1.2em;
-background: url("../img/scroll/backdrop.jpg") #000 no-repeat;
-color: #fff;
-margin: 20px auto 20px 26%;
-overflow: auto;
--webkit-box-shadow: 0 10px 6px -6px #777;
--moz-box-shadow: 0 10px 6px -6px #777;
-box-shadow: 0 10px 6px -6px #777;
-}
-
-#scrollPane > * {
-width: 390px;
-}
-
-*:focus {
-outline: blue 1px inset;
+	overflow: auto;
+	width: 90%;
+	max-width: 300px;
+	height: 340px;
+	font: 1.2em Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+	background: url("../img/scroll/backdrop.jpg") #000 no-repeat;
+	color: #fff;
+	padding: 1.5rem 2rem;
+	margin: 20px auto 20px 26%;
+	-webkit-box-shadow: 0 10px 6px -6px #777;
+	-moz-box-shadow: 0 10px 6px -6px #777;
+	box-shadow: 0 10px 6px -6px #777;
 }

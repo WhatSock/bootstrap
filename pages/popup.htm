@@ -1,142 +1,135 @@
 <html>
-<body>
-
-<div id="pg-popup">
-
-<div class="intro heading">
-<p>
-A popup control displays information or interactive content as an overlay.
-</p>
-</div>
-
-<div class="hd">
-<h2>
-<span>
-Accessible Popup
-</span>
-</h2>
-</div>
-
-<div class="intro tal">
-<p>
-<a id="popupId" href="#" class="accPopup excerpt" data-src="files/popup.html#popup-info" data-role="Excerpt" data-offsettop="-200">
-Show me the Shakespeare Quote of the Day!
-</a>
-</p>
-</div>
-
-<div class="intro tal">
-<p>
-The popup is optomized for screen reader and keyboard only users.
-</p>
-<p><pre>
-Activate the Quote link to open the popup.
-The content will be inserted inline with the triggering element,
-and focus will automatically move to the beginning of the new content.
-Press Tab to set focus to the Close link and press Enter to close the popup,
-or press Escape to close the popup directly.
-When closed, focus will move back to the triggering element.
-</pre></p>
-</div>
-
-<div class="hd">
-<h2>
-<span>
-Bootstrap Syntax
-</span>
-</h2>
-</div>
-
-<div class="intro tal">
-<p>
-<code>
-&lt;a href="#"<br />
-class="accPopup"<br />
-data-src="path/file.html#popupIdContent"<br />
-data-role="ContentRole"<br />
-data-autoposition="#"<br />
-data-offsetleft="#"<br />
-data-offsettop="#"<br />
-id="uniqueID"<br />
-&gt; ... &lt;/a&gt;
-</code>
-</p>
-<p>
-Or
-</p>
-<p>
-<code>
-&lt;a href="#"<br />
-class="accPopup"<br />
-data-internal="popupIdContent"<br />
-data-role="ContentRole"<br />
-data-autoposition="#"<br />
-data-offsetleft="#"<br />
-data-offsettop="#"<br />
-id="uniqueID"<br />
-&gt; ... &lt;/a&gt;
-</code>
-</p>
-</div>
-
-<div class="hd">
-<h2>
-<span>
-Attributes
-</span>
-</h2>
-</div>
-
-<div class="intro tal">
-<ul class="lsn"><li>
-class="accPopup" :
-The bootstrap class name that specifies an accessible popup.
-</li><li>
-data-src :
-The resource path and pointer to the ID attribute of the popup container element.
-If set, data-internal should be blank or not included.
-</li><li>
-data-internal :
-The ID attribute of the popup container element within the same document.<br />
-Syntax of popups within the same document:<br />
-<code>
-&lt;div class="hidden"&gt;<br />
-&lt;div id="popupIdContent"&gt;<br />
-...<br />
-&lt;/div&gt;<br />
-...<br />
-&lt;/div&gt;
-</code><br />
-If data-internal is set, data-src should be blank or not included.
-</li><li>
-data-role :
-The role name that is conveyed to screen reader users as beginning and ending boundary text for the new content.
-"Popup" is set by default if no value is specified.
-</li><li>
-data-autoposition :
-The autoPosition override, which dynamically positions the new content relative to the triggering element.
-This reflects the autoPosition property documented within AccDC, and may be a value between 0 and 12.
-The default is 3 if left blank or not included.
-</li><li>
-data-offsetleft :
-The offsetLeft override, which dynamically positions the new content relative to the triggering element.
-The default is 10 if left blank or not included.
-</li><li>
-data-offsettop :
-The offsetTop override, which dynamically positions the new content relative to the triggering element.
-The default is -20 if left blank or not included.
-</li><li>
-id :
-The unique ID of the element.
-This value is also registered as the ID of the popup AccDC Object, making it possible to invoke the object programmatically.<br />
-<code>
-$A.reg.uniqueID.open();<br />
-// All other AccDC API properties and methods are similarly available.
-</code>
-</li></ul>
-</div>
-
-</div>
-
-</body>
+    <body>
+        <div id="pg-popup">
+            <div class="hd">
+                <h3><span>Accessible Popup</span></h3>
+            </div>
+            <div class="intro highlight">
+                <p>A popup control displays information or interactive content as an overlay.</p>
+            </div>
+            <div class="intro tal demo-block">
+                <p><a id="popupId" href="#" class="accPopup excerpt" 
+					data-src="files/popup.html#popup-info" 
+					data-role="Excerpt" 
+					data-autoposition="0" 
+					data-offsetleft="0"  
+					data-offsettop="20"> Show me the Shakespeare Quote of the Day!</a></p>
+            </div>
+            <div class="intro tal keyboard">
+                <p>The popup is optimized for screen reader and keyboard only users:</p>
+               	<ul>
+               		<li>Activate the Quote link to open the popup.</li>
+					<li>The content will be inserted inline with the triggering element,
+and focus will automatically move to the beginning of the new content.</li>
+					<li>Press <kbd>Tab</kbd> to set focus to the Close link and press <kbd>Enter</kbd> to close the popup,
+or press <kbd>Escape</kbd> to close the popup directly.</li>
+					<li>When closed, focus will move back to the triggering element.</li>
+               	</ul>
+			</div>
+            <div class="hd">
+                <h4>Bootstrap Syntax</h4>
+            </div>
+            <div class="intro tal">
+                <p>
+                    <code>
+                        &lt;a href="#"
+                        <br/>
+                        class="accPopup"
+                        <br/>
+                        data-src="path/file.html#popupIdContent"
+                        <br/>
+                        data-role="ContentRole"
+                        <br/>
+                        data-autoposition="#"
+                        <br/>
+                        data-offsetleft="#"
+                        <br/>
+                        data-offsettop="#"
+                        <br/>
+                        id="uniqueID"
+                        <br/>
+                        &gt; ... &lt;/a&gt;
+                    </code>
+                </p>
+                <p> Or</p>
+                <p>
+                    <code>
+                        &lt;a href="#"
+                        <br/>
+                        class="accPopup"
+                        <br/>
+                        data-internal="popupIdContent"
+                        <br/>
+                        data-role="ContentRole"
+                        <br/>
+                        data-autoposition="#"
+                        <br/>
+                        data-offsetleft="#"
+                        <br/>
+                        data-offsettop="#"
+                        <br/>
+                        id="uniqueID"
+                        <br/>
+                        &gt; ... &lt;/a&gt;
+                    </code>
+                </p>
+            </div>
+            <div class="hd">
+                <h4>Attributes</h4>
+            </div>
+            <div class="intro tal">
+                <ul class="lsn">
+                    <li><strong>class="accPopup":</strong>
+                        The bootstrap class name that specifies an accessible popup.</li>
+                   <li><strong>data-src:</strong>
+                        The resource path and pointer to the ID attribute of the popup container element.
+                        If set, <code class="inline">data-internal</code> should be blank or not included.</li>
+                   <li><strong>data-internal:</strong>
+                        The ID attribute of the popup container element within the same document.
+                        <br/>
+                        Syntax of popups within the same document:
+                        <br/>
+                        <code>
+                            &lt;div class="hidden"&gt;
+                            <br/>
+                            &lt;div id="popupIdContent"&gt;
+                            <br/>
+                            ...
+                            <br/>
+                            &lt;/div&gt;
+                            <br/>
+                            ...
+                            <br/>
+                            &lt;/div&gt;
+                        </code>
+                        <br/>
+                        If <code class="inline">data-internal</code> is set, <code class="inline">data-src</code> should be blank or not included.
+                    </li>
+                    <li><strong>data-role:</strong>
+                        The role name that is conveyed to screen reader users as beginning and ending boundary text for the new content.
+                        "Popup" is set by default if no value is specified.</li>
+                    <li><strong>data-autoposition:</strong>
+                        The <code class="inline">autoPosition</code> override, which dynamically positions the new content relative to the triggering element.
+                        This reflects the <code class="inline">autoPosition</code> property documented within AccDC, and may be a value between 0 and 12.
+                        The default is 3 if left blank or not included.</li>
+                   <li><strong>data-offsetleft:</strong>
+                        The <code class="inline">offsetLeft</code> override, which dynamically positions the new content relative to the triggering element.
+                        The default is 10 if left blank or not included.</li>
+                    <li><strong>data-offsettop:</strong>
+                        The <code class="inline">offsetTop</code> override, which dynamically positions the new content relative to the triggering element.
+                        The default is -20 if left blank or not included.</li>
+                    <li><strong>id:</strong>
+                        The unique ID of the element.
+                        This value is also registered as the ID of the popup AccDC Object, making it possible to invoke the object programmatically.
+                        <br/>
+                        <code>
+                            $A.reg.uniqueID.open();
+                            <br/>
+                            // All other AccDC API properties and methods are similarly available.
+                        </code>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
 </html>

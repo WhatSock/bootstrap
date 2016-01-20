@@ -1,92 +1,68 @@
 <html>
-<body>
-
-<div id="pg-banner">
-
-<div class="intro heading">
-<p>
-A banner control displays important information by fixing it to a specific area of the viewport.
-</p>
-</div>
-
-<div class="hd">
-<h2>
-<span>
-Accessible Banner
-</span>
-</h2>
-</div>
-
-<div id="uniqueBannerId" data-src="files/banner.html#ad-2" data-role="Banner" class="accBanner"><!--
-Position this tag where you want the banner content to appear in the DOM reading order for screen reader users.
-(Preferably towards the top of the page so it's more likely to be encountered during navigation)
---></div>
-
-<div class="intro tal">
-<p>
-
-<button onclick="if ($A.reg.uniqueBannerId.loaded) $A.reg.uniqueBannerId.close(); else $A.reg.uniqueBannerId.open();" class="toggleBtn"> Toggle Banner </button>
-
-</p>
-</div>
-
-<div class="intro tal">
-<p>
-The banner is loaded from an external page using HTML5 attributes in the container element markup.
-</p>
-</div>
-
-<div class="hd">
-<h2>
-<span>
-Bootstrap Syntax
-</span>
-</h2>
-</div>
-
-<div class="intro tal">
-<p>
-<code>
-&lt;div class="accBanner"<br />
-data-src="path/file.html#containerId"<br />
-data-role="ContentPanelRoleName"<br />
-id="uniqueID"<br />
-&gt;&lt;/div&gt;
-</code>
-</p>
-</div>
-
-<div class="hd">
-<h2>
-<span>
-Attributes
-</span>
-</h2>
-</div>
-
-<div class="intro tal">
-<ul class="lsn"><li>
-class="accBanner" :
-The bootstrap class name that specifies an accessible banner.
-</li><li>
-data-src :
-The resource path and pointer to the ID attribute of the banner container element.
-</li><li>
-data-role :
-The role name that is conveyed to screen reader users as beginning and ending boundary text for the new content.
-"Banner" is set by default if no value is specified.
-</li><li>
-id :
-The unique ID of the element.
-This value is also registered as the ID of the banner AccDC Object, making it possible to invoke the object programmatically.<br />
-<code>
-$A.reg.uniqueID.open();<br />
-// All other AccDC API properties and methods are similarly available.
-</code>
-</li></ul>
-</div>
-
-</div>
-
-</body>
+    <body>
+        <div id="pg-banner">
+            <div class="hd">
+                <h3><span>Accessible Banner</span></h3>
+            </div>
+            <div class="intro highlight">
+                <p>A banner control displays important information by fixing it to a specific area of the viewport.</p>
+            </div>
+            <div id="uniqueBannerId" data-src="files/banner.html#ad-2" data-role="Banner" class="accBanner">
+                <!--
+                Position this tag where you want the banner content to appear in the DOM reading order for screen reader users.
+                (Preferably towards the top of the page so it's more likely to be encountered during navigation)
+                -->
+            </div>
+            <div class="intro tal demo-block">
+                <p><button onclick="if ($A.reg.uniqueBannerId.loaded) $A.reg.uniqueBannerId.close(); else $A.reg.uniqueBannerId.open();" class="toggleBtn">
+                        Toggle Banner 
+                   </button></p>
+            </div>
+            <div class="intro tal">
+                <p>The banner is loaded from an external page using HTML5 attributes in the container element markup.</p>
+            </div>
+            <div class="hd">
+                <h4>Bootstrap Syntax</h4>
+            </div>
+            <div class="intro tal">
+                <p>
+                    <code>
+                        &lt;div class="accBanner"
+                        <br/>
+                        data-src="path/file.html#containerId"
+                        <br/>
+                        data-role="ContentPanelRoleName"
+                        <br/>
+                        id="uniqueID"
+                        <br/>
+                        &gt;&lt;/div&gt;
+                    </code>
+                </p>
+            </div>
+            <div class="hd">
+                <h4>Attributes</h4>
+            </div>
+            <div class="intro tal">
+                <ul class="lsn">
+                    <li><strong>class="accBanner":</strong>
+                        The bootstrap class name that specifies an accessible banner.</li>
+                    <li><strong>data-src:</strong>
+                        The resource path and pointer to the ID attribute of the banner container element.</li>
+                    <li><strong>data-role:</strong>
+                        The role name that is conveyed to screen reader users as beginning and ending boundary text for the new content.
+                        "Banner" is set by default if no value is specified.</li>
+                    <li><strong>id:</strong>
+                        The unique ID of the element.
+                        This value is also registered as the ID of the banner AccDC Object, making it possible to invoke the object programmatically.
+                        <br/>
+                        <code>
+                            $A.reg.uniqueID.open();
+                            <br/>
+                            // All other AccDC API properties and methods are similarly available.
+                        </code>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
 </html>
