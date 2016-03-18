@@ -12,12 +12,12 @@
 	font-size: 1.2em;
 	text-transform: uppercase;
 	color: #000;
-	background: #63B7C2 url("../img/toggle/sprite.svg") 8px 5px no-repeat;
+	background: #63B7C2 url(../img/toggle/sprite.svg) 8px 5px no-repeat;
 	padding: 0.5em 0 0.5em 45px;
 }
 	
 	.accToggle.togglePressed .lbl {
-	    background: #63B7C2 url("../img/toggle/sprite.svg") 8px -175px no-repeat;
+	    background: #63B7C2 url(../img/toggle/sprite.svg) 8px -175px no-repeat;
 	}
 
 	div.toggle-section {
@@ -28,11 +28,14 @@
 	    animation: appearance 1s 1 ease-in-out;
 	}
 	
+@-webkit-keyframes appearance {
+    0% {background: #FC0;}
+    100% {background: #FFF;}
+}
 @keyframes appearance {
     0% {background: #FC0;}
     100% {background: #FFF;}
 }
-
 
 
 @media screen and (min-width: 1200px) {
