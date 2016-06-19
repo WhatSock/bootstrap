@@ -143,13 +143,14 @@ p, li, dt, dd {font-size: 0.9em; line-height: 1.45;}
 
 li li {font-size: 100%;}
 
-a, a:link, a:visited {
-	text-decoration: none;
+a, a:link {
 	color: #000;
-	background: #F2D3A1;
+	background: #FCE7C7;
 }
+
+a:visited {color: #404040; background: transparent;}
 a:hover {
-	text-decoration: underline;
+	text-decoration: none;
 	background: transparent;
 }
 
@@ -373,6 +374,7 @@ nav button, nav a, nav a:link, nav a:visited  {
 	width: 100%;
 	font: bold 1.2em Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	text-transform: uppercase;
+	text-decoration: none;
 	color: #FFF;
 	background: #444A51;
 	padding: 0.5em 0;
@@ -382,7 +384,6 @@ nav button, nav a, nav a:link, nav a:visited  {
 nav button:hover, nav a:hover {
 	color: #191B1D;
 	background: #63B7C2;
-	text-decoration: none;
 }
 
 nav li.active button, nav li.active a, nav li.active a:link, nav li.active a:visited {
@@ -414,6 +415,7 @@ ul.contextual-menu {
 	ul.contextual-menu a, ul.contextual-menu a:link {
 		display: block;
 		text-transform: uppercase;
+		text-decoration: none;
 		color: #2E3135;
 		background: #63B7C2 url(../img/sprite.svg) 45% 5px no-repeat;
 		padding: 65px 0.5em 0.5em;
@@ -421,7 +423,6 @@ ul.contextual-menu {
 	
 	ul.contextual-menu a:visited {opacity: .8;}
 	ul.contextual-menu a:hover, ul.contextual-menu a:focus, ul.contextual-menu a.active {
-		text-decoration: none;
 		color: #2E3135;
 		background-color: #E2A037;
 	}
@@ -765,7 +766,7 @@ p.guidance {
 
 div.demo-block {
 	clear: both;
-	padding: 1rem;
+	padding: 1rem 0;
 	margin-bottom: 2rem;
 	border-top: 2px dotted #63B7C2;
 	border-bottom: 2px dotted #63B7C2;
