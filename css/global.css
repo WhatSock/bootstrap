@@ -154,7 +154,7 @@ a:hover {
 	background: transparent;
 }
 
-*:focus {
+*:focus:not(*[role="tabpanel"]) {
 	color: #000;
 	background: #FC0;
 }
