@@ -1,4 +1,4 @@
-AccDC Bootstrap 1.4 for Standalone (01/08/2018)
+AccDC Bootstrap 1.5 for Standalone
 =====
 
 AccDC Bootstrap is an HTML parser that renders advanced, accessible interactive controls using semantic HTML markup.
