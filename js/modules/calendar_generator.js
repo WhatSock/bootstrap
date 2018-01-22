@@ -272,6 +272,68 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 											wDay: dc.date.getDay()
 											};
 						},
+						createDayCell: function(i, cellDateObj, cssClasses, dis, comm, inCurrentMonth){
+							var dc = this;
+
+							var cell = '<td ';
+
+							if (inCurrentMonth &&
+								(i == dc.fn.current.mDay) && (dc.range.current.month == dc.fn.current.month) &&
+								(dc.range.current.year == dc.fn.current.year)){
+
+								cell += 'aria-current="date" ';
+							}
+
+							if (dis){
+								cell += 'aria-disabled="true" ';
+							}
+
+							cell += 'aria-label="';
+
+							if (comm){
+								cell += dc.commentedTxt.replace(/<|>|\"/g, '') + ' ';
+							}
+
+							var dateFormatTokens = {
+								'YYYY': cellDateObj.getFullYear(),
+								'MMMM': dc.range[cellDateObj.getMonth()].name,
+								'dddd': dc.range.wDays[cellDateObj.getDay()].lng,
+								'D': i
+							};
+
+							cell += dateFormatTokens['D'] + ', ' + dateFormatTokens['dddd'] + ' ' + dateFormatTokens['MMMM'] + ' ' + dateFormatTokens['YYYY'];
+
+							if (comm){
+								cell += comm.replace(/<|>|\n/g, ' ').replace(/\"/g, '\"');
+							}
+							cell += '" role="link" tabindex="-1" ';
+
+							// CSS classes
+							cell += 'class="day ' + (cssClasses ? cssClasses : '');
+
+							if (dis){
+								cell += ' disabled';
+							}
+
+							if (comm){
+								cell += ' comment';
+							}
+							cell += '" ';
+
+							// Title attribute
+							cell += 'title="';
+
+							if (dis){
+								cell += dc.disabledTxt.replace(/<|>|\"/g, '');
+							}
+
+							if (comm){
+								cell += ' ' + dc.commentedTxt.replace(/<|>|\"/g, '');
+							}
+							cell += '" id="' + dc.baseId + i + '"><span aria-hidden="true">' + i + '</span></td>';
+
+							return cell;
+						},
 						runOnceBefore: function(dc){
 							dc.date = new Date();
 							dc.setCurrent(dc);
@@ -368,39 +430,9 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 								else if (commentsAll && commentsAll[i])
 									comm = commentsAll[i];
 
-								dc.source += '<td ';
+								// Draw calendar day cell
+								dc.source += dc.createDayCell(i, m, 'dayInMonth', dis, comm, true);
 
-								if (i == dc.fn.current.mDay && dc.range.current.month == dc.fn.current.month
-									&& dc.range.current.year == dc.fn.current.year)
-									dc.source += 'aria-current="date" ';
-
-								if (dis)
-									dc.source += 'aria-disabled="true" ';
-
-								dc.source += 'aria-label="';
-
-								if (comm)
-									dc.source += dc.commentedTxt.replace(/<|>|\"/g, '') + ' ';
-								dc.source += i + ', ' + dc.range.wDays[m.getDay()].lng + ' ' + dc.range[dc.range.current.month].name + ' '
-									+ dc.range.current.year;
-
-								if (comm)
-									dc.source += comm.replace(/<|>|\n/g, ' ').replace(/\"/g, '\"');
-								dc.source += '" role="link" tabindex="-1" class="day';
-
-								if (dis)
-									dc.source += ' disabled';
-
-								if (comm)
-									dc.source += ' comment';
-								dc.source += '" title="';
-
-								if (dis)
-									dc.source += dc.disabledTxt.replace(/<|>|\"/g, '');
-
-								if (comm)
-									dc.source += ' ' + dc.commentedTxt.replace(/<|>|\"/g, '');
-								dc.source += '" id="' + dc.baseId + i + '"><span aria-hidden="true">' + i + '</span></td>';
 								m.setDate(i);
 								var w = m.getDay();
 
