@@ -72,6 +72,10 @@ Please edit this file however desired to customize functionality.
 									// leftButtonMonthText: '&lt;',
 									// rightButtonMonthText: '&gt;',
 
+									// Uncomment to set specific start / end boundaries of a date range. Can be Date objects (absolute boundaries), or integers (relative boundaries)
+									// minDate: (new Date(1987, 4, 19)),
+									// maxDate: 28,
+
 									// Uncomment to set a specific date string format to be read out to screen reader users
 									// audibleDateFormat: 'D, MMMM YYYY (dddd)',
 

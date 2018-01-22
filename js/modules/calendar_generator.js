@@ -61,6 +61,8 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 						offsetLeft: isNaN(config.offsetLeft) ? 0 : config.offsetLeft,
 						posAnchor: config.posAnchor,
 						targetObj: config.targetObj,
+						minDate: ((config.minDate !== undefined) ? (config.minDate instanceof Date ? config.minDate : new Date((new Date()).setDate((new Date()).getDate() + config.minDate))) : undefined),
+						maxDate: ((config.maxDate !== undefined) ? (config.maxDate instanceof Date ? config.maxDate : new Date((new Date()).setDate((new Date()).getDate() + config.maxDate))) : undefined),
 						cssObj: config.cssObj ||
 										{
 										position: 'absolute',
@@ -250,7 +252,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 							var dc = this;
 
 							if (!o)
-								return;
+								return false;
 
 							this.current = o;
 							$A.query('td.dayInMonth.selected', this.containerDiv, function(i, p){
@@ -301,6 +303,8 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 
 							else
 								dc.navBtn = '';
+
+							return true;
 						},
 						setCurrent: function(dc){
 							dc.range.current =
@@ -311,7 +315,33 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 											wDay: dc.date.getDay()
 											};
 						},
-						createDayCell: function(i, cellDateObj, cssClasses, dis, comm, inCurrentMonth){
+						isDisabledDate: function(dc, counter, dateObj, cmpObj){
+							if (!cmpObj) {
+								cmpObj = dc.range.current;
+							}
+
+							var disabled = dc.range[cmpObj.month].disabled[cmpObj.year],
+								disabledAll = dc.range[cmpObj.month].disabled['*'],
+								disabledWDays = dc.range[cmpObj.month].disabledWDays,
+								disabledAllWDays = dc.range.disabledWDays;
+
+							var wkd = dateObj.getDay();
+
+							return !!((disabled && $A.inArray(counter, disabled) !== -1) || (disabledAll && $A.inArray(counter, disabledAll) !== -1)
+								|| (disabledWDays.length && $A.inArray(wkd, disabledWDays) !== -1)
+								|| (disabledAllWDays.length && $A.inArray(wkd, disabledAllWDays) !== -1)
+								|| dc.isOutsideDateRange(dateObj));
+
+						},
+						isOutsideDateRange: function(dateObj){
+							var dateCmp = this.createDateComparisonValue(dateObj);
+
+							return (
+								(this.minDateComparisonValue && (dateCmp < this.minDateComparisonValue)) ||
+								(this.maxDateComparisonValue && (dateCmp > this.maxDateComparisonValue))
+							);
+						},
+						createDayCell: function(i, cellDateObj, cssClasses, dis, inCurrentMonth){
 							var dc = this;
 
 							var cell = '<td ';
@@ -328,6 +358,16 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 							}
 
 							cell += 'aria-label="';
+
+							// draw comment?
+							var comments = dc.range[dc.range.current.month].comments[dc.range.current.year],
+								commentsAll = dc.range[dc.range.current.month].comments['*'];
+
+							var comm = '';
+							if (comments && comments[i])
+								comm = comments[i];
+							else if (commentsAll && commentsAll[i])
+								comm = commentsAll[i];
 
 							if (comm){
 								cell += dc.commentedTxt.replace(/<|>|\"/g, '') + ' ';
@@ -409,6 +449,16 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 							// Cache current date for comparison
 							dc.currentDate = new Date();
 							dc.currentDateComparisonValue = dc.createDateComparisonValue(dc.currentDate);
+
+							// If we have minDate / maxDate set, ensure they don't have time precision and create comparison value
+							if (dc.minDate) {
+								dc.minDate.setHours(0, 0, 0, 0);
+								dc.minDateComparisonValue = dc.createDateComparisonValue(dc.minDate);
+							}
+							if (dc.maxDate) {
+								dc.maxDate.setHours(0, 0, 0, 0);
+								dc.maxDateComparisonValue = dc.createDateComparisonValue(dc.maxDate);
+							}
 						},
 						runBefore: function(dc){
 							if (config.ajax && typeof config.ajax === 'function' && !dc.stopAjax && !dc.ajaxLoading){
@@ -456,34 +506,43 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 							var yearSelector = '';
 
 							if (!config.condenseYear){
+								var hasPrevYear = !dc.isOutsideDateRange(new Date((dc.range.current.year - 1), 0, 1)),
+									hasNextYear = !dc.isOutsideDateRange(new Date((dc.range.current.year + 1), 0, 1));
+
 								yearSelector = '<tr class="yearSelector" role="presentation">' +
-									'<td class="nav prev btn year" accesskey="1" title="'
+									'<td class="nav prev btn year' + (!hasPrevYear ? ' disabled' : '') + '" accesskey="1" title="'
 									+ dc.prevTxt.replace(/<|>|\"/g, '') + ' '
 									+ dc.yearTxt.replace(/<|>|\"/g, '') + '" aria-label="' + dc.prevTxt.replace(/<|>|\"/g, '') + ' '
 									+ dc.yearTxt.replace(/<|>|\"/g, '') + '"'
-									+ ' role="button" id="' + dc.prevBtnId
-									+ 'Y" tabindex="0"><span aria-hidden="true">' + dc.leftButtonYearText + '</span></td>' +
+									+ (!hasPrevYear ? ' aria-disabled="true" tabindex="-1"' : ' tabindex="0"')
+									+ ' role="button" id="' + dc.prevBtnId + 'Y"><span aria-hidden="true">' + dc.leftButtonYearText + '</span></td>' +
 									'<td title="'
 									+ dc.tooltipTxt.replace(/<|>|\"/g, '') + '" colspan="5" class="year" role="presentation"><span>'
 									+ dc.range.current.year + '</span></td>' +
-									'<td class="nav next nav prev btn" accesskey="2" title="'
+									'<td class="nav next nav prev btn' + (!hasNextYear ? ' disabled' : '') + '" accesskey="2" title="'
 									+ dc.nextTxt.replace(/<|>|\"/g, '') + ' '
 									+ dc.yearTxt.replace(/<|>|\"/g, '') + '" aria-label="' + dc.nextTxt.replace(/<|>|\"/g, '') + ' '
 									+ dc.yearTxt.replace(/<|>|\"/g, '') + '"'
-									+ ' role="button" id="' + dc.nextBtnId
-									+ 'Y" tabindex="0"><span aria-hidden="true">' + dc.rightButtonYearText + '</span></td></tr>';
+									+ (!hasNextYear ? ' aria-disabled="true" tabindex="-1"' : ' tabindex="0"')
+									+ ' role="button" id="' + dc.nextBtnId + 'Y"><span aria-hidden="true">' + dc.rightButtonYearText + '</span></td></tr>';
 							}
 
+							// Draw the month display and prev/next month buttons
+							var hasPrevMonth = !dc.isOutsideDateRange(new Date(prevDateValues.year, prevDateValues.month, dc.range[prevDateValues.month].max)),
+							hasNextMonth = !dc.isOutsideDateRange(new Date(nextDateValues.year, nextDateValues.month, 1));
+
 							var monthSelector = '<tr class="monthSelector" role="presentation">' +
-								'<td class="nav prev btn month" accesskey="3" title="'
+								'<td class="nav prev btn month' + (!hasPrevMonth ? ' disabled' : '') + '" accesskey="3" title="'
 								+ dc.prevTxt.replace(/<|>|\"/g, '') + ' ' + dc.monthTxt.replace(/<|>|\"/g, '') + '" aria-label="'
 								+ dc.prevTxt.replace(/<|>|\"/g, '') + ' ' + dc.monthTxt.replace(/<|>|\"/g, '') + '"'
-								+ ' role="button" id="' + dc.prevBtnId + '" tabindex="0"><span aria-hidden="true">' + dc.leftButtonMonthText + '</span></td>' +
+								+ (!hasPrevMonth ? ' aria-disabled="true" tabindex="-1"' : ' tabindex="0"')
+								+ ' role="button" id="' + dc.prevBtnId + '"><span aria-hidden="true">' + dc.leftButtonMonthText + '</span></td>' +
 								'<td colspan="5" class="month" role="presentation"><span>'
 								+ dc.range[dc.range.current.month].name + (!config.condenseYear ? '' : ' ' + dc.range.current.year) + '</span></td>' +
-								'<td class="nav next btn month" accesskey="4" title="'
+								'<td class="nav next btn month' + (!hasNextMonth ? ' disabled' : '') + '" accesskey="4" title="'
 								+ dc.nextTxt.replace(/<|>|\"/g, '') + ' ' + dc.monthTxt.replace(/<|>|\"/g, '') + '" aria-label="'
 								+ dc.nextTxt.replace(/<|>|\"/g, '') + ' ' + dc.monthTxt.replace(/<|>|\"/g, '') + '"'
+								+ (!hasNextMonth ? ' aria-disabled="true" tabindex="-1"' : ' tabindex="0"')
 								+ ' role="button" id="' + dc.nextBtnId + '"><span aria-hidden="true">' + dc.rightButtonMonthText + '</span></td></tr>';
 
 							// Start constructing the Datepicker table element
@@ -509,9 +568,11 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 							m.setDate(1);
 							m.setMonth(dc.range.current.month);
 							m.setFullYear(dc.range.current.year);
+
 							var f = m.getDay();
 							m.setDate(dc.range[dc.range.current.month].max);
-							var e = m.getDay(), w = dc.iterS;
+							var e = m.getDay(),
+								w = dc.iterS;
 
 							// Draw the full calendar? (a full grid containing previous / next month cells)
 							if (dc.drawFullCalendar === true){
@@ -524,7 +585,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 
 								if (dc.drawFullCalendar === true){
 									prevMonth.setDate(counter);
-									dc.source += dc.createDayCell(counter, prevMonth, 'dayInPrevMonth', false);
+									dc.source += dc.createDayCell(counter, prevMonth, 'dayInPrevMonth', dc.isDisabledDate(dc, counter, prevMonth));
 									++counter;
 
 								} else{
@@ -533,11 +594,6 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 							}
 
 							dc.range.track = {};
-							var disabled = dc.range[dc.range.current.month].disabled[dc.range.current.year],
-								disabledAll = dc.range[dc.range.current.month].disabled['*'],
-								disabledWDays = dc.range[dc.range.current.month].disabledWDays, disabledAllWDays = dc.range.disabledWDays,
-								comments = dc.range[dc.range.current.month].comments[dc.range.current.year],
-								commentsAll = dc.range[dc.range.current.month].comments['*'];
 
 							for (var i = 1; i <= 31; i++){
 								dc.range.track[dc.baseId + i] = i;
@@ -545,21 +601,10 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 
 							for (var i = 1; i <= dc.range[dc.range.current.month].max; i++){
 								m.setDate(i);
-								var wkd = m.getDay();
-								var dis = ((disabled && $A.inArray(i, disabled) !== -1) || (disabledAll && $A.inArray(i, disabledAll) !== -1)
-									|| (disabledWDays.length && $A.inArray(wkd, disabledWDays) !== -1)
-									|| (disabledAllWDays.length && $A.inArray(wkd, disabledAllWDays) !== -1)) ? true : false, comm = '';
-
-								if (comments && comments[i])
-									comm = comments[i];
-
-								else if (commentsAll && commentsAll[i])
-									comm = commentsAll[i];
 
 								// Draw calendar day cell
-								dc.source += dc.createDayCell(i, m, 'dayInMonth', dis, comm, true);
+								dc.source += dc.createDayCell(i, m, 'dayInMonth', dc.isDisabledDate(dc, i, m), true);
 
-								m.setDate(i);
 								var w = m.getDay();
 
 								if (w == dc.iter && i < dc.range[dc.range.current.month].max)
@@ -575,7 +620,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 
 								if (dc.drawFullCalendar === true){
 									nextMonth.setDate(counter);
-									dc.source += dc.createDayCell(counter, nextMonth, 'dayInNextMonth', false);
+									dc.source += dc.createDayCell(counter, nextMonth, 'dayInNextMonth', dc.isDisabledDate(dc, counter, nextMonth));
 									++counter;
 
 								} else{
@@ -647,42 +692,110 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 							if (!dc.prevCurrent)
 								dc.prevCurrent = {};
 							$A.internal.extend(true, dc.prevCurrent, dc.range.current);
+
 							var nMonth = function(){
-								if ($A.getAttr(dc.buttons.nM, 'aria-disabled') == 'true')
+								if (dc.disableNavNextMonthBtn && ($A.getAttr(dc.buttons.nM, 'aria-disabled') == 'true'))
 									return;
 
 								$A.internal.extend(true, dc.prevCurrent, dc.range.current);
-								var month = dc.range.current.month == 11 ? 0 : dc.range.current.month + 1,
-									year = month > 0 ? dc.range.current.year : dc.range.current.year + 1,
-									day = dc.range.current.mDay > dc.range[month].max ? dc.range[month].max : dc.range.current.mDay;
-								dc.date = new Date(year, month, day);
+
+								var dateValues = dc.modifyDateValues(
+									{
+										month: dc.range.current.month,
+										year: dc.range.current.year
+									},
+									{
+										month: 1
+									}
+								);
+
+								// Only change to next month if its first day is inside the valid date range
+								if(!dc.isOutsideDateRange(new Date(dateValues.year, dateValues.month, 1))){
+									var day = dc.range.current.mDay > dc.range[dateValues.month].max ? dc.range[dateValues.month].max : dc.range.current.mDay,
+										intendedDate = new Date(dateValues.year, dateValues.month, day);
+
+									// If intended selected date one month ahead is outside of date range, set
+									// selected date to the next available date
+									if (dc.isOutsideDateRange(intendedDate))
+										dc.date = dc.maxDate;
+									else
+										dc.date = intendedDate;
+								}
+
+								else {
+									dc.date = dc.maxDate;
+								}
+
 								dc.setCurrent(dc);
 								dc.reopen = true;
 								dc.open();
+
 							}, pMonth = function(){
-								if ($A.getAttr(dc.buttons.pM, 'aria-disabled') == 'true')
+								if (dc.disableNavPrevMonthBtn && ($A.getAttr(dc.buttons.pM, 'aria-disabled') == 'true'))
 									return;
+
 								$A.internal.extend(true, dc.prevCurrent, dc.range.current);
-								var month = dc.range.current.month < 1 ? 11 : dc.range.current.month - 1,
-									year = month < 11 ? dc.range.current.year : dc.range.current.year - 1,
-									day = dc.range.current.mDay > dc.range[month].max ? dc.range[month].max : dc.range.current.mDay;
-								dc.date = new Date(year, month, day);
+
+								var dateValues = dc.modifyDateValues(
+									{
+										month: dc.range.current.month,
+										year: dc.range.current.year
+									},
+									{
+										month: -1
+									}
+								);
+
+								// Only change to previous month if its last day is inside the valid date range
+								if(!dc.isOutsideDateRange(new Date(dateValues.year, dateValues.month, dc.range[dateValues.month].max))){
+									var day = dc.range.current.mDay > dc.range[dateValues.month].max ? dc.range[dateValues.month].max : dc.range.current.mDay,
+										intendedDate = new Date(dateValues.year, dateValues.month, day);
+
+									// If intended selected date one month previously is outside of date range, set
+									// selected date to the next available date
+									if(dc.isOutsideDateRange(intendedDate))
+										dc.date = dc.minDate;
+									else
+										dc.date = intendedDate;
+								}
+
+								else{
+									dc.date = dc.minDate;
+								}
+
 								dc.setCurrent(dc);
 								dc.reopen = true;
 								dc.open();
+
 							}, gYear = function(forward){
 								if ((!forward && ((!config.condenseYear && $A.getAttr(dc.buttons.pY, 'aria-disabled') == 'true')
-									|| (config.condenseYear && dc.disableNavPrevYearBtn)))
-									|| (forward && ((!config.condenseYear && $A.getAttr(dc.buttons.nY, 'aria-disabled') == 'true')
-										|| (config.condenseYear && dc.disableNavNextYearBtn))))
+									|| (config.condenseYear && dc.disableNavPrevYearBtn)))) {
+
 									return;
+
+								} else if ((forward && ((!config.condenseYear && $A.getAttr(dc.buttons.nY, 'aria-disabled') == 'true')
+										|| (config.condenseYear && dc.disableNavNextYearBtn)))) {
+
+									return;
+								}
+
 								$A.internal.extend(true, dc.prevCurrent, dc.range.current);
-								var month = dc.range.current.month, year = forward ? dc.range.current.year + 1 : dc.range.current.year - 1;
+
+								var month = dc.range.current.month,
+									year = forward ? dc.range.current.year + 1 : dc.range.current.year - 1;
 
 								if (month === 1)
 									dc.range[1].max = 28;
 								var day = dc.range.current.mDay > dc.range[month].max ? dc.range[month].max : dc.range.current.mDay;
-								dc.date = new Date(year, month, day);
+
+								// Only change year if the intended date is inside of any set date range
+								var intendedDate = new Date(year, month, day);
+
+								if (dc.isOutsideDateRange(intendedDate)){
+									return;
+								}
+
+								dc.date = intendedDate;
 								dc.setCurrent(dc);
 								dc.reopen = true;
 								dc.open();
@@ -717,7 +830,38 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 												}
 											},
 											click: function(ev){
-												dc.date.setDate(dc.range.track[this.id]);
+												// If items from a previous / next month are selected, modify the date accordingly
+												if ($A.hasClass(this, 'dayInPrevMonth')){
+													var prevDateValues = dc.modifyDateValues(
+														{
+															month: dc.range.current.month,
+															year: dc.range.current.year
+														},
+														{
+															month: -1
+														}
+													);
+
+													dc.date = new Date(prevDateValues.year, prevDateValues.month, dc.range.track[this.id]);
+
+												} else if ($A.hasClass(this, 'dayInNextMonth')){
+													var nextDateValues = dc.modifyDateValues(
+														{
+															month: dc.range.current.month,
+															year: dc.range.current.year
+														},
+														{
+															month: 1
+														}
+													);
+
+													dc.date = new Date(nextDateValues.year, nextDateValues.month, dc.range.track[this.id]);
+
+												} else {
+													// Selection in current month, just adjust the date
+													dc.date.setDate(dc.range.track[this.id]);
+												}
+
 												dc.setCurrent(dc);
 
 												if ($A.hasClass(this, 'selected') || (!commentsEnabled && !$A.hasClass(this, 'comment'))){
@@ -765,18 +909,30 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														$A.internal.extend(true, dc.prevCurrent, dc.range.current);
 
 														if (dc.range.current.mDay > 1){
+															dc.setFocus(dc.range.index[dc.range.current.mDay - 2], this);
+
 															dc.range.current.mDay--;
 															dc.range.current.wDay = !wd ? 6 : wd - 1;
-															dc.setFocus(dc.range.index[dc.range.current.mDay - 1], this);
 														}
 
-														else if (dc.range.current.mDay == 1 && $A.getAttr(dc.buttons.pM, 'aria-disabled') != 'true'){
-															var month = dc.range.current.month < 1 ? 11 : dc.range.current.month - 1,
-																year = month < 11 ? dc.range.current.year : dc.range.current.year - 1, day = dc.range[month].max;
+														else if (dc.range.current.mDay == 1
+															&& $A.getAttr(dc.buttons.pM, 'aria-disabled') != 'true'){
 
-															if (month === 1)
-																day = (new Date(year, 1, 29).getMonth() == 1) ? 29 : 28;
-															dc.date = new Date(year, month, day);
+															var dateValues = dc.modifyDateValues(
+																{
+																	month: dc.range.current.month,
+																	year: dc.range.current.year
+																},
+																{
+																	month: -1
+																}
+															);
+															var day = dc.range[dateValues.month].max;
+
+															if (dateValues.month === 1)
+																day = (new Date(dateValues.year, 1, 29).getMonth() == 1) ? 29 : 28;
+
+															dc.date = new Date(dateValues.year, dateValues.month, day);
 															dc.setCurrent(dc);
 															dc.reopen = true;
 															dc.open();
@@ -788,16 +944,26 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														$A.internal.extend(true, dc.prevCurrent, dc.range.current);
 
 														if (dc.range.current.mDay < dc.range[dc.range.current.month].max){
+															dc.setFocus(dc.range.index[dc.range.current.mDay], this);
+
 															dc.range.current.mDay++;
 															dc.range.current.wDay = wd == 6 ? 0 : wd + 1;
-															dc.setFocus(dc.range.index[dc.range.current.mDay - 1], this);
 														}
 
 														else if (dc.range.current.mDay == dc.range[dc.range.current.month].max
 															&& $A.getAttr(dc.buttons.nM, 'aria-disabled') != 'true'){
-															var month = dc.range.current.month == 11 ? 0 : dc.range.current.month + 1,
-																year = month > 0 ? dc.range.current.year : dc.range.current.year + 1;
-															dc.date = new Date(year, month, 1);
+
+															var dateValues = dc.modifyDateValues(
+																{
+																	month: dc.range.current.month,
+																	year: dc.range.current.year
+																},
+																{
+																	month: 1
+																}
+															);
+
+															dc.date = new Date(dateValues.year, dateValues.month, 1);
 															dc.setCurrent(dc);
 															dc.reopen = true;
 															dc.open();
@@ -809,24 +975,40 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														$A.internal.extend(true, dc.prevCurrent, dc.range.current);
 
 														if ((dc.range.current.mDay - 7) > 0){
+															dc.setFocus(dc.range.index[dc.range.current.mDay - 8], this);
+
 															dc.range.current.mDay -= 7;
-															dc.setFocus(dc.range.index[dc.range.current.mDay - 1], this);
 														}
 
 														else if ($A.getAttr(dc.buttons.pM, 'aria-disabled') != 'true'){
-															var month = dc.range.current.month < 1 ? 11 : dc.range.current.month - 1,
-																year = month < 11 ? dc.range.current.year : dc.range.current.year - 1;
+															// Go to previous month
+															var dateValues = dc.modifyDateValues(
+																{
+																	month: dc.range.current.month,
+																	year: dc.range.current.year
+																},
+																{
+																	month: -1
+																}
+															);
 
-															if (month === 1 && (new Date(year, 1, 29).getMonth() == 1))
-																dc.range[month].max = 29;
+															if (dateValues.month === 1 && (new Date(dateValues.year, 1, 29).getMonth() == 1))
+																dc.range[dateValues.month].max = 29;
 
-															else if (month === 1)
-																dc.range[month].max = 28;
-															var day = dc.range[month].max + (dc.range.current.mDay - 7);
-															dc.date = new Date(year, month, day);
-															dc.setCurrent(dc);
-															dc.reopen = true;
-															dc.open();
+															else if (dateValues.month === 1)
+																dc.range[dateValues.month].max = 28;
+
+															var day = dc.range[dateValues.month].max + (dc.range.current.mDay - 7),
+																intendedDate = new Date(dateValues.year, dateValues.month, day);
+
+															// If intended selected date one month previous is outside of date range, do not attempt
+															// to select the date cell
+															if (!dc.isOutsideDateRange(intendedDate)){
+																dc.date = intendedDate;
+																dc.setCurrent(dc);
+																dc.reopen = true;
+																dc.open();
+															}
 														}
 													}
 
@@ -835,18 +1017,34 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														$A.internal.extend(true, dc.prevCurrent, dc.range.current);
 
 														if ((dc.range.current.mDay + 7) <= dc.range[dc.range.current.month].max){
+															dc.setFocus(dc.range.index[dc.range.current.mDay + 6], this);
+
 															dc.range.current.mDay += 7;
-															dc.setFocus(dc.range.index[dc.range.current.mDay - 1], this);
 														}
 
 														else if ($A.getAttr(dc.buttons.nM, 'aria-disabled') != 'true'){
-															var month = dc.range.current.month == 11 ? 0 : dc.range.current.month + 1,
-																year = month > 0 ? dc.range.current.year : dc.range.current.year + 1,
-																day = dc.range.current.mDay + 7 - dc.range[dc.range.current.month].max;
-															dc.date = new Date(year, month, day);
-															dc.setCurrent(dc);
-															dc.reopen = true;
-															dc.open();
+															// Go to next month
+															var dateValues = dc.modifyDateValues(
+																{
+																	month: dc.range.current.month,
+																	year: dc.range.current.year
+																},
+																{
+																	month: 1
+																}
+															);
+
+															var day = dc.range.current.mDay + 7 - dc.range[dc.range.current.month].max,
+																intendedDate = new Date(dateValues.year, dateValues.month, day);
+
+															// If intended selected date one month ahead is outside of date range, do not attempt
+															// to select the date cell
+															if (!dc.isOutsideDateRange(intendedDate)){
+																dc.date = intendedDate;
+																dc.setCurrent(dc);
+																dc.reopen = true;
+																dc.open();
+															}
 														}
 													}
 
@@ -896,7 +1094,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 													}
 
 													else if (k == 36){
-														// Home key
+														// Home key (goes to the first day of the row)
 														$A.internal.extend(true, dc.prevCurrent, dc.range.current);
 
 														if (wd != dc.iterS && dc.range.current.mDay > 1){
@@ -909,7 +1107,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 													}
 
 													else if (k == 35){
-														// End key
+														// End key (goes to the last day of the row)
 														$A.internal.extend(true, dc.prevCurrent, dc.range.current);
 
 														if (wd != dc.iterE && dc.range.current.mDay < dc.range[dc.range.current.month].max){
