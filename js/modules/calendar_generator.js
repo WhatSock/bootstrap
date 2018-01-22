@@ -1,6 +1,7 @@
 /*!
 ARIA Calendar Module R1.26
 Copyright 2010-2017 Bryan Garaventa (WhatSock.com)
+Copyright 2018 Danny Allen (dannya.com) / Wonderscore Ltd (wonderscore.co.uk)
 Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under the terms of the Open Source Initiative OSI - MIT License
 */
 
@@ -48,6 +49,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 						nextTxt: config.nextTxt || 'Next',
 						monthTxt: config.monthTxt || 'Month',
 						yearTxt: config.yearTxt || 'Year',
+						pageUpDownNatural: (config.pageUpDownNatural === true),
 						autoPosition: isNaN(config.autoPosition) ? 9 : config.autoPosition,
 						offsetTop: isNaN(config.offsetTop) ? 0 : config.offsetTop,
 						offsetLeft: isNaN(config.offsetLeft) ? 0 : config.offsetLeft,
@@ -584,6 +586,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 													var wd = dc.range.current.wDay;
 
 													if (k == 37){
+														// Left arrow key
 														$A.internal.extend(true, dc.prevCurrent, dc.range.current);
 
 														if (dc.range.current.mDay > 1){
@@ -606,6 +609,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 													}
 
 													else if (k == 39){
+														// Right arrow key
 														$A.internal.extend(true, dc.prevCurrent, dc.range.current);
 
 														if (dc.range.current.mDay < dc.range[dc.range.current.month].max){
@@ -626,6 +630,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 													}
 
 													else if (k == 38){
+														// Up arrow key
 														$A.internal.extend(true, dc.prevCurrent, dc.range.current);
 
 														if ((dc.range.current.mDay - 7) > 0){
@@ -651,6 +656,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 													}
 
 													else if (k == 40){
+														// Down arrow key
 														$A.internal.extend(true, dc.prevCurrent, dc.range.current);
 
 														if ((dc.range.current.mDay + 7) <= dc.range[dc.range.current.month].max){
@@ -670,30 +676,52 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 													}
 
 													else if (k == 27){
+														// Esc key
 														dc.close();
 													}
 
 													else if (k == 33){
+														// PageUp key
 														$A.internal.extend(true, dc.prevCurrent, dc.range.current);
 
-														if (pressed.alt)
-															gYear(true);
+														if (dc.pageUpDownNatural === true){
+															if (pressed.alt){
+																gYear(false);
+															} else{
+																pMonth();
+															}
 
-														else
-															nMonth();
+														} else{
+															if (pressed.alt){
+																gYear(true);
+															} else{
+																nMonth();
+															}
+														}
 													}
 
 													else if (k == 34){
+														// PageDown key
 														$A.internal.extend(true, dc.prevCurrent, dc.range.current);
 
-														if (pressed.alt)
-															gYear();
+														if (dc.pageUpDownNatural === true){
+															if (pressed.alt){
+																gYear(true);
+															} else{
+																nMonth();
+															}
 
-														else
-															pMonth();
+														} else{
+															if (pressed.alt){
+																gYear(false);
+															} else{
+																pMonth();
+															}
+														}
 													}
 
 													else if (k == 36){
+														// Home key
 														$A.internal.extend(true, dc.prevCurrent, dc.range.current);
 
 														if (wd != dc.iterS && dc.range.current.mDay > 1){
@@ -706,6 +734,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 													}
 
 													else if (k == 35){
+														// End key
 														$A.internal.extend(true, dc.prevCurrent, dc.range.current);
 
 														if (wd != dc.iterE && dc.range.current.mDay < dc.range[dc.range.current.month].max){
@@ -720,6 +749,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 												}
 
 												else if (k == 9 && !pressed.alt && !pressed.ctrl && !pressed.shift){
+													// Tab key (without any simultaneous modifiers Alt / Ctrl / Shift)
 													$A.internal.extend(true, dc.prevCurrent, dc.range.current);
 
 													if (!config.condenseYear && $A.getAttr(dc.buttons.pY, 'aria-disabled') != 'true')
@@ -738,6 +768,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 												}
 
 												else if (k == 9 && !pressed.alt && !pressed.ctrl && pressed.shift){
+													// Tab key (with simultaneous Shift modifier)
 													$A.internal.extend(true, dc.prevCurrent, dc.range.current);
 
 													if ($A.getAttr(dc.buttons.nM, 'aria-disabled') != 'true')

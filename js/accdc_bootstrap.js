@@ -46,11 +46,16 @@ Please edit this file however desired to customize functionality.
 									{
 									// Uncomment to disable auto positioning
 									// autoPosition: 0,
+
+									// Uncomment to switch the behaviour when the PageUp or PageDown keys are pressed to a "natural" behaviour (PageUp goes to previous month, PageDown goes to next month)
+									// pageUpDownNatural: true,
+
 									cssObj:
 													{
 													position: 'absolute',
 													zIndex: 1
 													},
+
 									// Uncomment the following to enable disabled date ranges
 									/*
 																	disabledTxt: 'Disabled',
