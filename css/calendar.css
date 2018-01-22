@@ -60,6 +60,12 @@ td.dayToday {
 	background: #db7093;
 }
 
+td.dayInPrevMonth,
+td.dayInNextMonth {
+	color: #000;
+	background: #e6e6e6;
+}
+
 td.day:hover {background: #E2A037;}
 
 td[aria-current="date"] {background: #E2A037;}

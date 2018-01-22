@@ -53,6 +53,9 @@ Please edit this file however desired to customize functionality.
 									// Uncomment to append a "dayToday" CSS class to the current day cell element - this allows styling to be targeted to this specific element
 									// highlightToday: true,
 
+									// Uncomment to fill in the day cells outside of the current month so that the calendar grid is always filled with day cells
+									// drawFullCalendar: true,
+
 									// Uncomment to set a specific date string format to be read out to screen reader users
 									// audibleDateFormat: 'D, MMMM YYYY (dddd)',
 

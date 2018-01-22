@@ -49,6 +49,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 						nextTxt: config.nextTxt || 'Next',
 						monthTxt: config.monthTxt || 'Month',
 						yearTxt: config.yearTxt || 'Year',
+						drawFullCalendar: (config.drawFullCalendar === true),
 						highlightToday: (config.highlightToday === true),
 						pageUpDownNatural: (config.pageUpDownNatural === true),
 						autoPosition: isNaN(config.autoPosition) ? 9 : config.autoPosition,
@@ -208,6 +209,39 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 								d = 6 - d;
 							return d;
 						},
+						modifyDateValues: function (values, modifications) {
+							// Note: Months are zero based
+							for (var key in modifications) {
+								var modification = modifications[key];
+
+								if (key === 'month') {
+									values.month += modification;
+
+									if (modification < 0) {
+										// Subtraction
+										if (values.month < 0) {
+											values.month = 11;
+
+											if (values.year) {
+												values.year -= 1;
+											}
+										}
+
+									} else {
+										// Addition
+										if (values.month > 11) {
+											values.month = 0;
+
+											if (values.year) {
+												values.year += 1;
+											}
+										}
+									}
+								}
+							}
+
+							return values;
+						},
 						setFocus: function(o, p, s){
 							var dc = this;
 
@@ -215,7 +249,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 								return;
 
 							this.current = o;
-							$A.query('td.day.selected', this.containerDiv, function(i, p){
+							$A.query('td.dayInMonth.selected', this.containerDiv, function(i, p){
 								$A.setAttr(p,
 												{
 												tabindex: '-1'
@@ -384,6 +418,36 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 							dc.baseId = 'b' + $A.genId();
 							dc.prevBtnId = dc.baseId + 'p';
 							dc.nextBtnId = dc.baseId + 'n';
+
+							// Calculate prev/next month date values, and whether they are within the allowed date range
+							var prevMonth = new Date();
+							var prevDateValues = dc.modifyDateValues(
+                				{
+									month: dc.range.current.month,
+									year: dc.range.current.year
+                				},
+                				{
+                  					month: -1
+                				}
+              				);
+
+							prevMonth.setMonth(prevDateValues.month);
+							prevMonth.setFullYear(prevDateValues.year);
+
+							var nextMonth = new Date();
+							var nextDateValues = dc.modifyDateValues(
+								{
+									month: dc.range.current.month,
+									year: dc.range.current.year
+								},
+								{
+									month: 1
+								}
+							);
+
+							nextMonth.setMonth(nextDateValues.month);
+							nextMonth.setFullYear(nextDateValues.year);
+
 							dc.source = '<table role="application" class="calendar" aria-label="' + dc.role + '">';
 
 							if (!config.condenseYear)
@@ -418,6 +482,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 								nMonth = dc.range.current.month < 11 ? dc.range.current.month + 1 : 0;
 							dc.iter = 0;
 
+							// Draw day headers
 							for (var i = 0; i < 7; i++){
 								var di = dc.getWDay(dc, i), d = dc.range.wDays[di];
 
@@ -429,6 +494,8 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 									+ '</span></th>';
 							}
 							dc.source += '</tr><tr role="presentation">';
+
+							// Start drawing day cells
 							var m = new Date();
 							m.setDate(1);
 							m.setMonth(dc.range.current.month);
@@ -437,10 +504,25 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 							m.setDate(dc.range[dc.range.current.month].max);
 							var e = m.getDay(), w = dc.iterS;
 
+							// Draw the full calendar? (a full grid containing previous / next month cells)
+							if (dc.drawFullCalendar === true){
+								var daysInMonth = (new Date(prevDateValues.year, (prevDateValues.month + 1), 0)).getDate(),
+									counter = (daysInMonth - (new Date(dc.range.current.year, dc.range.current.month, 0)).getDay() + dc.range.wdOffset);
+							}
+
 							while (w != f){
 								w = (w + 1) > 6 ? 0 : w + 1;
-								dc.source += '<td class="empty" role="presentation"><span>&nbsp;</span></td>';
+
+								if (dc.drawFullCalendar === true){
+									prevMonth.setDate(counter);
+									dc.source += dc.createDayCell(counter, prevMonth, 'dayInPrevMonth', false);
+									++counter;
+
+								} else{
+									dc.source += '<td class="empty" role="presentation"><span>&nbsp;</span></td>';
+								}
 							}
+
 							dc.range.track = {};
 							var disabled = dc.range[dc.range.current.month].disabled[dc.range.current.year],
 								disabledAll = dc.range[dc.range.current.month].disabled['*'],
@@ -448,8 +530,11 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 								comments = dc.range[dc.range.current.month].comments[dc.range.current.year],
 								commentsAll = dc.range[dc.range.current.month].comments['*'];
 
-							for (var i = 1; i <= dc.range[dc.range.current.month].max; i++){
+							for (var i = 1; i <= 31; i++){
 								dc.range.track[dc.baseId + i] = i;
+							}
+
+							for (var i = 1; i <= dc.range[dc.range.current.month].max; i++){
 								m.setDate(i);
 								var wkd = m.getDay();
 								var dis = ((disabled && $A.inArray(i, disabled) !== -1) || (disabledAll && $A.inArray(i, disabledAll) !== -1)
@@ -472,9 +557,21 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 									dc.source += '</tr><tr role="presentation">';
 							}
 
+							if (dc.drawFullCalendar === true){
+								var counter = 1;
+							}
+
 							while (e != dc.iter){
 								e = (e + 1) > 6 ? 0 : e + 1;
-								dc.source += '<td class="empty" role="presentation"><span>&nbsp;</span></td>';
+
+								if (dc.drawFullCalendar === true){
+									nextMonth.setDate(counter);
+									dc.source += dc.createDayCell(counter, nextMonth, 'dayInNextMonth', false);
+									++counter;
+
+								} else{
+									dc.source += '<td class="empty" role="presentation"><span>&nbsp;</span></td>';
+								}
 							}
 							dc.source += '</tr></table>';
 
@@ -1122,7 +1219,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 												}
 												});
 
-							dc.range.index = $A.query('td.day', dc.containerDiv);
+							dc.range.index = $A.query('td.dayInMonth', dc.containerDiv);
 							dc.setFocus.firstOpen = true;
 
 							dc.setFocus(dc.range.index[dc.range.current.mDay - 1]);
