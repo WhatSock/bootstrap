@@ -47,6 +47,9 @@ Please edit this file however desired to customize functionality.
 									// Uncomment to disable auto positioning
 									// autoPosition: 0,
 
+									// Uncomment to combine the year and month selectors
+									// condenseYear: true,
+
 									// Uncomment to switch the behaviour when the PageUp or PageDown keys are pressed to a "natural" behaviour (PageUp goes to previous month, PageDown goes to next month)
 									// pageUpDownNatural: true,
 
@@ -87,7 +90,6 @@ Please edit this file however desired to customize functionality.
 
 									// Uncomment the following to enable disabled date ranges
 									/*
-																	disabledTxt: 'Disabled',
 																	ajax: function(dc, save){
 					
 											// Run before the datepicker renders
@@ -101,52 +103,6 @@ Please edit this file however desired to customize functionality.
 															weekDay: date.getDay()
 															};
 					
-											// Disable all dates prior to the current day
-											if (current.year > dc.range.current.year
-												|| (current.year === dc.range.current.year && current.month > dc.range.current.month)){
-												dc.range[dc.range.current.month].disabled[dc.range.current.year] =
-																[
-																1,
-																2,
-																3,
-																4,
-																5,
-																6,
-																7,
-																8,
-																9,
-																10,
-																11,
-																12,
-																13,
-																14,
-																15,
-																16,
-																17,
-																18,
-																19,
-																20,
-																21,
-																22,
-																23,
-																24,
-																25,
-																26,
-																27,
-																28,
-																29,
-																30,
-																31
-																];
-											}
-					
-											if (current.year === dc.range.current.year && current.month === dc.range.current.month){
-												dc.range[dc.range.current.month].disabled[dc.range.current.year] = [];
-					
-												for (var day = 1; day < current.day; day++){
-													dc.range[dc.range.current.month].disabled[dc.range.current.year].push(day);
-												}
-											}
 					
 											// Disable all dates that fall on Saturday or Sunday
 											if (!dc.range[dc.range.current.month].disabled[dc.range.current.year])
