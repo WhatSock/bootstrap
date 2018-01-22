@@ -49,6 +49,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 						nextTxt: config.nextTxt || 'Next',
 						monthTxt: config.monthTxt || 'Month',
 						yearTxt: config.yearTxt || 'Year',
+						highlightToday: (config.highlightToday === true),
 						pageUpDownNatural: (config.pageUpDownNatural === true),
 						autoPosition: isNaN(config.autoPosition) ? 9 : config.autoPosition,
 						offsetTop: isNaN(config.offsetTop) ? 0 : config.offsetTop,
@@ -322,6 +323,12 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 							// CSS classes
 							cell += 'class="day ' + (cssClasses ? cssClasses : '');
 
+							if (dc.highlightToday === true){
+								if (dc.createDateComparisonValue(cellDateObj) === dc.currentDateComparisonValue) {
+									cell += ' dayToday';
+								}
+							}
+
 							if (dis){
 								cell += ' disabled';
 							}
@@ -345,11 +352,25 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 
 							return cell;
 						},
+						createDateComparisonValue: function (dateObj){
+							return parseInt(
+								(
+									dateObj.getFullYear() +
+									('00' + dateObj.getMonth()).slice(-2) +
+									('00' + dateObj.getDate()).slice(-2)
+								),
+								10
+							);
+						},
 						runOnceBefore: function(dc){
 							dc.date = new Date();
 							dc.setCurrent(dc);
 							dc.fn.current = {};
 							$A.internal.extend(true, dc.fn.current, dc.range.current);
+
+							// Cache current date for comparison
+							dc.currentDate = new Date();
+							dc.currentDateComparisonValue = dc.createDateComparisonValue(dc.currentDate);
 						},
 						runBefore: function(dc){
 							if (config.ajax && typeof config.ajax === 'function' && !dc.stopAjax && !dc.ajaxLoading){

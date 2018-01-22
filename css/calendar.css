@@ -55,6 +55,11 @@ td.day {
     background: #63B7C2;
 }
 
+td.dayToday {
+	color: #000;
+	background: #db7093;
+}
+
 td.day:hover {background: #E2A037;}
 
 td[aria-current="date"] {background: #E2A037;}

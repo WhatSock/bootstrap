@@ -50,6 +50,9 @@ Please edit this file however desired to customize functionality.
 									// Uncomment to switch the behaviour when the PageUp or PageDown keys are pressed to a "natural" behaviour (PageUp goes to previous month, PageDown goes to next month)
 									// pageUpDownNatural: true,
 
+									// Uncomment to append a "dayToday" CSS class to the current day cell element - this allows styling to be targeted to this specific element
+									// highlightToday: true,
+
 									// Uncomment to set a specific date string format to be read out to screen reader users
 									// audibleDateFormat: 'D, MMMM YYYY (dddd)',
 
