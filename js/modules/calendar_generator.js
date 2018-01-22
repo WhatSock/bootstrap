@@ -301,7 +301,18 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 								'D': i
 							};
 
-							cell += dateFormatTokens['D'] + ', ' + dateFormatTokens['dddd'] + ' ' + dateFormatTokens['MMMM'] + ' ' + dateFormatTokens['YYYY'];
+							// Use a custom audible date format?
+							if (typeof config.audibleDateFormat === 'string') {
+								var re = new RegExp(Object.keys(dateFormatTokens).join('|'), 'gi');
+
+								cell += config.audibleDateFormat.replace(re, function (matched){
+									return dateFormatTokens[matched];
+								});
+
+							} else {
+								// If custom audible date format is not set, use more performant default output (D, dddd MMMM YYYY)
+								cell += dateFormatTokens['D'] + ', ' + dateFormatTokens['dddd'] + ' ' + dateFormatTokens['MMMM'] + ' ' + dateFormatTokens['YYYY'];
+							}
 
 							if (comm){
 								cell += comm.replace(/<|>|\n/g, ' ').replace(/\"/g, '\"');
