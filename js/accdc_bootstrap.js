@@ -56,6 +56,16 @@ Please edit this file however desired to customize functionality.
 									// Uncomment to fill in the day cells outside of the current month so that the calendar grid is always filled with day cells
 									// drawFullCalendar: true,
 
+									// Uncomment to run custom functions at the end of the code within the following component functions. Receives a single parameter "dc", which provides access to the Datepicker object.
+									// runBefore: function (dc) {
+									// 	console.log('runBefore');
+									// 	console.log(dc);
+									// },
+									// runAfterClose: function (dc) {
+									// 	console.log('runAfterClose');
+									// 	console.log(dc);
+									// },
+
 									// Uncomment to set a specific date string format to be read out to screen reader users
 									// audibleDateFormat: 'D, MMMM YYYY (dddd)',
 

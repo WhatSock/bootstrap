@@ -580,6 +580,11 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 								if (dc.controlType && dc.controlType == 'DatePicker' && dc.loaded)
 									dc.close();
 							});
+
+							// Run custom specified function?
+							if (typeof config.runBefore === 'function'){
+								config.runBefore(dc);
+							}
 						},
 						click: function(ev, dc){
 							ev.stopPropagation();
@@ -1270,6 +1275,11 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 							$A.unbind('body', '.datepicker');
 
 							$A.setAttr(dc.triggerObj, 'aria-expanded', 'false');
+
+							// Run custom specified function?
+							if (typeof config.runAfterClose === 'function'){
+								config.runAfterClose(dc);
+							}
 						}
 						}
 						]);
