@@ -66,6 +66,12 @@ Please edit this file however desired to customize functionality.
 									// 	console.log(dc);
 									// },
 
+									// Uncomment to override the character used on the month / year change buttons
+									// leftButtonYearText: '&lt;',
+									// rightButtonYearText: '&gt;',
+									// leftButtonMonthText: '&lt;',
+									// rightButtonMonthText: '&gt;',
+
 									// Uncomment to set a specific date string format to be read out to screen reader users
 									// audibleDateFormat: 'D, MMMM YYYY (dddd)',
 

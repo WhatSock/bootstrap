@@ -49,6 +49,10 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 						nextTxt: config.nextTxt || 'Next',
 						monthTxt: config.monthTxt || 'Month',
 						yearTxt: config.yearTxt || 'Year',
+						leftButtonYearText: config.leftButtonYearText || '&#8656;',
+						rightButtonYearText: config.rightButtonYearText || '&#8658;',
+						leftButtonMonthText: config.leftButtonMonthText || '&#8592;',
+						rightButtonMonthText: config.rightButtonMonthText || '&#8594;',
 						drawFullCalendar: (config.drawFullCalendar === true),
 						highlightToday: (config.highlightToday === true),
 						pageUpDownNatural: (config.pageUpDownNatural === true),
@@ -448,38 +452,43 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 							nextMonth.setMonth(nextDateValues.month);
 							nextMonth.setFullYear(nextDateValues.year);
 
-							dc.source = '<table role="application" class="calendar" aria-label="' + dc.role + '">';
+							// Draw the year display and prev/next year buttons?
+							var yearSelector = '';
 
-							if (!config.condenseYear)
-								dc.source += '<tr role="presentation"><td class="nav btn prev year" accesskey="1" title="'
+							if (!config.condenseYear){
+								yearSelector = '<tr class="yearSelector" role="presentation">' +
+									'<td class="nav prev btn year" accesskey="1" title="'
 									+ dc.prevTxt.replace(/<|>|\"/g, '') + ' '
 									+ dc.yearTxt.replace(/<|>|\"/g, '') + '" aria-label="' + dc.prevTxt.replace(/<|>|\"/g, '') + ' '
-									+ dc.yearTxt.replace(/<|>|\"/g, '') + '" role="button" id="' + dc.prevBtnId
-									+ 'Y" tabindex="0"><span aria-hidden="true">&#8656;</span></td><td title="'
+									+ dc.yearTxt.replace(/<|>|\"/g, '') + '"'
+									+ ' role="button" id="' + dc.prevBtnId
+									+ 'Y" tabindex="0"><span aria-hidden="true">' + dc.leftButtonYearText + '</span></td>' +
+									'<td title="'
 									+ dc.tooltipTxt.replace(/<|>|\"/g, '') + '" colspan="5" class="year" role="presentation"><span>'
-									+ dc.range.current.year + '</span></td><td class="nav btn next year" accesskey="2" title="'
+									+ dc.range.current.year + '</span></td>' +
+									'<td class="nav next nav prev btn" accesskey="2" title="'
 									+ dc.nextTxt.replace(/<|>|\"/g, '') + ' '
 									+ dc.yearTxt.replace(/<|>|\"/g, '') + '" aria-label="' + dc.nextTxt.replace(/<|>|\"/g, '') + ' '
-									+ dc.yearTxt.replace(/<|>|\"/g, '') + '" role="button" id="' + dc.nextBtnId
-									+ 'Y" tabindex="0"><span aria-hidden="true">&#8658;</span></td></tr>';
+									+ dc.yearTxt.replace(/<|>|\"/g, '') + '"'
+									+ ' role="button" id="' + dc.nextBtnId
+									+ 'Y" tabindex="0"><span aria-hidden="true">' + dc.rightButtonYearText + '</span></td></tr>';
+							}
 
-							dc.source += '<tr role="presentation"><td class="nav btn prev month" accesskey="3" title="'
+							var monthSelector = '<tr class="monthSelector" role="presentation">' +
+								'<td class="nav prev btn month" accesskey="3" title="'
 								+ dc.prevTxt.replace(/<|>|\"/g, '') + ' ' + dc.monthTxt.replace(/<|>|\"/g, '') + '" aria-label="'
-								+ dc.prevTxt.replace(/<|>|\"/g, '') + ' ' + dc.monthTxt.replace(/<|>|\"/g, '') + '" role="button" id="'
-								+ dc.prevBtnId
-								+ '" tabindex="0"><span aria-hidden="true">&#8592;</span></td><td colspan="5" class="month" role="presentation"><span>';
-
-							dc.source += dc.range[dc.range.current.month].name;
-
-							if (config.condenseYear)
-								dc.source += '&nbsp;' + dc.range.current.year;
-
-							dc.source += '</span></td><td class="nav btn next month" accesskey="4" title="'
+								+ dc.prevTxt.replace(/<|>|\"/g, '') + ' ' + dc.monthTxt.replace(/<|>|\"/g, '') + '"'
+								+ ' role="button" id="' + dc.prevBtnId + '" tabindex="0"><span aria-hidden="true">' + dc.leftButtonMonthText + '</span></td>' +
+								'<td colspan="5" class="month" role="presentation"><span>'
+								+ dc.range[dc.range.current.month].name + (!config.condenseYear ? '' : ' ' + dc.range.current.year) + '</span></td>' +
+								'<td class="nav next btn month" accesskey="4" title="'
 								+ dc.nextTxt.replace(/<|>|\"/g, '') + ' ' + dc.monthTxt.replace(/<|>|\"/g, '') + '" aria-label="'
-								+ dc.nextTxt.replace(/<|>|\"/g, '') + ' ' + dc.monthTxt.replace(/<|>|\"/g, '') + '" role="button" id="'
-								+ dc.nextBtnId + '" tabindex="0"><span aria-hidden="true">&#8594;</span></td></tr><tr role="presentation">';
-							var pMonth = dc.range.current.month > 0 ? dc.range.current.month - 1 : 11,
-								nMonth = dc.range.current.month < 11 ? dc.range.current.month + 1 : 0;
+								+ dc.nextTxt.replace(/<|>|\"/g, '') + ' ' + dc.monthTxt.replace(/<|>|\"/g, '') + '"'
+								+ ' role="button" id="' + dc.nextBtnId + '"><span aria-hidden="true">' + dc.rightButtonMonthText + '</span></td></tr>';
+
+							// Start constructing the Datepicker table element
+							dc.source = '<table role="application" class="calendar" aria-label="' + dc.role
+								+ '">' + yearSelector + monthSelector + '<tr role="presentation">';
 							dc.iter = 0;
 
 							// Draw day headers
