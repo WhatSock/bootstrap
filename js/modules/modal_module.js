@@ -156,7 +156,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 
 						// Set a localized focusIn handler on the AccDC Object to control circular tabbing
 						focusIn: function(ev, dc){
-// dc.tempFocus will bubble up to the body focusIn handler to verify if focus is still within the AccDC Object or not
+							// dc.tempFocus will bubble up to the body focusIn handler to verify if focus is still within the AccDC Object or not
 							dc.tempFocus = this;
 						},
 						tabOut: function(ev, dc){
@@ -172,8 +172,8 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 							if (k == 27)
 								dc.close();
 						},
-// Set the className for the close link, must match the className for any other close links in the rendered content
-// AccDC Object close functionality is automatically configured
+						// Set the className for the close link, must match the className for any other close links in the rendered content
+						// AccDC Object close functionality is automatically configured
 						closeClassName: 'lbClose',
 						className: 'modal'
 						}, true);
