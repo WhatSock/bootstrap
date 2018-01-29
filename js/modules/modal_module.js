@@ -1,6 +1,7 @@
 /*!
 Modal Module R1.8
 Copyright 2010-2017 Bryan Garaventa (WhatSock.com)
+Copyright 2018 Danny Allen (dannya.com) / Wonderscore Ltd (wonderscore.co.uk)
 Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under the terms of the Open Source Initiative OSI - MIT License
 */
 
@@ -95,11 +96,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 						runAfter: function(dc){
 							if (!openModals.length){
 								$A.bind(window, 'resize.accmodal', function(ev){
-									if (openModals[openModals.length - 1].autoFix)
-										openModals[openModals.length - 1].applyFix();
-
-									else if (openModals[openModals.length - 1].autoPosition)
-										openModals[openModals.length - 1].setPosition();
+									dc.reposition();
 								});
 								$A.bind('body', 'focusin.accmodal', function(ev){
 									if (openModals[openModals.length - 1].tempFocus)
@@ -141,6 +138,20 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 							$A.query('*', dc.containerDiv, function(i, o){
 								$A.unbind(o, '*');
 							});
+						},
+
+						reposition: function () {
+							if (!openModals.length) {
+								return false;
+							}
+
+							if (openModals[openModals.length - 1].autoFix)
+								openModals[openModals.length - 1].applyFix();
+
+							else if (openModals[openModals.length - 1].autoPosition)
+								openModals[openModals.length - 1].setPosition();
+
+							return true;
 						},
 
 						// Set a localized focusIn handler on the AccDC Object to control circular tabbing
