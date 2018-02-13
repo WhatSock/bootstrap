@@ -1,7 +1,7 @@
 /*!
-Modal Module R1.8
-Copyright 2010-2017 Bryan Garaventa (WhatSock.com)
-Copyright 2018 Danny Allen (dannya.com) / Wonderscore Ltd (wonderscore.co.uk)
+Modal Module R1.9
+Copyright 2010-2018 Bryan Garaventa (WhatSock.com)
+Refactoring Contributions Copyright 2018 Danny Allen (dannya.com) / Wonderscore Ltd (wonderscore.co.uk)
 Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under the terms of the Open Source Initiative OSI - MIT License
 */
 
