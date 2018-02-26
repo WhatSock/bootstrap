@@ -140,7 +140,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 							});
 						},
 
-						reposition: function () {
+						reposition: function (callbackFn) {
 							if (!openModals.length) {
 								return false;
 							}
@@ -150,6 +150,11 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 
 							else if (openModals[openModals.length - 1].autoPosition)
 								openModals[openModals.length - 1].setPosition();
+
+							// Run custom specified function?
+							if (typeof callbackFn === 'function'){
+								callbackFn(openModals[openModals.length - 1]);
+							}
 
 							return true;
 						},
