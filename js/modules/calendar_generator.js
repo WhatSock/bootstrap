@@ -15,21 +15,19 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 					? config.helpText
 					: 'Press the arrow keys to navigate by day, PageUp and PageDown to navigate by month, Alt+PageUp and Alt+PageDown to navigate by year, or Escape to cancel.',
 
-		// Control the behavior of date selection clicks
-		handleClick = callback && typeof callback === 'function' ? callback : function(ev, dc){
-			targ.value = dc.range.wDays[dc.range.current.wDay].lng + ' ' + dc.range[dc.range.current.month].name + ' '
-				+ dc.range.current.mDay + ', ' + dc.range.current.year;
-			dc.close();
-		}, key =
-						{
-						alt: true,
-						ctrl: false,
-						shift: false
-						}, pressed = {}, changePressed = function(ev){
-			pressed.alt = ev.altKey;
-			pressed.ctrl = ev.ctrlKey;
-			pressed.shift = ev.shiftKey;
-		};
+			// Control the behavior of date selection clicks
+			handleClick = callback && typeof callback === 'function' ? callback : function(ev, dc){
+				targ.value = dc.range.wDays[dc.range.current.wDay].lng + ' ' + dc.range[dc.range.current.month].name + ' '
+					+ dc.range.current.mDay + ', ' + dc.range.current.year;
+				dc.close();
+			},
+
+			pressed = {},
+			changePressed = function(ev){
+				pressed.alt = ev.altKey;
+				pressed.ctrl = ev.ctrlKey;
+				pressed.shift = ev.shiftKey;
+			};
 
 		// Calendar object declaration start
 		$A(
@@ -632,14 +630,14 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 
 							// Calculate prev/next month date values, and whether they are within the allowed date range
 							var prevDateValues = dc.modifyDateValues(
-                				{
+												{
 									month: dc.range.current.month,
 									year: dc.range.current.year
-                				},
-                				{
-                  					month: -1
-                				}
-              				);
+												},
+												{
+														month: -1
+												}
+											);
 
 							var prevMonth = new Date();
 							prevMonth.setMonth(prevDateValues.month);
@@ -793,7 +791,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 							if (dc.range[dc.range.current.month].message[dc.range.current.year]){
 								dc.source +=
 									'<div class="monthMessage">' +
-									'  <p>' + dc.range[dc.range.current.month].message[dc.range.current.year] + '</p>' +
+									'	<p>' + dc.range[dc.range.current.month].message[dc.range.current.year] + '</p>' +
 									'</div>';
 							}
 
