@@ -62,6 +62,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 						offsetLeft: isNaN(config.offsetLeft) ? 0 : config.offsetLeft,
 						posAnchor: config.posAnchor,
 						targetObj: config.targetObj,
+						initialDate: ((config.initialDate instanceof Date) ? config.initialDate : new Date()),
 						minDate: ((config.minDate !== undefined) ? (config.minDate instanceof Date ? config.minDate : new Date((new Date()).setDate((new Date()).getDate() + config.minDate))) : undefined),
 						maxDate: ((config.maxDate !== undefined) ? (config.maxDate instanceof Date ? config.maxDate : new Date((new Date()).setDate((new Date()).getDate() + config.maxDate))) : undefined),
 						cssObj: config.cssObj ||
@@ -487,17 +488,31 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 								10
 							);
 						},
-						runOnceBefore: function(dc){
-							dc.date = new Date();
+						setDate: function(dc, dateObj){
+							// if dateObj is not specified, set to an initial value...
+							if (dateObj === undefined){
+								// ensure initialDate value is within any set date range
+								if ((dc.minDate || dc.maxDate) && dc.isOutsideDateRange(dc.initialDate)) {
+									// initialDate config value is outside of the valid date range, determine an optimal initial date value
+									if (dc.initialDate < dc.minDate) {
+										dateObj = dc.minDate;
+									} else if (dc.initialDate > dc.maxDate) {
+										dateObj = dc.maxDate;
+									}
+
+								} else {
+									// set to initialDate config value
+									dateObj = dc.initialDate;
+								}
+							}
+
+							dc.date = dateObj;
 							dc.setCurrent(dc);
 							dc.fn.current = {};
 							$A.internal.extend(true, dc.fn.current, dc.range.current);
-
-							// Cache current date for comparison
-							dc.currentDate = new Date();
-							dc.currentDateComparisonValue = dc.createDateComparisonValue(dc.currentDate);
-
-							// If we have minDate / maxDate set, ensure they don't have time precision and create comparison value
+						},
+						runOnceBefore: function(dc){
+							// If we have minDate / maxDate set, ensure they don't have time precision, and create comparison value
 							if (dc.minDate) {
 								dc.minDate.setHours(0, 0, 0, 0);
 								dc.minDateComparisonValue = dc.createDateComparisonValue(dc.minDate);
@@ -506,6 +521,13 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 								dc.maxDate.setHours(0, 0, 0, 0);
 								dc.maxDateComparisonValue = dc.createDateComparisonValue(dc.maxDate);
 							}
+
+							// set date to initialDate
+							this.setDate(dc);
+
+							// Cache current date for comparison
+							dc.currentDate = new Date();
+							dc.currentDateComparisonValue = dc.createDateComparisonValue(dc.currentDate);
 						},
 						runBefore: function(dc){
 							if (config.ajax && typeof config.ajax === 'function' && !dc.stopAjax && !dc.ajaxLoading){
