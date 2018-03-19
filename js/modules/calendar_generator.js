@@ -78,6 +78,8 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 						initialDate: ((config.initialDate instanceof Date) ? config.initialDate : new Date()),
 						minDate: ((config.minDate !== undefined) ? (config.minDate instanceof Date ? config.minDate : new Date((new Date()).setDate((new Date()).getDate() + config.minDate))) : undefined),
 						maxDate: ((config.maxDate !== undefined) ? (config.maxDate instanceof Date ? config.maxDate : new Date((new Date()).setDate((new Date()).getDate() + config.maxDate))) : undefined),
+						disableWeekdays: (config.disableWeekdays !== undefined) ? config.disableWeekdays : false,
+						disableWeekends: (config.disableWeekends !== undefined) ? config.disableWeekends : false,
 						cssObj: config.cssObj ||
 										{
 										position: 'absolute',
@@ -388,11 +390,12 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 								day = dateObj.getDate();
 
 							if (isMarked) {
-								// set day as marked
+								// initialise marked array for month if it doesn't exist
 								if (typeof dc.range[month].marked[year] !== 'object') {
 									dc.range[month].marked[year] = [];
 								}
 
+								// set day as marked
 								dc.range[month].marked[year].push(day);
 
 							} else {
@@ -417,11 +420,12 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 									day = dateObj.getDate();
 
 							if (isDisabled) {
-								// set day as disabled
+								// initialise disabled array for month if it doesn't exist
 								if (typeof dc.range[month].disabled[year] !== 'object') {
 									dc.range[month].disabled[year] = [];
 								}
 
+								// set day as disabled
 								dc.range[month].disabled[year].push(day);
 
 							} else {
@@ -440,17 +444,56 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 									month = dateObj.getMonth();
 
 							if (isDisabled) {
-								// set month as disabled
+								// reset month disabled array
 								dc.range[month].disabled[year] = [];
 
+								// set each day in month as disabled
 								for (var day = 1; day <= dc.range[month].max; day++){
 									dc.range[month].disabled[year].push(day);
 								}
 
 							} else {
 								// unset month as disabled
-								delete dc.range[month].disabled[year];
+								dc.range[month].disabled[year] = [];
 							}
+						},
+						setDayOfWeekDisabled: function (dc, dateObj, daysOfWeek, isDisabled) {
+							var year = dateObj.getFullYear(),
+									month = dateObj.getMonth();
+
+							// initialise disabled array for month if it doesn't exist
+							if (typeof dc.range[month].disabled[year] !== 'object') {
+								dc.range[month].disabled[year] = [];
+							}
+
+							// initialise local modifiable date that we will use to call the native getDay() method on
+							var date = new Date(year, month, 1);
+
+							for (var day = 1; day <= dc.range[month].max; day++){
+								date.setDate(day);
+
+								if (daysOfWeek.indexOf(date.getDay()) !== -1) {
+									if (isDisabled) {
+										dc.range[month].disabled[year].push(day);
+
+									} else {
+										// unset day as disabled
+										var arrIndex = dc.range[month].marked[year].indexOf(day);
+
+										if (arrIndex !== -1) {
+											delete dc.range[month].marked[year][arrIndex];
+										}
+									}
+								}
+							}
+						},
+						setWeekdaysDisabled: function (dc, dateObj, isDisabled) {
+							// 0 = Sunday, 6 = Saturday
+							dc.setDayOfWeekDisabled(dc, dateObj, [0, 6], isDisabled);
+						},
+						setWeekendsDisabled: function (dc, dateObj, isDisabled) {
+							// 0 = Sunday, 6 = Saturday, which are the days we are not setting
+							dc.setDayOfWeekDisabled(dc, dateObj, [1, 2, 3, 4, 5], isDisabled);
 						},
 						clearAllDisabled: function (dc) {
 							for (var month in dc.range) {
@@ -657,6 +700,15 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 								config.runBefore(dc);
 							}
 
+							// based on config option, disable weekdays?
+							if (dc.disableWeekdays) {
+								dc.setWeekdaysDisabled(dc, dc.date, true);
+							}
+
+							// based on config option, disable weekends?
+							if (dc.disableWeekends) {
+								dc.setWeekendsDisabled(dc, dc.date, true);
+							}
 
 							if (config.ajax && typeof config.ajax === 'function' && !dc.stopAjax && !dc.ajaxLoading){
 								dc.ajaxLoading = dc.cancel = true;
