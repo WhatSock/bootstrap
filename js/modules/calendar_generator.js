@@ -43,6 +43,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 						showHiddenClose: false,
 						controlType: 'DatePicker',
 						tooltipTxt: config.tooltipTxt || 'Press Escape to cancel',
+						markedTxt: config.markedTxt || 'Selected',
 						disabledTxt: config.disabledTxt || 'Disabled',
 						commentedTxt: config.commentedTxt || 'Has Comment',
 						prevTxt: config.prevTxt || 'Previous',
@@ -76,6 +77,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														{
 														name: config.months && config.months[0] ? config.months[0] : 'January',
 														max: 31,
+														marked: {},
 														disabled: {},
 														disabledWDays: [],
 														comments: {}
@@ -84,6 +86,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														{
 														name: config.months && config.months[1] ? config.months[1] : 'February',
 														max: 28,
+														marked: {},
 														disabled: {},
 														disabledWDays: [],
 														comments: {}
@@ -92,6 +95,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														{
 														name: config.months && config.months[2] ? config.months[2] : 'March',
 														max: 31,
+														marked: {},
 														disabled: {},
 														disabledWDays: [],
 														comments: {}
@@ -100,6 +104,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														{
 														name: config.months && config.months[3] ? config.months[3] : 'April',
 														max: 30,
+														marked: {},
 														disabled: {},
 														disabledWDays: [],
 														comments: {}
@@ -108,6 +113,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														{
 														name: config.months && config.months[4] ? config.months[4] : 'May',
 														max: 31,
+														marked: {},
 														disabled: {},
 														disabledWDays: [],
 														comments: {}
@@ -116,6 +122,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														{
 														name: config.months && config.months[5] ? config.months[5] : 'June',
 														max: 30,
+														marked: {},
 														disabled: {},
 														disabledWDays: [],
 														comments: {}
@@ -124,6 +131,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														{
 														name: config.months && config.months[6] ? config.months[6] : 'July',
 														max: 31,
+														marked: {},
 														disabled: {},
 														disabledWDays: [],
 														comments: {}
@@ -132,6 +140,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														{
 														name: config.months && config.months[7] ? config.months[7] : 'August',
 														max: 31,
+														marked: {},
 														disabled: {},
 														disabledWDays: [],
 														comments: {}
@@ -140,6 +149,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														{
 														name: config.months && config.months[8] ? config.months[8] : 'September',
 														max: 30,
+														marked: {},
 														disabled: {},
 														disabledWDays: [],
 														comments: {}
@@ -148,6 +158,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														{
 														name: config.months && config.months[9] ? config.months[9] : 'October',
 														max: 31,
+														marked: {},
 														disabled: {},
 														disabledWDays: [],
 														comments: {}
@@ -156,6 +167,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														{
 														name: config.months && config.months[10] ? config.months[10] : 'November',
 														max: 30,
+														marked: {},
 														disabled: {},
 														disabledWDays: [],
 														comments: {}
@@ -164,6 +176,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														{
 														name: config.months && config.months[11] ? config.months[11] : 'December',
 														max: 31,
+														marked: {},
 														disabled: {},
 														disabledWDays: [],
 														comments: {}
@@ -315,6 +328,29 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 											wDay: dc.date.getDay()
 											};
 						},
+						setDayMarked: function (dc, dateObj, isMarked) {
+							var year = dateObj.getFullYear(),
+								month = dateObj.getMonth(),
+								day = dateObj.getDate();
+
+							if (isMarked) {
+								// set day as marked
+								if (typeof dc.range[month].marked[year] !== 'object') {
+									dc.range[month].marked[year] = [];
+								}
+
+								dc.range[month].marked[year].push(day);
+
+							} else {
+								// unset day as marked
+								delete dc.range[month].marked[year];
+							}
+						},
+						clearAllMarked: function (dc) {
+							for (var month in dc.range) {
+								dc.range[month].marked = {};
+							}
+						},
 						isDisabledDate: function(dc, counter, dateObj, cmpObj){
 							if (!cmpObj) {
 								cmpObj = dc.range.current;
@@ -341,19 +377,17 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 								(this.maxDateComparisonValue && (dateCmp > this.maxDateComparisonValue))
 							);
 						},
-						createDayCell: function(i, cellDateObj, cssClasses, dis, inCurrentMonth){
+						createDayCell: function(i, cellDateObj, cssClasses, isDisabled, isSelected){
 							var dc = this;
 
 							var cell = '<td ';
 
-							if (inCurrentMonth &&
-								(i == dc.fn.current.mDay) && (dc.range.current.month == dc.fn.current.month) &&
-								(dc.range.current.year == dc.fn.current.year)){
-
+							// set correct ARIA attributes
+							if (isSelected){
 								cell += 'aria-current="date" ';
 							}
 
-							if (dis){
+							if (isDisabled){
 								cell += 'aria-disabled="true" ';
 							}
 
@@ -407,7 +441,17 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 								}
 							}
 
-							if (dis){
+							// set date as visually marked?
+							var isMarked = (
+								dc.range[dc.range.current.month].marked[dc.range.current.year] &&
+								(dc.range[dc.range.current.month].marked[dc.range.current.year].indexOf(i) !== -1)
+							);
+
+							if ((isSelected && !isDisabled) || isMarked){
+								cell += ' dayMarked';
+							}
+
+							if (isDisabled){
 								cell += ' disabled';
 							}
 
@@ -419,7 +463,10 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 							// Title attribute
 							cell += 'title="';
 
-							if (dis){
+							if (isMarked){
+								cell += dc.markedTxt.replace(/<|>|\"/g, '');
+
+							} else if (isDisabled){
 								cell += dc.disabledTxt.replace(/<|>|\"/g, '');
 							}
 
@@ -474,7 +521,6 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 							dc.nextBtnId = dc.baseId + 'n';
 
 							// Calculate prev/next month date values, and whether they are within the allowed date range
-							var prevMonth = new Date();
 							var prevDateValues = dc.modifyDateValues(
                 				{
 									month: dc.range.current.month,
@@ -485,10 +531,10 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
                 				}
               				);
 
+							var prevMonth = new Date();
 							prevMonth.setMonth(prevDateValues.month);
 							prevMonth.setFullYear(prevDateValues.year);
 
-							var nextMonth = new Date();
 							var nextDateValues = dc.modifyDateValues(
 								{
 									month: dc.range.current.month,
@@ -499,6 +545,7 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 								}
 							);
 
+							var nextMonth = new Date();
 							nextMonth.setMonth(nextDateValues.month);
 							nextMonth.setFullYear(nextDateValues.year);
 
@@ -602,8 +649,11 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 							for (var i = 1; i <= dc.range[dc.range.current.month].max; i++){
 								m.setDate(i);
 
+								var isSelected = ((i == dc.fn.current.mDay) && (dc.range.current.month == dc.fn.current.month) &&
+									(dc.range.current.year == dc.fn.current.year));
+
 								// Draw calendar day cell
-								dc.source += dc.createDayCell(i, m, 'dayInMonth', dc.isDisabledDate(dc, i, m), true);
+								dc.source += dc.createDayCell(i, m, 'dayInMonth', dc.isDisabledDate(dc, i, m), isSelected);
 
 								var w = m.getDay();
 
