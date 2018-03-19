@@ -612,6 +612,12 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 							dc.currentDateComparisonValue = dc.createDateComparisonValue(dc.currentDate);
 						},
 						runBefore: function(dc){
+							// Run custom specified function?
+							if (typeof config.runBefore === 'function'){
+								config.runBefore(dc);
+							}
+
+
 							if (config.ajax && typeof config.ajax === 'function' && !dc.stopAjax && !dc.ajaxLoading){
 								dc.ajaxLoading = dc.cancel = true;
 								dc.fn.navBtn = dc.navBtn;
@@ -796,11 +802,6 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 								if (dc.controlType && dc.controlType == 'DatePicker' && dc.loaded)
 									dc.close();
 							});
-
-							// Run custom specified function?
-							if (typeof config.runBefore === 'function'){
-								config.runBefore(dc);
-							}
 						},
 						click: function(ev, dc){
 							ev.stopPropagation();
