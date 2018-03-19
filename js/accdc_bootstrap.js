@@ -79,6 +79,9 @@ Please edit this file however desired to customize functionality.
 									// minDate: (new Date(1987, 4, 19)),
 									// maxDate: 28,
 
+									// Uncomment to set a specific date string format to be used when setting the selected value into the calendar input box
+									// inputDateFormat: 'dddd MMMM D, YYYY',
+
 									// Uncomment to set a specific date string format to be read out to screen reader users
 									// audibleDateFormat: 'D, MMMM YYYY (dddd)',
 

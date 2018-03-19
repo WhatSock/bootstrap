@@ -16,9 +16,22 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 					: 'Press the arrow keys to navigate by day, PageUp and PageDown to navigate by month, Alt+PageUp and Alt+PageDown to navigate by year, or Escape to cancel.',
 
 			// Control the behavior of date selection clicks
-			handleClick = callback && typeof callback === 'function' ? callback : function(ev, dc){
-				targ.value = dc.range.wDays[dc.range.current.wDay].lng + ' ' + dc.range[dc.range.current.month].name + ' '
-					+ dc.range.current.mDay + ', ' + dc.range.current.year;
+			handleClick = (callback && typeof callback === 'function') ? callback : function(ev, dc){
+				// format selected calendar value and set into input field
+				targ.value = dc.formatDate(
+					dc,
+					{
+						'YYYY': dc.range.current.year,
+						'MMMM': dc.range[dc.range.current.month].name,
+						'dddd': dc.range.wDays[dc.range.current.wDay].lng,
+						'MM': ('00' + (dc.range.current.month + 1)).slice(-2),
+						'DD': ('00' + dc.range.current.mDay).slice(-2),
+						'Do': dc.getDateOrdinalSuffix(dc.range.current.mDay),
+						'M': (dc.range.current.month + 1),
+						'D': dc.range.current.mDay
+					}
+				);
+
 				dc.close();
 			},
 
@@ -60,6 +73,8 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 						offsetLeft: isNaN(config.offsetLeft) ? 0 : config.offsetLeft,
 						posAnchor: config.posAnchor,
 						targetObj: config.targetObj,
+						inputDateFormat: config.inputDateFormat || 'dddd MMMM D, YYYY',
+						audibleDateFormat: config.audibleDateFormat || 'D, MMMM YYYY (dddd)',
 						initialDate: ((config.initialDate instanceof Date) ? config.initialDate : new Date()),
 						minDate: ((config.minDate !== undefined) ? (config.minDate instanceof Date ? config.minDate : new Date((new Date()).setDate((new Date()).getDate() + config.minDate))) : undefined),
 						maxDate: ((config.maxDate !== undefined) ? (config.maxDate instanceof Date ? config.maxDate : new Date((new Date()).setDate((new Date()).getDate() + config.maxDate))) : undefined),
@@ -238,6 +253,34 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 							if (r)
 								d = 6 - d;
 							return d;
+						},
+						getDateOrdinalSuffix: function (i) {
+							var j = i % 10,
+								k = i % 100;
+
+							if (j == 1 && k != 11) {
+								return i + 'st';
+							}
+							if (j == 2 && k != 12) {
+								return i + 'nd';
+							}
+							if (j == 3 && k != 13) {
+								return i + 'rd';
+							}
+
+							return i + 'th';
+						},
+						formatDate: function (dc, dateFormatTokens, dateFormat) {
+							// if dateFormat is not specified, use component default
+							if (typeof dateFormat !== 'string') {
+								dateFormat = dc.inputDateFormat;
+							}
+
+							var re = new RegExp(Object.keys(dateFormatTokens).join('|'), 'gi');
+
+							return dateFormat.replace(re, function (matched){
+								return dateFormatTokens[matched];
+							});
 						},
 						modifyDateValues: function (values, modifications) {
 							// Note: Months are zero based
@@ -488,25 +531,24 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 								cell += dc.commentedTxt.replace(/<|>|\"/g, '') + ' ';
 							}
 
+							var month = cellDateObj.getMonth();
 							var dateFormatTokens = {
 								'YYYY': cellDateObj.getFullYear(),
-								'MMMM': dc.range[cellDateObj.getMonth()].name,
+								'MMMM': dc.range[month].name,
 								'dddd': dc.range.wDays[cellDateObj.getDay()].lng,
+								'MM': ('00' + (month + 1)).slice(-2),
+								'DD': ('00' + i).slice(-2),
+								'Do': dc.getDateOrdinalSuffix(i),
+								'M': (month + 1),
 								'D': i
 							};
 
-							// Use a custom audible date format?
-							if (typeof config.audibleDateFormat === 'string') {
-								var re = new RegExp(Object.keys(dateFormatTokens).join('|'), 'gi');
+							// set audible date value
+							var re = new RegExp(Object.keys(dateFormatTokens).join('|'), 'gi');
 
-								cell += config.audibleDateFormat.replace(re, function (matched){
-									return dateFormatTokens[matched];
-								});
-
-							} else {
-								// If custom audible date format is not set, use more performant default output (D, dddd MMMM YYYY)
-								cell += dateFormatTokens['D'] + ', ' + dateFormatTokens['dddd'] + ' ' + dateFormatTokens['MMMM'] + ' ' + dateFormatTokens['YYYY'];
-							}
+							cell += dc.audibleDateFormat.replace(re, function (matched){
+								return dateFormatTokens[matched];
+							});
 
 							if (comm){
 								cell += comm.replace(/<|>|\n/g, ' ').replace(/\"/g, '\"');
