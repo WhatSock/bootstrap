@@ -356,12 +356,64 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 
 							} else {
 								// unset day as marked
-								delete dc.range[month].marked[year];
+								if (typeof dc.range[month].marked[year] === 'object') {
+									var arrIndex = dc.range[month].marked[year].indexOf(day);
+
+									if (arrIndex !== -1) {
+										delete dc.range[month].marked[year][arrIndex];
+									}
+								}
 							}
 						},
 						clearAllMarked: function (dc) {
 							for (var month in dc.range) {
 								dc.range[month].marked = {};
+							}
+						},
+						setDayDisabled: function (dc, dateObj, isDisabled) {
+							var year = dateObj.getFullYear(),
+									month = dateObj.getMonth(),
+									day = dateObj.getDate();
+
+							if (isDisabled) {
+								// set day as disabled
+								if (typeof dc.range[month].disabled[year] !== 'object') {
+									dc.range[month].disabled[year] = [];
+								}
+
+								dc.range[month].disabled[year].push(day);
+
+							} else {
+								// unset day as disabled
+								if (typeof dc.range[month].disabled[year] === 'object') {
+									var arrIndex = dc.range[month].disabled[year].indexOf(day);
+
+									if (arrIndex !== -1) {
+										delete dc.range[month].disabled[year][arrIndex];
+									}
+								}
+							}
+						},
+						setMonthDisabled: function (dc, dateObj, isDisabled) {
+							var year = dateObj.getFullYear(),
+									month = dateObj.getMonth();
+
+							if (isDisabled) {
+								// set month as disabled
+								dc.range[month].disabled[year] = [];
+
+								for (var day = 1; day <= dc.range[month].max; day++){
+									dc.range[month].disabled[year].push(day);
+								}
+
+							} else {
+								// unset month as disabled
+								delete dc.range[month].disabled[year];
+							}
+						},
+						clearAllDisabled: function (dc) {
+							for (var month in dc.range) {
+								dc.range[month].disabled = {};
 							}
 						},
 						setMonthMessage: function (dc, dateObj, message) {
