@@ -81,7 +81,8 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														marked: {},
 														disabled: {},
 														disabledWDays: [],
-														comments: {}
+														comments: {},
+														message: {}
 														},
 										1:
 														{
@@ -90,7 +91,8 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														marked: {},
 														disabled: {},
 														disabledWDays: [],
-														comments: {}
+														comments: {},
+														message: {}
 														},
 										2:
 														{
@@ -99,7 +101,8 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														marked: {},
 														disabled: {},
 														disabledWDays: [],
-														comments: {}
+														comments: {},
+														message: {}
 														},
 										3:
 														{
@@ -108,7 +111,8 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														marked: {},
 														disabled: {},
 														disabledWDays: [],
-														comments: {}
+														comments: {},
+														message: {}
 														},
 										4:
 														{
@@ -117,7 +121,8 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														marked: {},
 														disabled: {},
 														disabledWDays: [],
-														comments: {}
+														comments: {},
+														message: {}
 														},
 										5:
 														{
@@ -126,7 +131,8 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														marked: {},
 														disabled: {},
 														disabledWDays: [],
-														comments: {}
+														comments: {},
+														message: {}
 														},
 										6:
 														{
@@ -135,7 +141,8 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														marked: {},
 														disabled: {},
 														disabledWDays: [],
-														comments: {}
+														comments: {},
+														message: {}
 														},
 										7:
 														{
@@ -144,7 +151,8 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														marked: {},
 														disabled: {},
 														disabledWDays: [],
-														comments: {}
+														comments: {},
+														message: {}
 														},
 										8:
 														{
@@ -153,7 +161,8 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														marked: {},
 														disabled: {},
 														disabledWDays: [],
-														comments: {}
+														comments: {},
+														message: {}
 														},
 										9:
 														{
@@ -162,7 +171,8 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														marked: {},
 														disabled: {},
 														disabledWDays: [],
-														comments: {}
+														comments: {},
+														message: {}
 														},
 										10:
 														{
@@ -171,7 +181,8 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														marked: {},
 														disabled: {},
 														disabledWDays: [],
-														comments: {}
+														comments: {},
+														message: {}
 														},
 										11:
 														{
@@ -180,7 +191,8 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														marked: {},
 														disabled: {},
 														disabledWDays: [],
-														comments: {}
+														comments: {},
+														message: {}
 														},
 										wDays:
 														[
@@ -350,6 +362,24 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 						clearAllMarked: function (dc) {
 							for (var month in dc.range) {
 								dc.range[month].marked = {};
+							}
+						},
+						setMonthMessage: function (dc, dateObj, message) {
+							var year = dateObj.getFullYear(),
+									month = dateObj.getMonth();
+
+							if ((typeof message === 'string') && (message.length > 0)) {
+								// set month message
+								dc.range[month].message[year] = message;
+
+							} else {
+								// unset month message
+								delete dc.range[month].message[year];
+							}
+						},
+						clearAllMessage: function (dc) {
+							for (var month in dc.range) {
+								dc.range[month].message = {};
 							}
 						},
 						isDisabledDate: function(dc, counter, dateObj, cmpObj){
@@ -700,6 +730,14 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 								}
 							}
 							dc.source += '</tr></table>';
+
+							// if a message is set for the month, draw it
+							if (dc.range[dc.range.current.month].message[dc.range.current.year]){
+								dc.source +=
+									'<div class="monthMessage">' +
+									'  <p>' + dc.range[dc.range.current.month].message[dc.range.current.year] + '</p>' +
+									'</div>';
+							}
 
 							// Close other calendar pickers that are currently open
 							$A.find('*', function(dc){
