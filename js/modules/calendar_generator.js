@@ -1164,10 +1164,10 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														$A.internal.extend(true, dc.prevCurrent, dc.range.current);
 
 														if (dc.range.current.mDay > 1){
-															dc.setFocus(dc.range.index[dc.range.current.mDay - 2], this);
-
 															dc.range.current.mDay--;
 															dc.range.current.wDay = !wd ? 6 : wd - 1;
+
+															dc.setFocus(dc.range.index[dc.range.current.mDay - 1], this);
 														}
 
 														else if (dc.range.current.mDay == 1
@@ -1199,10 +1199,10 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														$A.internal.extend(true, dc.prevCurrent, dc.range.current);
 
 														if (dc.range.current.mDay < dc.range[dc.range.current.month].max){
-															dc.setFocus(dc.range.index[dc.range.current.mDay], this);
-
 															dc.range.current.mDay++;
 															dc.range.current.wDay = wd == 6 ? 0 : wd + 1;
+
+															dc.setFocus(dc.range.index[dc.range.current.mDay - 1], this);
 														}
 
 														else if (dc.range.current.mDay == dc.range[dc.range.current.month].max
@@ -1230,9 +1230,9 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														$A.internal.extend(true, dc.prevCurrent, dc.range.current);
 
 														if ((dc.range.current.mDay - 7) > 0){
-															dc.setFocus(dc.range.index[dc.range.current.mDay - 8], this);
-
 															dc.range.current.mDay -= 7;
+
+															dc.setFocus(dc.range.index[dc.range.current.mDay - 1], this);
 														}
 
 														else if ($A.getAttr(dc.buttons.pM, 'aria-disabled') != 'true'){
@@ -1272,9 +1272,9 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 														$A.internal.extend(true, dc.prevCurrent, dc.range.current);
 
 														if ((dc.range.current.mDay + 7) <= dc.range[dc.range.current.month].max){
-															dc.setFocus(dc.range.index[dc.range.current.mDay + 6], this);
-
 															dc.range.current.mDay += 7;
+
+															dc.setFocus(dc.range.index[dc.range.current.mDay - 1], this);
 														}
 
 														else if ($A.getAttr(dc.buttons.nM, 'aria-disabled') != 'true'){
