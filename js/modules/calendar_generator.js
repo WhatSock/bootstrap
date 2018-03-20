@@ -489,11 +489,11 @@ Part of AccDC, a Cross-Browser JavaScript accessibility API, distributed under t
 						},
 						setWeekdaysDisabled: function (dc, dateObj, isDisabled) {
 							// 0 = Sunday, 6 = Saturday
-							dc.setDayOfWeekDisabled(dc, dateObj, [0, 6], isDisabled);
+							dc.setDayOfWeekDisabled(dc, dateObj, [1, 2, 3, 4, 5], isDisabled);
 						},
 						setWeekendsDisabled: function (dc, dateObj, isDisabled) {
 							// 0 = Sunday, 6 = Saturday, which are the days we are not setting
-							dc.setDayOfWeekDisabled(dc, dateObj, [1, 2, 3, 4, 5], isDisabled);
+							dc.setDayOfWeekDisabled(dc, dateObj, [0, 6], isDisabled);
 						},
 						clearAllDisabled: function (dc) {
 							for (var month in dc.range) {
