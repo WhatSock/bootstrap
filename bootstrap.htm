@@ -32,32 +32,46 @@
                 <script type="text/javascript" src="js/modules/aria_tree_module.min.js"></script>
                 <script type="text/javascript" src="js/modules/scrollable_div_generator.min.js"></script>
                 <script type="text/javascript" src="js/accdc_bootstrap.js"></script>
+
                 <script type="text/javascript">
-            $A.bind(window, 'load', function(){
+                  $A.bind(window, 'load', function(){
 
-$A.bind('p.topLink a', 'click', function(ev){
-$A.setFocus($A.query('h1')[0]);
-ev.preventDefault();
-});
+                    $A.bind('p.topLink a', 'click', function(ev){
+                      $A.setFocus($A.query('h1')[0]);
+                      ev.preventDefault();
+                    });
 
-$A.bind('#skipLink', 'click', function(ev){
-$A.setFocus($A.getEl('wrapper'));
-ev.preventDefault();
-});
+                  $A.bind('#skipLink', 'click', function(ev){
+                    $A.setFocus($A.getEl('wrapper'));
+                    ev.preventDefault();
+                  });
 
-                var verNode = $A.getEl('AccDCCurrentVerS1');
-                
-                if (verNode && $A.version) {
-                    verNode.innerHTML = $A.version;
-                }
-                
-                if (window.navigator.onLine) 
+                  var verNode = $A.getEl('AccDCCurrentVerS1');
+
+                  if (verNode && $A.version) {
+                      verNode.innerHTML = $A.version;
+                  }
+
+                  if (window.navigator.onLine) {
                     // Check for updates
                     $A.getScript('http://api.whatsock.com/bootstrap-updates.js');
+                  }
+
+
+                  // Scroll to page title when interacting with main tabs
+                  let tabLink = document.querySelector('.contextual-menu');
+                  let contentY = document.getElementById('pgContent').offsetTop;
+
+                  tabLink.addEventListener('click', function() {
+                    window.scroll({
+                      top: contentY,
+                      behavior: "smooth"
+                    });
+                  });
             });
         </script>
     </head>
-	
+
     <body>
     	<div id="container">
 
@@ -65,7 +79,7 @@ ev.preventDefault();
 				<h1><strong>AccDC</strong> Accelerated Dynamic Content</h1>
 				<p class="baseline version">AccDC <abbr title="Application Programming Interface">API</abbr> for Standalone, version: <span id="AccDCCurrentVerS1"></span></p>
 				<p class="logo"><img alt="WhatSock : Changing the world one step at a time" src="img/whatsock.svg" /></p>
-			
+
 				<nav>
 					<h2>Main navigation <a id="skipLink" href="#wrapper">(Jump to main content)</a></h2>
 					<ul class="menuList">
@@ -75,12 +89,12 @@ ev.preventDefault();
 					</ul>
 				</nav>
 			</header>
-			
+
 			<div id="wrapper">
 				<main>
 					<article>
 						<h2>AccDC Bootstrap </h2>
-						
+
 						<ul role="tablist" class="contextual-menu">
 			                <li role="presentation"><a id="tb1" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/intro.htm#pg-intro" data-defaultopen="true"><span> Bootstrap</span></a></li>
 			                <li role="presentation"><a id="tb2" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/accordion.htm#pg-accordion"><span> Accordion</span></a></li>
@@ -102,19 +116,19 @@ ev.preventDefault();
 			            </div>
 					</article>
 				</main>
-				
-				<aside>					
+
+				<aside>
 					<h2>Transversal content</h2>
 					<section class="honors">
 						<h3>The "Above and Beyond Accessibility Award" <a href="http://thersa.org" target="_blank">
 							<img src="img/rsa_fellowship_logo.jpg" alt="Supported by the Royal Society of Arts" title="Supported by the Royal Society of Arts" /></a></h3>
-							<p>AccDC was awarded the <strong>"Above and Beyond Accessibility Award"</strong> from the United States Department of Labor, 
-								and was presented at the Developing with Accessibility Event, hosted by the Federal Communications 
+							<p>AccDC was awarded the <strong>"Above and Beyond Accessibility Award"</strong> from the United States Department of Labor,
+								and was presented at the Developing with Accessibility Event, hosted by the Federal Communications
 								Commission in Washington DC in 2012.</p>
 					</section>
 					<section class="at-guide">
 						<h3><a href="http://whatsock.com/training">The Accessibility Tree Guide</a></h3>
-						<p>A Training Guide, if you want to learn how to be totally 
+						<p>A Training Guide, if you want to learn how to be totally
 							awesome. <a href="http://whatsock.com/training">Check it out!</a></p>
 					</section>
 				</aside>
