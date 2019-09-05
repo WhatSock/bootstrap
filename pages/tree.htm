@@ -1,102 +1,104 @@
 <html>
-    <body>
-        <div id="pg-tree">
-            <div class="hd">
-                <h3><span>Accessible Tree</span></h3>
-            </div>
-            <div class="intro highlight">
-                <p>A tree control is an expandable and collapsable selection mechanism that dynamically displays grouped items.</p>
-            </div>
-            <div id="treeview" class="viewport demo-block">
-                <div id="tree">
-                    <div id="treeId" class="accTree tree" data-src="files/tree.xml" data-label="Choose Region" title="Choose Region" data-type="google-map">
-                    </div>
-                </div>
-                <div id="map">
+
+<body>
+    <div id="pg-tree">
+        <div class="hd">
+            <h3><span>Accessible Tree</span></h3>
+        </div>
+        <div class="intro highlight">
+            <p>A tree control is an expandable and collapsable selection mechanism that dynamically displays grouped items.</p>
+        </div>
+        <div id="treeview" class="viewport demo-block">
+            <div id="tree">
+                <div id="treeId" class="accTree tree" data-src="files/tree.xml" data-label="Choose Region" title="Choose Region" data-type="google-map">
                 </div>
             </div>
-            <div class="intro tal keyboard">
-                <p>The ARIA Tree control is keyboard accessible:</p>
-                <ul>
-					<li>Set focus to the ARIA Tree.</li>
-					<li>Press the <kbd class="up">Up</kbd> and <kbd class="down">Down</kbd> Arrow keys to navigate vertically.</li>
-					<li>Press the <kbd class="left">Left</kbd> and <kbd class="right">Right</kbd> Arrow keys to collapse or expand branch nodes.</li>
-					<li>Press any letter or number to jump to a tree node starting with that character or digit.</li>
-					<li>Press <kbd>Enter</kbd> or the <kbd>Spacebar</kbd> to activate a node.</li>
-					<li>Mouse users can click tree branches and nodes to expand/collapse or activate items as usual.</li>
-				</ul>
-            </div>
-            <div class="hd">
-                <h4>Bootstrap Syntax</h4>
-            </div>
-            <div class="intro tal">
-                <p>
-                    <code>
-                        &lt;div class="accTree"
-                        <br/>
-                        data-src="path/file.xml"
-                        <br/>
-                        data-label="Accessible Field Name"
-                        <br/>
-                        data-type="ControlType"
-                        <br/>
-                        id="uniqueID"
-                        <br/>
-                        &gt;&lt;/div&gt;
-                    </code>
-                </p>
-            </div>
-            <div class="hd">
-                <h4>Attributes</h4>
-            </div>
-            <div class="intro tal">
-                <ul class="lsn">
-                    <li><strong>class="accTree":</strong>
-                        The bootstrap class name that specifies an accessible tree.</li>
-                    <li><strong>data-src:</strong>
-                        The resource path.</li>
-                    <li><strong>data-label:</strong>
-                        The accessible field name that will be announced by screen readers.</li>
-                    <li><strong>data-type:</strong>
-                        The control type name that matches related references within the bootstrap module for custom functionality.</li>
-                    <li><strong>id:</strong>
-                        The unique ID of the element.
-                        This value is also registered as the ID of the top level tree AccDC Object, making it possible to invoke the object programmatically.
-                        <br/>
-                        <code>
-                            $A.reg.uniqueID.open();
-                            <br/>
-                            // All other AccDC API properties and methods are similarly available.
-                        </code>
-                    </li>
-                </ul>
-            </div>
-            <div class="hd">
-                <h4>XML Syntax</h4>
-            </div>
-            <div class="intro tal">
-                <p>
-                    <code>
-                        &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
-                        <br/>
-                        &lt;tree&gt;
-                        <br/>
-                        &lt;folder id="uniqueID1" name="Folder Name"&gt;
-                        <br/>
-                        &lt;subfolder id="uniqueID2" name="Subfolder Name"&gt;
-                        <br/>
-                        &lt;item id="uniqueID3" name="Item Name"&gt;&lt;/item&gt;
-                        <br/>
-                        &lt;/subfolder&gt;
-                        <br/>
-                        &lt;item id="uniqueID4" name="Item Name"&gt;&lt;/item&gt;
-                        <br/>
-                        &lt;/folder&gt;
-                        <br/>
-                        &lt;/tree&gt;
-                    </code>
-                </p>
+            <div id="map">
             </div>
         </div>
-    </body>
+        <div class="intro tal keyboard">
+            <p>The ARIA Tree control is keyboard accessible:</p>
+            <ul>
+                <li>Set focus to the ARIA Tree.</li>
+                <li>Press the <kbd class="up">Up</kbd> and <kbd class="down">Down</kbd> Arrow keys to navigate vertically.</li>
+                <li>Press the <kbd class="left">Left</kbd> and <kbd class="right">Right</kbd> Arrow keys to collapse or expand branch nodes.</li>
+                <li>Press any letter or number to jump to a tree node starting with that character or digit.</li>
+                <li>Press <kbd>Enter</kbd> or the <kbd>Spacebar</kbd> to activate a node.</li>
+                <li>Mouse users can click tree branches and nodes to expand/collapse or activate items as usual.</li>
+            </ul>
+        </div>
+        <div class="hd">
+            <h4>Bootstrap Syntax</h4>
+        </div>
+        <div class="intro tal">
+            <p>
+                <code>
+                    &lt;div class="accTree"
+                    <br />
+                    data-src="path/file.xml"
+                    <br />
+                    data-label="Accessible Field Name"
+                    <br />
+                    data-type="ControlType"
+                    <br />
+                    id="uniqueID"
+                    <br />
+                    &gt;&lt;/div&gt;
+                </code>
+            </p>
+        </div>
+        <div class="hd">
+            <h4>Attributes</h4>
+        </div>
+        <div class="intro tal">
+            <ul class="lsn">
+                <li><strong>class="accTree":</strong>
+                    The bootstrap class name that specifies an accessible tree.</li>
+                <li><strong>data-src:</strong>
+                    The resource path.</li>
+                <li><strong>data-label:</strong>
+                    The accessible field name that will be announced by screen readers.</li>
+                <li><strong>data-type:</strong>
+                    The control type name that matches related references within the bootstrap module for custom functionality.</li>
+                <li><strong>id:</strong>
+                    The unique ID of the element.
+                    This value is also registered as the ID of the top level tree AccDC Object, making it possible to invoke the object programmatically.
+                    <br />
+                    <code>
+                        $A.reg.uniqueID.open();
+                        <br />
+                        // All other AccDC API properties and methods are similarly available.
+                    </code>
+                </li>
+            </ul>
+        </div>
+        <div class="hd">
+            <h4>XML Syntax</h4>
+        </div>
+        <div class="intro tal">
+            <p>
+                <code>
+                    &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+                    <br />
+                    &lt;tree&gt;
+                    <br />
+                    &lt;folder id="uniqueID1" name="Folder Name"&gt;
+                    <br />
+                    &lt;subfolder id="uniqueID2" name="Subfolder Name"&gt;
+                    <br />
+                    &lt;item id="uniqueID3" name="Item Name"&gt;&lt;/item&gt;
+                    <br />
+                    &lt;/subfolder&gt;
+                    <br />
+                    &lt;item id="uniqueID4" name="Item Name"&gt;&lt;/item&gt;
+                    <br />
+                    &lt;/folder&gt;
+                    <br />
+                    &lt;/tree&gt;
+                </code>
+            </p>
+        </div>
+    </div>
+</body>
+
 </html>

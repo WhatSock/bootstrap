@@ -1,116 +1,118 @@
 <html>
-    <body>
-        <div id="pg-modal">
-            <div class="hd">
-                <h3><span>Accessible Modal</span></h3>
-            </div>
-            <div class="intro highlight">
-                <p>A modal control displays information or interactive content that must be dismissed before further interaction with the background page can occur.</p>
-            </div>
-            <div class="intro tal demo-block">
-                <p><button id="modalId" data-src="files/modal.html#modal-login" data-role="Login" class="accModal lightbox">
-                        Login
-                    </button></p>
-            </div>
-            <div class="intro tal keyboard">
-                <p>The modal is optimized for screen reader and keyboard only users:</p>
-                <ul>
-                	<li>Activate the triggering element to open the modal.</li>
-                	<li>Screen reader users will be confined within the modal content, and will not be able to see the background page content. 
-						<em>(Confirmed in both Windows platform and iOS touch screen devices using JAWS, NVDA, and VoiceOver)</em></li>
-                	<li>Keyboard focus is automatically restricted to active elements within the modal, which is handled using 
-						HTML5 attributes within the first and last focusable elements within the markup.</li>
-                </ul>
-            </div>
-            <div class="hd">
-                <h4>Bootstrap Syntax</h4>
-            </div>
-            <div class="intro tal">
-                <p>
-                    <code>
-                        &lt;a href="#"
-                        <br/>
-                        class="accModal"
-                        <br/>
-                        data-src="path/file.html#modalIdContent"
-                        <br/>
-                        data-role="ContentRole"
-                        <br/>
-                        id="uniqueID"
-                        <br/>
-                        &gt; ... &lt;/a&gt;
-                    </code>
-                </p>
-                <p> Or</p>
-                <p>
-                    <code>
-                        &lt;a href="#"
-                        <br/>
-                        class="accModal"
-                        <br/>
-                        data-internal="modalIdContent"
-                        <br/>
-                        data-role="ContentRole"
-                        <br/>
-                        id="uniqueID"
-                        <br/>
-                        &gt; ... &lt;/a&gt;
-                    </code>
-                </p>
-            </div>
-            <div class="hd">
-                <h4>Attributes</h4>
-            </div>
-            <div class="intro tal">
-                <ul class="lsn">
-                    <li><strong>class="accModal":</strong>
-                        The bootstrap class name that specifies an accessible modal.</li>
-                    <li><strong>data-src:</strong>
-                        The resource path and pointer to the ID attribute of the modal container element.
-                        If set, <code class="inline">data-internal</code> should be blank or not included.</li>
-                    <li><strong>data-internal:</strong>
-                        The ID attribute of the modal container element within the same document.
-                        <br/>
-                        Syntax of modals within the same document:
-                        <br/>
-                        <code>
-                            &lt;div class="hidden"&gt;
-                            <br/>
-                            &lt;div id="modalIdContent"&gt;
-                            <br/>
-                            ...
-                            <br/>
-                            &lt;/div&gt;
-                            <br/>
-                            ...
-                            <br/>
-                            &lt;/div&gt;
-                        </code>
-                        <br/>
-                        If <code class="inline">data-internal</code> is set, <code class="inline">data-src</code> should be blank or not included.
-                    </li>
-                    <li><strong>data-role:</strong>
-                        The role name that is conveyed to screen reader users as beginning and ending boundary 
-						text for the new content. "Modal" is set by default if no value is specified.</li>
-                    <li><strong>id:</strong>
-                        The unique ID of the element.
-                        This value is also registered as the ID of the modal AccDC Object, making it possible to invoke the object programmatically.
-                        <br/>
-                        <code>
-                            $A.reg.uniqueID.open();
-                            <br/>
-                            // All other AccDC API properties and methods are similarly available.
-                        </code>
-                    </li>
-                    <li><strong>data-first="true":</strong>
-                        Within the modal content, this specifies the first active element within the modal.
-                        When pressing <kbd>Tab</kbd> to navigate past the last active element in the modal, focus will automatically be moved to the first active element.</li>
-                    <li><strong>data-last="true":</strong>
-                        Within the modal content, this specifies the last active element within the modal.
-                        When pressing <kbd><kbd>Shift</kbd>+<kbd>Tab</kbd></kbd> to navigate past the first active element in the modal, 
-						focus will automatically be moved to the last active element.</li>
-                </ul>
-            </div>
+
+<body>
+    <div id="pg-modal">
+        <div class="hd">
+            <h3><span>Accessible Modal</span></h3>
         </div>
-    </body>
+        <div class="intro highlight">
+            <p>A modal control displays information or interactive content that must be dismissed before further interaction with the background page can occur.</p>
+        </div>
+        <div class="intro tal demo-block">
+            <p><button id="modalId" data-src="files/modal.html#modal-login" data-role="Login" class="accModal lightbox">
+                    Login
+                </button></p>
+        </div>
+        <div class="intro tal keyboard">
+            <p>The modal is optimized for screen reader and keyboard only users:</p>
+            <ul>
+                <li>Activate the triggering element to open the modal.</li>
+                <li>Screen reader users will be confined within the modal content, and will not be able to see the background page content.
+                    <em>(Confirmed in both Windows platform and iOS touch screen devices using JAWS, NVDA, and VoiceOver)</em></li>
+                <li>Keyboard focus is automatically restricted to active elements within the modal, which is handled using
+                    HTML5 attributes within the first and last focusable elements within the markup.</li>
+            </ul>
+        </div>
+        <div class="hd">
+            <h4>Bootstrap Syntax</h4>
+        </div>
+        <div class="intro tal">
+            <p>
+                <code>
+                    &lt;a href="#"
+                    <br />
+                    class="accModal"
+                    <br />
+                    data-src="path/file.html#modalIdContent"
+                    <br />
+                    data-role="ContentRole"
+                    <br />
+                    id="uniqueID"
+                    <br />
+                    &gt; ... &lt;/a&gt;
+                </code>
+            </p>
+            <p> Or</p>
+            <p>
+                <code>
+                    &lt;a href="#"
+                    <br />
+                    class="accModal"
+                    <br />
+                    data-internal="modalIdContent"
+                    <br />
+                    data-role="ContentRole"
+                    <br />
+                    id="uniqueID"
+                    <br />
+                    &gt; ... &lt;/a&gt;
+                </code>
+            </p>
+        </div>
+        <div class="hd">
+            <h4>Attributes</h4>
+        </div>
+        <div class="intro tal">
+            <ul class="lsn">
+                <li><strong>class="accModal":</strong>
+                    The bootstrap class name that specifies an accessible modal.</li>
+                <li><strong>data-src:</strong>
+                    The resource path and pointer to the ID attribute of the modal container element.
+                    If set, <code class="inline">data-internal</code> should be blank or not included.</li>
+                <li><strong>data-internal:</strong>
+                    The ID attribute of the modal container element within the same document.
+                    <br />
+                    Syntax of modals within the same document:
+                    <br />
+                    <code>
+                        &lt;div class="hidden"&gt;
+                        <br />
+                        &lt;div id="modalIdContent"&gt;
+                        <br />
+                        ...
+                        <br />
+                        &lt;/div&gt;
+                        <br />
+                        ...
+                        <br />
+                        &lt;/div&gt;
+                    </code>
+                    <br />
+                    If <code class="inline">data-internal</code> is set, <code class="inline">data-src</code> should be blank or not included.
+                </li>
+                <li><strong>data-role:</strong>
+                    The role name that is conveyed to screen reader users as beginning and ending boundary
+                    text for the new content. "Modal" is set by default if no value is specified.</li>
+                <li><strong>id:</strong>
+                    The unique ID of the element.
+                    This value is also registered as the ID of the modal AccDC Object, making it possible to invoke the object programmatically.
+                    <br />
+                    <code>
+                        $A.reg.uniqueID.open();
+                        <br />
+                        // All other AccDC API properties and methods are similarly available.
+                    </code>
+                </li>
+                <li><strong>data-first="true":</strong>
+                    Within the modal content, this specifies the first active element within the modal.
+                    When pressing <kbd>Tab</kbd> to navigate past the last active element in the modal, focus will automatically be moved to the first active element.</li>
+                <li><strong>data-last="true":</strong>
+                    Within the modal content, this specifies the last active element within the modal.
+                    When pressing <kbd><kbd>Shift</kbd>+<kbd>Tab</kbd></kbd> to navigate past the first active element in the modal,
+                    focus will automatically be moved to the last active element.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
 </html>

@@ -1,0 +1,5 @@
+(call prettier --write "./**/{Acc.DC.API.U.js,accdc_bootstrap.js,google.js,modals.js,tooltip_module.js,acordion_generator.js,aria_combobox_module.js,aria_data_grid_module.js,aria_listbox_generator.js,aria_menu_module.js,aria_radio_generator.js,aria_slider.js,aria_tabs_module.js,aria_toggler.js,aria_tree_module.js,banner_module.js,calendar_generator.js,carousel_module.js,css_drag_drop_module_for_jquery.js,css_drag_drop_module_for_standalone_dojo_and_mootools.js,footnote_generator.js,form_field_validator.js,modal_module.js,popup_module.js,progress_bar.js,scrollable_div_generator.js}")
+(call prettier --write "./**/*{.css,.json}")
+(call js-beautify -r --type="html" "./**/*.{htm,html}")
+(call js-beautify -r --type="html" "./bootstrap.htm")
+(call .\minify.bat)

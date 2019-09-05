@@ -1,197 +1,199 @@
 <html>
-    <body>
-        <div id="pg-carousel">
-            <div class="hd">
-                <h3><span>Accessible Carousel</span></h3>
-            </div>
-            <div class="intro highlight">
-                <p> A carousel control dynamically scrolls large amounts of data using minimal screen real estate.</p>
-            </div>
-            <div class="intro viewport demo-block">
-                <div id="carouselId" class="accCarousel" data-src="files/carousel.xml" data-defaultopen="0,0">
-                </div>
-            </div>
-            <div class="intro tal keyboard">
-                <p>The carousel controls are keyboard accessible:</p>
-				<ul>
-					<li>Press <kbd>Tab</kbd> and <kbd><kbd>Shift</kbd>+<kbd>Tab</kbd></kbd> to navigate between buttons, and press Enter to activate.</li>
-					<li>Mouse users can click the desired buttons as usual.</li>
-				</ul>
-            </div>
-            <div class="hd">
-                <h4>Bootstrap Syntax</h4>
-            </div>
-            <div class="intro tal">
-                <p>
-                    <code>
-                        &lt;div class="accCarousel"
-                        <br/>
-                        data-src="path/file.xml"
-                        <br/>
-                        data-defaultopen="#" or "#,#"
-                        <br/>
-                        id="uniqueID"
-                        <br/>
-                        &gt;&lt;/div&gt;
-                    </code>
-                </p>
-            </div>
-            <div class="hd">
-                <h4>Attributes</h4>
-            </div>
-            <div class="intro tal">
-                <ul class="lsn">
-                    <li><strong>class="accCarousel":</strong>
-                        The bootstrap class name that specifies an accessible carousel.</li>
-                    <li><strong>data-src:</strong>
-                        The resource path.</li>
-                    <li><strong>data-defaultopen:</strong>
-                        The array index number of the carousel slide to open automatically when loaded.
-                        The difference between the use of "#" or "#,#", depends whether the carousel is flat or grouped within the XML syntax.</li>
-                    <li><strong>id:</strong>
-                        The unique ID of the element.
-                        This value is also registered as the ID of the carousel AccDC Object, making it possible to invoke the object programmatically.
-                        <br/>
-                        <code>
-                            $A.reg.uniqueID.open();
-                            <br/>
-                            // All other AccDC API properties and methods are similarly available.
-                        </code>
-                    </li>
-                </ul>
-            </div>
-            <div class="hd">
-                <h4>Outer XML Syntax</h4>
-            </div>
-            <div class="intro tal">
-                <p>Required for both grouped and ungrouped carousels:</p>
-                <p>
-                    <code>
-                        &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
-                        <br/>
-                        &lt;carousel role="REQUIRED: Hidden text role for screen reader users"
-                        <br/>
-                        accStart="REQUIRED: Hidden text start keyword for screen reader users"
-                        <br/>
-                        accEnd="REQUIRED: Hidden text end keyword for screen reader users"
-                        <br/>
-                        height="REQUIRED: Total height of control"
-                        <br/>
-                        width="REQUIRED: Total width of control"
-                        <br/>
-                        className="Control class name for styling"
-                        <br/>
-                        prevTitle="REQUIRED: Title text for the previous button"
-                        <br/>
-                        nextTitle="REQUIRED: Title text for the next button"
-                        <br/>
-                        slideName="General name for a slide, used with prevTitle and nextTitle for Next Slide and Previous Slide buttons"
-                        <br/>
-                        isGrouped="REQUIRED: 'yes' or 'no': Must match the syntax of the XML whether or not group markup is included"
-                        <br/>
-                        groupName="General name for a group, used with prevTitle and nextTitle for Next Group and Previous Group buttons"
-                        <br/>
-                        showGroup="If 'yes', group names will be displayed above or below the carousel; depends on the value of groupPosTop"
-                        <br/>
-                        groupPosTop="If 'yes', group names are displayed above the carousel, if not, then they are displayed below"
-                        <br/>
-                        btnPText="Textual value of the Previous Slide button; uses innerHTML to insert"
-                        <br/>
-                        btnNText="Textual value of the Next Slide button; uses innerHTML to insert"
-                        <br/>
-                        btnPGText="Textual value of the Previous Group button; uses innerHTML to insert"
-                        <br/>
-                        btnNGText="Textual value of the Next Group button; uses innerHTML to insert"
-                        <br/>
-                        btnPAccesskey="accesskey for the Previous Slide button"
-                        <br/>
-                        btnNAccesskey="accesskey for the Next Slide button"
-                        <br/>
-                        btnPGAccesskey="accesskey for the Previous Group button"
-                        <br/>
-                        btnNGAccesskey="accesskey for the Next Group button"
-                        <br/>
-                        direction="REQUIRED: Must be either 'lr' (left to right), or 'tb' (top to bottom)"
-                        <br/>
-                        cycle="REQUIRED: 'yes' or 'no' for infinite looping"
-                        <br/>
-                        timer="REQUIRED: '0' to disable, or positive integer for automatic rotation in N milliseconds"
-                        <br/>
-                        animDelay="REQUIRED: Slide animation length in milliseconds; set to '0' for instant transition"
-                        <br/>
-                        forward="REQUIRED: 'yes' or 'no' to set auto rotation to move backwards or forwards"
-                        <br/>
-                        hiddenMsg="Hidden text message for screen reader users" &gt;
-                        <br/>
-                        ... Inner XML markup ...
-                        <br/>
-                        &lt;/carousel&gt;
-                    </code>
-                </p>
-            </div>
-            <div class="hd">
-                <h4>Inner XML Syntax</h4>
-            </div>
-            <div class="intro tal">
-                <p>For slides with no grouping:</p>
-                <p>
-                    <code>
-                        &lt;slide announce="Text1 to announce to screen reader users" &gt;&lt;![CDATA[
-                        <br/>
-                        ... HTML markup to display for slide 1 ...
-                        <br/>
-                        ]]&gt;&lt;/slide&gt;
-                        <br/>
-                        &lt;slide announce="Text2 to announce to screen reader users" &gt;&lt;![CDATA[
-                        <br/>
-                        ... HTML markup to display for slide 2 ...
-                        <br/>
-                        ]]&gt;&lt;/slide&gt;
-                    </code>
-                </p>
-            </div>
-            <div class="hd">
-                <h4>Inner XML Syntax</h4>
-            </div>
-            <div class="intro tal">
-                <p>For slides with grouping enabled:</p>
-                <p>
-                    <code>
-                        &lt;group name="Textual name for group 1" &gt;
-                        <br/>
-                        &lt;slide announce="Text1 to announce to screen reader users" &gt;&lt;![CDATA[
-                        <br/>
-                        ... HTML markup to display for slide 1 ...
-                        <br/>
-                        ]]&gt;&lt;/slide&gt;
-                        <br/>
-                        &lt;slide announce="Text2 to announce to screen reader users" &gt;&lt;![CDATA[
-                        <br/>
-                        ... HTML markup to display for slide 2 ...
-                        <br/>
-                        ]]&gt;&lt;/slide&gt;
-                        <br/>
-                        &lt;/group&gt;
-                        <br/>
-                        &lt;group name="Textual name for group 2" &gt;
-                        <br/>
-                        &lt;slide announce="Text3 to announce to screen reader users" &gt;&lt;![CDATA[
-                        <br/>
-                        ... HTML markup to display for slide 3 ...
-                        <br/>
-                        ]]&gt;&lt;/slide&gt;
-                        <br/>
-                        &lt;slide announce="Text4 to announce to screen reader users" &gt;&lt;![CDATA[
-                        <br/>
-                        ... HTML markup to display for slide 4 ...
-                        <br/>
-                        ]]&gt;&lt;/slide&gt;
-                        <br/>
-                        &lt;/group&gt;
-                    </code>
-                </p>
-                <p>XML attributes that are not required may be set to null. E.G. <code class="inline">attributeName=""</code></p>
+
+<body>
+    <div id="pg-carousel">
+        <div class="hd">
+            <h3><span>Accessible Carousel</span></h3>
+        </div>
+        <div class="intro highlight">
+            <p> A carousel control dynamically scrolls large amounts of data using minimal screen real estate.</p>
+        </div>
+        <div class="intro viewport demo-block">
+            <div id="carouselId" class="accCarousel" data-src="files/carousel.xml" data-defaultopen="0,0">
             </div>
         </div>
-    </body>
+        <div class="intro tal keyboard">
+            <p>The carousel controls are keyboard accessible:</p>
+            <ul>
+                <li>Press <kbd>Tab</kbd> and <kbd><kbd>Shift</kbd>+<kbd>Tab</kbd></kbd> to navigate between buttons, and press Enter to activate.</li>
+                <li>Mouse users can click the desired buttons as usual.</li>
+            </ul>
+        </div>
+        <div class="hd">
+            <h4>Bootstrap Syntax</h4>
+        </div>
+        <div class="intro tal">
+            <p>
+                <code>
+                    &lt;div class="accCarousel"
+                    <br />
+                    data-src="path/file.xml"
+                    <br />
+                    data-defaultopen="#" or "#,#"
+                    <br />
+                    id="uniqueID"
+                    <br />
+                    &gt;&lt;/div&gt;
+                </code>
+            </p>
+        </div>
+        <div class="hd">
+            <h4>Attributes</h4>
+        </div>
+        <div class="intro tal">
+            <ul class="lsn">
+                <li><strong>class="accCarousel":</strong>
+                    The bootstrap class name that specifies an accessible carousel.</li>
+                <li><strong>data-src:</strong>
+                    The resource path.</li>
+                <li><strong>data-defaultopen:</strong>
+                    The array index number of the carousel slide to open automatically when loaded.
+                    The difference between the use of "#" or "#,#", depends whether the carousel is flat or grouped within the XML syntax.</li>
+                <li><strong>id:</strong>
+                    The unique ID of the element.
+                    This value is also registered as the ID of the carousel AccDC Object, making it possible to invoke the object programmatically.
+                    <br />
+                    <code>
+                        $A.reg.uniqueID.open();
+                        <br />
+                        // All other AccDC API properties and methods are similarly available.
+                    </code>
+                </li>
+            </ul>
+        </div>
+        <div class="hd">
+            <h4>Outer XML Syntax</h4>
+        </div>
+        <div class="intro tal">
+            <p>Required for both grouped and ungrouped carousels:</p>
+            <p>
+                <code>
+                    &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+                    <br />
+                    &lt;carousel role="REQUIRED: Hidden text role for screen reader users"
+                    <br />
+                    accStart="REQUIRED: Hidden text start keyword for screen reader users"
+                    <br />
+                    accEnd="REQUIRED: Hidden text end keyword for screen reader users"
+                    <br />
+                    height="REQUIRED: Total height of control"
+                    <br />
+                    width="REQUIRED: Total width of control"
+                    <br />
+                    className="Control class name for styling"
+                    <br />
+                    prevTitle="REQUIRED: Title text for the previous button"
+                    <br />
+                    nextTitle="REQUIRED: Title text for the next button"
+                    <br />
+                    slideName="General name for a slide, used with prevTitle and nextTitle for Next Slide and Previous Slide buttons"
+                    <br />
+                    isGrouped="REQUIRED: 'yes' or 'no': Must match the syntax of the XML whether or not group markup is included"
+                    <br />
+                    groupName="General name for a group, used with prevTitle and nextTitle for Next Group and Previous Group buttons"
+                    <br />
+                    showGroup="If 'yes', group names will be displayed above or below the carousel; depends on the value of groupPosTop"
+                    <br />
+                    groupPosTop="If 'yes', group names are displayed above the carousel, if not, then they are displayed below"
+                    <br />
+                    btnPText="Textual value of the Previous Slide button; uses innerHTML to insert"
+                    <br />
+                    btnNText="Textual value of the Next Slide button; uses innerHTML to insert"
+                    <br />
+                    btnPGText="Textual value of the Previous Group button; uses innerHTML to insert"
+                    <br />
+                    btnNGText="Textual value of the Next Group button; uses innerHTML to insert"
+                    <br />
+                    btnPAccesskey="accesskey for the Previous Slide button"
+                    <br />
+                    btnNAccesskey="accesskey for the Next Slide button"
+                    <br />
+                    btnPGAccesskey="accesskey for the Previous Group button"
+                    <br />
+                    btnNGAccesskey="accesskey for the Next Group button"
+                    <br />
+                    direction="REQUIRED: Must be either 'lr' (left to right), or 'tb' (top to bottom)"
+                    <br />
+                    cycle="REQUIRED: 'yes' or 'no' for infinite looping"
+                    <br />
+                    timer="REQUIRED: '0' to disable, or positive integer for automatic rotation in N milliseconds"
+                    <br />
+                    animDelay="REQUIRED: Slide animation length in milliseconds; set to '0' for instant transition"
+                    <br />
+                    forward="REQUIRED: 'yes' or 'no' to set auto rotation to move backwards or forwards"
+                    <br />
+                    hiddenMsg="Hidden text message for screen reader users" &gt;
+                    <br />
+                    ... Inner XML markup ...
+                    <br />
+                    &lt;/carousel&gt;
+                </code>
+            </p>
+        </div>
+        <div class="hd">
+            <h4>Inner XML Syntax</h4>
+        </div>
+        <div class="intro tal">
+            <p>For slides with no grouping:</p>
+            <p>
+                <code>
+                    &lt;slide announce="Text1 to announce to screen reader users" &gt;&lt;![CDATA[
+                    <br />
+                    ... HTML markup to display for slide 1 ...
+                    <br />
+                    ]]&gt;&lt;/slide&gt;
+                    <br />
+                    &lt;slide announce="Text2 to announce to screen reader users" &gt;&lt;![CDATA[
+                    <br />
+                    ... HTML markup to display for slide 2 ...
+                    <br />
+                    ]]&gt;&lt;/slide&gt;
+                </code>
+            </p>
+        </div>
+        <div class="hd">
+            <h4>Inner XML Syntax</h4>
+        </div>
+        <div class="intro tal">
+            <p>For slides with grouping enabled:</p>
+            <p>
+                <code>
+                    &lt;group name="Textual name for group 1" &gt;
+                    <br />
+                    &lt;slide announce="Text1 to announce to screen reader users" &gt;&lt;![CDATA[
+                    <br />
+                    ... HTML markup to display for slide 1 ...
+                    <br />
+                    ]]&gt;&lt;/slide&gt;
+                    <br />
+                    &lt;slide announce="Text2 to announce to screen reader users" &gt;&lt;![CDATA[
+                    <br />
+                    ... HTML markup to display for slide 2 ...
+                    <br />
+                    ]]&gt;&lt;/slide&gt;
+                    <br />
+                    &lt;/group&gt;
+                    <br />
+                    &lt;group name="Textual name for group 2" &gt;
+                    <br />
+                    &lt;slide announce="Text3 to announce to screen reader users" &gt;&lt;![CDATA[
+                    <br />
+                    ... HTML markup to display for slide 3 ...
+                    <br />
+                    ]]&gt;&lt;/slide&gt;
+                    <br />
+                    &lt;slide announce="Text4 to announce to screen reader users" &gt;&lt;![CDATA[
+                    <br />
+                    ... HTML markup to display for slide 4 ...
+                    <br />
+                    ]]&gt;&lt;/slide&gt;
+                    <br />
+                    &lt;/group&gt;
+                </code>
+            </p>
+            <p>XML attributes that are not required may be set to null. E.G. <code class="inline">attributeName=""</code></p>
+        </div>
+    </div>
+</body>
+
 </html>

@@ -1,52 +1,60 @@
 /* WHATSOCK, 2016 */
 /* Specific styles for ARIA Acco*/
 
-
 #slideshowId {
-    display: block;
-    height: 480px;
-	margin: 2rem 0;
+  display: block;
+  height: 480px;
+  margin: 2rem 0;
 }
 
 #slideshowId div.carouselCls {
-    text-align: center;
+  text-align: center;
 }
 
-#slideshowId div.lNav, #slideshowId div.rNav {
-    position: absolute;
-    left: 300px;
-	width: 28px;
-	height: 28px;
-    padding: 6px;
+#slideshowId div.lNav,
+#slideshowId div.rNav {
+  position: absolute;
+  left: 300px;
+  width: 28px;
+  height: 28px;
+  padding: 6px;
 }
 
-	#slideshowId .navButton {
-		overflow: hidden;
-		width: 28px;
-		height: 28px;
-		text-indent: -5rem;
-		border: none;
-	}
-	#slideshowId div.rNav {margin-top: 438px;}
+#slideshowId .navButton {
+  overflow: hidden;
+  width: 28px;
+  height: 28px;
+  text-indent: -5rem;
+  border: none;
+}
+#slideshowId div.rNav {
+  margin-top: 438px;
+}
 
-	#slideshowId div.lNav .navButton {
-		background: transparent url(../img/slideshow/sprite.svg) 0 -663px no-repeat;
-	}
-	#slideshowId div.rNav .navButton {
-		background: transparent url(../img/slideshow/sprite.svg) 0 -483px no-repeat;
-	}
+#slideshowId div.lNav .navButton {
+  background: transparent url(../img/slideshow/sprite.svg) 0 -663px no-repeat;
+}
+#slideshowId div.rNav .navButton {
+  background: transparent url(../img/slideshow/sprite.svg) 0 -483px no-repeat;
+}
 
 #slideshowId div.centerContent {
-    position: absolute;
-    overflow: hidden;
-    left: 0;
-    width: 265px;
-    height: 480px;
+  position: absolute;
+  overflow: hidden;
+  left: 0;
+  width: 265px;
+  height: 480px;
 }
 
-	#slideshowId div.centerContent div div {transition: opacity 1s;}
-	#slideshowId div.centerContent div div[aria-hidden=false] {opacity: 1;}
-	#slideshowId div.centerContent div div[aria-hidden=true] {opacity: 0;}
+#slideshowId div.centerContent div div {
+  transition: opacity 1s;
+}
+#slideshowId div.centerContent div div[aria-hidden="false"] {
+  opacity: 1;
+}
+#slideshowId div.centerContent div div[aria-hidden="true"] {
+  opacity: 0;
+}
 
 /*
 #slideshowId {

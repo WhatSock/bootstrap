@@ -1,147 +1,181 @@
 /* WHATSOCK, 2016 */
 /* Specific styles for Tabs/menus */
 
-
-	
 /* ----- TABS ----- */
 
-ul.tabs {margin: 0;}
-ul.tabs + div.content {margin-bottom: 2rem;}
-
+ul.tabs {
+  margin: 0;
+}
+ul.tabs + div.content {
+  margin-bottom: 2rem;
+}
 
 ul.tabs.nonARIA li {
-	display: inline-block;
-	list-style-type: none;
-	margin: 0;
+  display: inline-block;
+  list-style-type: none;
+  margin: 0;
 }
 
-.tab {display: inline-block; margin: 0;}
-
-.tab a, .tab a:link, .tab a:visited, a.tab, a.tab:link, a.tab:visited {
-	display: block;
-	color: #FFF;
-	background: #5D1F2C;
-	padding: 0.3em 0.5em 0.5em;
-	border-top-right-radius: 2px;
-	border-top-left-radius: 2px;
+.tab {
+  display: inline-block;
+  margin: 0;
 }
 
-.tab a:hover, .tab a:focus, a.tab:hover, a.tab:focus {
-	text-decoration: none;
-	color: #FFF;
-	background-color: #2E3135;
+.tab a,
+.tab a:link,
+.tab a:visited,
+a.tab,
+a.tab:link,
+a.tab:visited {
+  display: block;
+  color: #fff;
+  background: #5d1f2c;
+  padding: 0.3em 0.5em 0.5em;
+  border-top-right-radius: 2px;
+  border-top-left-radius: 2px;
 }
 
-.tab.active a, .tab.active a:link, .tab.active a:visited, a.tab.active {
-	color: #FFF;
-	background-color: #2E3135;
+.tab a:hover,
+.tab a:focus,
+a.tab:hover,
+a.tab:focus {
+  text-decoration: none;
+  color: #fff;
+  background-color: #2e3135;
+}
+
+.tab.active a,
+.tab.active a:link,
+.tab.active a:visited,
+a.tab.active {
+  color: #fff;
+  background-color: #2e3135;
 }
 
 /* -------- MENUS ---------- */
 
-#pg-menus a.accMenu, #pg-menus a.accMenu:link, #pg-menus a.accMenu:visited, #pg-menus button.accMenu {
-	display: block;
-	color: #FFF;
-	background: #2E3135;
-	padding: 0.3em 0.5em;
+#pg-menus a.accMenu,
+#pg-menus a.accMenu:link,
+#pg-menus a.accMenu:visited,
+#pg-menus button.accMenu {
+  display: block;
+  color: #fff;
+  background: #2e3135;
+  padding: 0.3em 0.5em;
 }
 #pg-menus button.accMenu {
-	font-size: 100%;
-	border: none;
+  font-size: 100%;
+  border: none;
 }
 
-ul.menus-demos {margin: 0 0 2rem;}
+ul.menus-demos {
+  margin: 0 0 2rem;
+}
 
 ul.menus-demos > li {
-	display: inline-block;width: 100%;
-	list-style-type: none;
+  display: inline-block;
+  width: 100%;
+  list-style-type: none;
 }
 
-div.hiddenStorage, .hidden {
-	display: none;
-	visibility: hidden;
+div.hiddenStorage,
+.hidden {
+  display: none;
+  visibility: hidden;
 }
 
-ul.menus-demos a, ul.menus-demos a:link, ul.menus-demos a:visited, ul.menus-demos button {
-	font-size: 100%;
-	background: transparent;
-	padding: 0.3em 0.5em;
-	border: 1px solid #CCC;
+ul.menus-demos a,
+ul.menus-demos a:link,
+ul.menus-demos a:visited,
+ul.menus-demos button {
+  font-size: 100%;
+  background: transparent;
+  padding: 0.3em 0.5em;
+  border: 1px solid #ccc;
 }
-ul.menus-demos a:hover, ul.menus-demos a:focus, ul.menus-demos button:hover, ul.menus-demos button:focus {
-	text-decoration: none;
-	color: #FFF;
-	background: #2E3135;
+ul.menus-demos a:hover,
+ul.menus-demos a:focus,
+ul.menus-demos button:hover,
+ul.menus-demos button:focus {
+  text-decoration: none;
+  color: #fff;
+  background: #2e3135;
 }
 
 div.menu {
-	text-align: left;
-	width: 15em;
-	left: 13em;
-	top: 0;
+  text-align: left;
+  width: 15em;
+  left: 13em;
+  top: 0;
 }
 div.menu ol.menu {
-	float: left;
-	list-style: none;
-	width: 100%;
-	margin: 0;
+  float: left;
+  list-style: none;
+  width: 100%;
+  margin: 0;
 }
 div.menu ol.menu > li {
-	position: relative;
+  position: relative;
 }
-	div.menu ol.menu > li li {font-size: 100%;}
-	
+div.menu ol.menu > li li {
+  font-size: 100%;
+}
+
 div.menu ol.menu a {
-	display: block;
-	padding: 0.3em 0.8em;
-	text-decoration: none;
-	color: #FFF;
-	background-color: #2E3135;
+  display: block;
+  padding: 0.3em 0.8em;
+  text-decoration: none;
+  color: #fff;
+  background-color: #2e3135;
 }
-div.menu ol.menu a:focus, div.menu ol.menu a:hover {
-	color: #000;
-	background: #E2A037;
+div.menu ol.menu a:focus,
+div.menu ol.menu a:hover {
+  color: #000;
+  background: #e2a037;
 }
 div.menu ol.menu a.submenu::after {
-	content: '\2192 ';
-	color: #E2A037;
+  content: "\2192 ";
+  color: #e2a037;
 }
-div.menu ol.menu a.submenu:hover::after, div.menu ol.menu a.submenu:focus::after {
-	content: '\2192 ';
-	color: #2E3135;
+div.menu ol.menu a.submenu:hover::after,
+div.menu ol.menu a.submenu:focus::after {
+  content: "\2192 ";
+  color: #2e3135;
 }
 
 div.foMenu {
-	min-width: 300px;
-	background-color: #2E3135;
+  min-width: 300px;
+  background-color: #2e3135;
 }
 div.foMenu ul.menu2 {
-	list-style: none;
-	margin: 0;
+  list-style: none;
+  margin: 0;
 }
 div.foMenu ul.menu2 > li {
-	float: left;
-	width: auto;
+  float: left;
+  width: auto;
 }
-	div.foMenu ul.menu2 > li li {font-size: 100%;}
-	
+div.foMenu ul.menu2 > li li {
+  font-size: 100%;
+}
+
 div.foMenu ul.menu2 a {
-	display: block;
-	padding: 0.3em 0.8em;
-	text-align: center;
-	text-decoration: none;
-	color: #FFF;
-	background-color: #2E3135;
+  display: block;
+  padding: 0.3em 0.8em;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #2e3135;
 }
 div.foMenu ul.menu2 a:focus {
-	color: #000;
-	background: #E2A037;
+  color: #000;
+  background: #e2a037;
 }
 div.foMenu ul.menu2 a.submenu2::before {
-	content: '\2193 ';
-	color: #E2A037;
+  content: "\2193 ";
+  color: #e2a037;
 }
 
 div.foMenu ul.menu2 a.submenu2:focus::before {
-	color: #2E3135;
+  color: #2e3135;
 }

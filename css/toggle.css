@@ -2,47 +2,54 @@
 /* Specific styles for Toggle Panels */
 
 .accToggle {
-	margin-bottom: 0.5rem;
-    cursor: pointer;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
 }
 
 .accToggle .lbl {
-	display: block;
-	position: relative;
-	font-size: 1.2em;
-	text-transform: uppercase;
-	color: #000;
-	background: #63B7C2 url(../img/toggle/sprite.svg) 8px 5px no-repeat;
-	padding: 0.5em 0 0.5em 45px;
+  display: block;
+  position: relative;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  color: #000;
+  background: #63b7c2 url(../img/toggle/sprite.svg) 8px 5px no-repeat;
+  padding: 0.5em 0 0.5em 45px;
 }
-	
-	.accToggle.togglePressed .lbl {
-	    background: #63B7C2 url(../img/toggle/sprite.svg) 8px -175px no-repeat;
-	}
 
-	div.toggle-section {
-	    -webkit-animation: appearance 1s 1 ease-in-out;
-	    -moz-animation: appearance 1s 1 ease-in-out;
-	    -o-animation: appearance 1s 1 ease-in-out;
-	    -ms-animation: appearance 1s 1 ease-in-out;
-	    animation: appearance 1s 1 ease-in-out;
-	}
-	
+.accToggle.togglePressed .lbl {
+  background: #63b7c2 url(../img/toggle/sprite.svg) 8px -175px no-repeat;
+}
+
+div.toggle-section {
+  -webkit-animation: appearance 1s 1 ease-in-out;
+  -moz-animation: appearance 1s 1 ease-in-out;
+  -o-animation: appearance 1s 1 ease-in-out;
+  -ms-animation: appearance 1s 1 ease-in-out;
+  animation: appearance 1s 1 ease-in-out;
+}
+
 @-webkit-keyframes appearance {
-    0% {background: #FC0;}
-    100% {background: #FFF;}
+  0% {
+    background: #fc0;
+  }
+  100% {
+    background: #fff;
+  }
 }
 @keyframes appearance {
-    0% {background: #FC0;}
-    100% {background: #FFF;}
+  0% {
+    background: #fc0;
+  }
+  100% {
+    background: #fff;
+  }
 }
 
-
 @media screen and (min-width: 1200px) {
-	.accToggle .lbl {
-		background-position: 8px 10px;
-	}	
-	.accToggle.togglePressed .lbl {
-	    background-position: 8px -170px;
-	}
+  .accToggle .lbl {
+    background-position: 8px 10px;
+  }
+  .accToggle.togglePressed .lbl {
+    background-position: 8px -170px;
+  }
 }

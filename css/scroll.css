@@ -2,19 +2,20 @@
 /* Specific styles for Accessible Scroll */
 
 #scrollPane {
-	overflow: auto;
-	-webkit-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	box-sizing: border-box;
-	width: 100%;
-	max-width: 400px;
-	height: 340px;
-	font: 1.2em Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
-	background: url("../img/scroll/backdrop.jpg") #000 no-repeat;
-	color: #fff;
-	padding: 1.5rem 2rem;
-	margin: 20px auto;
-	-webkit-box-shadow: 0 10px 6px -6px #777;
-	-moz-box-shadow: 0 10px 6px -6px #777;
-	box-shadow: 0 10px 6px -6px #777;
+  overflow: auto;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 400px;
+  height: 340px;
+  font: 1.2em Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida,
+    "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+  background: url("../img/scroll/backdrop.jpg") #000 no-repeat;
+  color: #fff;
+  padding: 1.5rem 2rem;
+  margin: 20px auto;
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+  -moz-box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 6px -6px #777;
 }

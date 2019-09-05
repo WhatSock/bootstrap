@@ -1,226 +1,228 @@
 <html>
-    <body>
-        <div id="pg-tabs">
-            <div class="hd">
-                <h3><span>Accessible Tabs</span></h3>
-            </div>
-            <div class="intro highlight">
-                <p>A tab control is a selection mechanism that conditionally renders dynamic content.</p>
-            </div>
-			<div class="demo-block">
-	            <ul class="tabs ARIA" role="tablist">
-	                <li id="tab1id" class="accTab tab tab1" role="tab" data-src="files/tabs.html#tab1content" data-role="Surfer Tab" data-defaultopen="true" data-insert="tabInsertId" data-group="tabGroup1" data-headinglvl="3">
-	                    <span>Surfer</span>
-	                </li>
-	                <li id="tab2id" class="accTab tab tab2" role="tab" data-src="files/tabs.html#tab2content" data-role="Grapes Tab" data-insert="tabInsertId" data-group="tabGroup1" data-headinglvl="3">
-	                    <span>Grapes</span>
-	                </li>
-	                <li id="tab3id" class="accTab tab tab3" role="tab" data-src="files/tabs.html#tab3content" data-role="Trees Tab" data-insert="tabInsertId" data-group="tabGroup1" data-headinglvl="3">
-	                    <span>Trees</span>
-	                </li>
-	                <li id="tab4id" class="accTab tab tab4" role="tab" data-src="files/tabs.html#tab4content" data-role="Sculpture Tab" data-insert="tabInsertId" data-group="tabGroup1" data-headinglvl="3">
-	                    <span>Sculpture</span>
-	                </li>
-	            </ul>
-	            <div class="content" id="tabInsertId">
-	            </div>
-			</div>
-            <div class="intro tal keyboard">
-                <p> The tab controls are keyboard accessible:</p>
-                <ul>
-					<li>Set focus on the tab control.</li>
-					<li>Press the Arrow keys to move focus between tabs.</li>
-					<li>Press <kbd class="home">Home</kbd> or <kbd class="end">End</kbd> to move to the first or last tab.</li>
-					<li>Press any letter or number to jump to a tab starting with that character or digit.</li>
-					<li>Press the <kbd>Spacebar</kbd> to open (or optionally toggle if configured) the selected tab.</li>
-					<li>Mouse users can click the desired tab as usual.</li>
-				</ul>
-            </div>
-            <div class="hd">
-                <h4>Bootstrap Syntax</h4>
-            </div>
-            <div class="intro tal">
-                <p>
-                    <code>
-                        &lt;div role="tablist">
-                        <br/>
-                        <br/>
-                        &lt;a href="#"
-                        <br/>
-                        role="tab"
-                        <br/>
-                        class="accTab"
-                        <br/>
-                        data-src="path/file.html#tab1contentID"
-                        <br/>
-                        data-role="ContentPanelRoleName"
-                        <br/>
-                        data-defaultopen="true"
-                        <br/>
-                        data-insert="insertionPointElementID"
-                        <br/>
-                        data-group="sharedGroupName"
-                        <br/>
-                        data-headinglvl="#"
-                        <br/>
-                        id="uniqueID"
-                        <br/>
-                        &gt; Tab1 Name &lt;/a&gt;
-                        <br/>
-                        <br/>
-                        &lt;a href="#"
-                        <br/>
-                        role="tab"
-                        <br/>
-                        class="accTab"
-                        <br/>
-                        data-src="path/file.html#tab2contentID"
-                        <br/>
-                        data-role="ContentPanelRoleName"
-                        <br/>
-                        data-insert="insertionPointElementID"
-                        <br/>
-                        data-group="sharedGroupName"
-                        <br/>
-                        data-headinglvl="#"
-                        <br/>
-                        id="uniqueID"
-                        <br/>
-                        &gt; Tab2 Name &lt;/a&gt;
-                        <br/>
-                        <br/>
-                        &lt;/div&gt;
-                    </code>
-                </p>
-                <p> Or</p>
-                <p>
-                    <code>
-                        &lt;div role="tablist">
-                        <br/>
-                        <br/>
-                        &lt;a href="#"
-                        <br/>
-                        role="tab"
-                        <br/>
-                        class="accTab"
-                        <br/>
-                        data-internal="tab1contentID"
-                        <br/>
-                        data-role="ContentPanelRoleName"
-                        <br/>
-                        data-defaultopen="true"
-                        <br/>
-                        data-insert="insertionPointElementID"
-                        <br/>
-                        data-group="sharedGroupName"
-                        <br/>
-                        data-headinglvl="#"
-                        <br/>
-                        id="uniqueID"
-                        <br/>
-                        &gt; Tab1 Name &lt;/a&gt;
-                        <br/>
-                        <br/>
-                        &lt;a href="#"
-                        <br/>
-                        role="tab"
-                        <br/>
-                        class="accTab"
-                        <br/>
-                        data-internal="tab2contentID"
-                        <br/>
-                        data-role="ContentPanelRoleName"
-                        <br/>
-                        data-insert="insertionPointElementID"
-                        <br/>
-                        data-group="sharedGroupName"
-                        <br/>
-                        data-headinglvl="#"
-                        <br/>
-                        id="uniqueID"
-                        <br/>
-                        &gt; Tab2 Name &lt;/a&gt;
-                        <br/>
-                        <br/>
-                        &lt;/div&gt;
-                    </code>
-                </p>
-            </div>
-            <div class="hd">
-                <h4>Attributes</h4>
-            </div>
-            <div class="intro tal">
-                <ul class="lsn">
-                    <li><strong>role="tablist":</strong>
-                        The ARIA role that specifies a group of tab controls.
-                        This must only be included within the element that contains all individual tabs.</li>
-                    <li><strong>role="tab":</strong>
-                        The ARIA role that specifies an individual tab control.
-                        To ensure accessibility, this element must not contain any other active elements.</li>
-                    <li><strong>class="accTab":</strong>
-                        The bootstrap class name that specifies an accessible tab.</li>
-                    <li><strong>data-src:</strong>
-                        The resource path and pointer to the ID attribute of the tab content container element.
-                        If set, data-internal should be blank or not included.</li>
-                    <li><strong>data-internal:</strong>
-                        The ID attribute of the tab panel container element within the same document.
-                        <br/>
-                        Syntax of tab panels within the same document:
-                        <br/>
-                        <code>
-                            &lt;div class="hidden"&gt;
-                            <br/>
-                            <br/>
-                            &lt;div id="tab1contentID"&gt;
-                            <br/>
-                            ...
-                            <br/>
-                            &lt;/div&gt;
-                            <br/>
-                            <br/>
-                            &lt;div id="tab2contentID"&gt;
-                            <br/>
-                            ...
-                            <br/>
-                            &lt;/div&gt;
-                            <br/>
-                            <br/>
-                            ...
-                            <br/>
-                            <br/>
-                            &lt;/div&gt;
-                        </code>
-                        <br/>
-                        If <code class="inline">data-internal</code> is set, <code class="inline">data-src</code> should be blank or not included.
-                    </li>
-                    <li><strong>data-defaultopen="true":</strong>
-                        Specifies that the referenced tab will open automatically.
-                        Only one tab per group should include this attribute.</li>
-                   <li><strong>data-role:</strong>
-                        The role name that is conveyed to screen reader users as beginning and ending boundary text for the tab panel content.
-                        "Tab" is set by default if no value is specified.</li>
-                    <li><strong>data-insert:</strong>
-                        The ID attribute of the container element where tab panel content will be inserted.</li>
-                    <li><strong>data-group:</strong>
-                        The shared group name for all related tabs.
-                        This is used to differentiate separate tab groups within the same document.</li>
-                    <li><strong>data-headinglvl:</strong>
-                        The heading level of the tab panel section for screen reader users.
-                        This should reflect proper nesting.
-                        If the tab panel content is inserted within an H1, data-headinglvl should be set to '2', and so on.
-                        If no value is specified, and if no override is set within accdc_bootstrap.js via ariaLevel:#, '3' will be set by default.</li>
-                    <li><strong>id:</strong>
-                        The unique ID of the element.
-                        This value is also registered as the ID of the individual tab AccDC Object, making it possible to invoke the object programmatically.
-                        <br/>
-                        <code>
-                            $A.reg.uniqueID.open();
-                            <br/>
-                            // All other AccDC API properties and methods are similarly available.
-                        </code>
-                    </li>
-                </ul>
+
+<body>
+    <div id="pg-tabs">
+        <div class="hd">
+            <h3><span>Accessible Tabs</span></h3>
+        </div>
+        <div class="intro highlight">
+            <p>A tab control is a selection mechanism that conditionally renders dynamic content.</p>
+        </div>
+        <div class="demo-block">
+            <ul class="tabs ARIA" role="tablist">
+                <li id="tab1id" class="accTab tab tab1" role="tab" data-src="files/tabs.html#tab1content" data-role="Surfer Tab" data-defaultopen="true" data-insert="tabInsertId" data-group="tabGroup1" data-headinglvl="3">
+                    <span>Surfer</span>
+                </li>
+                <li id="tab2id" class="accTab tab tab2" role="tab" data-src="files/tabs.html#tab2content" data-role="Grapes Tab" data-insert="tabInsertId" data-group="tabGroup1" data-headinglvl="3">
+                    <span>Grapes</span>
+                </li>
+                <li id="tab3id" class="accTab tab tab3" role="tab" data-src="files/tabs.html#tab3content" data-role="Trees Tab" data-insert="tabInsertId" data-group="tabGroup1" data-headinglvl="3">
+                    <span>Trees</span>
+                </li>
+                <li id="tab4id" class="accTab tab tab4" role="tab" data-src="files/tabs.html#tab4content" data-role="Sculpture Tab" data-insert="tabInsertId" data-group="tabGroup1" data-headinglvl="3">
+                    <span>Sculpture</span>
+                </li>
+            </ul>
+            <div class="content" id="tabInsertId">
             </div>
         </div>
-    </body>
+        <div class="intro tal keyboard">
+            <p> The tab controls are keyboard accessible:</p>
+            <ul>
+                <li>Set focus on the tab control.</li>
+                <li>Press the Arrow keys to move focus between tabs.</li>
+                <li>Press <kbd class="home">Home</kbd> or <kbd class="end">End</kbd> to move to the first or last tab.</li>
+                <li>Press any letter or number to jump to a tab starting with that character or digit.</li>
+                <li>Press the <kbd>Spacebar</kbd> to open (or optionally toggle if configured) the selected tab.</li>
+                <li>Mouse users can click the desired tab as usual.</li>
+            </ul>
+        </div>
+        <div class="hd">
+            <h4>Bootstrap Syntax</h4>
+        </div>
+        <div class="intro tal">
+            <p>
+                <code>
+                    &lt;div role="tablist">
+                    <br />
+                    <br />
+                    &lt;a href="#"
+                    <br />
+                    role="tab"
+                    <br />
+                    class="accTab"
+                    <br />
+                    data-src="path/file.html#tab1contentID"
+                    <br />
+                    data-role="ContentPanelRoleName"
+                    <br />
+                    data-defaultopen="true"
+                    <br />
+                    data-insert="insertionPointElementID"
+                    <br />
+                    data-group="sharedGroupName"
+                    <br />
+                    data-headinglvl="#"
+                    <br />
+                    id="uniqueID"
+                    <br />
+                    &gt; Tab1 Name &lt;/a&gt;
+                    <br />
+                    <br />
+                    &lt;a href="#"
+                    <br />
+                    role="tab"
+                    <br />
+                    class="accTab"
+                    <br />
+                    data-src="path/file.html#tab2contentID"
+                    <br />
+                    data-role="ContentPanelRoleName"
+                    <br />
+                    data-insert="insertionPointElementID"
+                    <br />
+                    data-group="sharedGroupName"
+                    <br />
+                    data-headinglvl="#"
+                    <br />
+                    id="uniqueID"
+                    <br />
+                    &gt; Tab2 Name &lt;/a&gt;
+                    <br />
+                    <br />
+                    &lt;/div&gt;
+                </code>
+            </p>
+            <p> Or</p>
+            <p>
+                <code>
+                    &lt;div role="tablist">
+                    <br />
+                    <br />
+                    &lt;a href="#"
+                    <br />
+                    role="tab"
+                    <br />
+                    class="accTab"
+                    <br />
+                    data-internal="tab1contentID"
+                    <br />
+                    data-role="ContentPanelRoleName"
+                    <br />
+                    data-defaultopen="true"
+                    <br />
+                    data-insert="insertionPointElementID"
+                    <br />
+                    data-group="sharedGroupName"
+                    <br />
+                    data-headinglvl="#"
+                    <br />
+                    id="uniqueID"
+                    <br />
+                    &gt; Tab1 Name &lt;/a&gt;
+                    <br />
+                    <br />
+                    &lt;a href="#"
+                    <br />
+                    role="tab"
+                    <br />
+                    class="accTab"
+                    <br />
+                    data-internal="tab2contentID"
+                    <br />
+                    data-role="ContentPanelRoleName"
+                    <br />
+                    data-insert="insertionPointElementID"
+                    <br />
+                    data-group="sharedGroupName"
+                    <br />
+                    data-headinglvl="#"
+                    <br />
+                    id="uniqueID"
+                    <br />
+                    &gt; Tab2 Name &lt;/a&gt;
+                    <br />
+                    <br />
+                    &lt;/div&gt;
+                </code>
+            </p>
+        </div>
+        <div class="hd">
+            <h4>Attributes</h4>
+        </div>
+        <div class="intro tal">
+            <ul class="lsn">
+                <li><strong>role="tablist":</strong>
+                    The ARIA role that specifies a group of tab controls.
+                    This must only be included within the element that contains all individual tabs.</li>
+                <li><strong>role="tab":</strong>
+                    The ARIA role that specifies an individual tab control.
+                    To ensure accessibility, this element must not contain any other active elements.</li>
+                <li><strong>class="accTab":</strong>
+                    The bootstrap class name that specifies an accessible tab.</li>
+                <li><strong>data-src:</strong>
+                    The resource path and pointer to the ID attribute of the tab content container element.
+                    If set, data-internal should be blank or not included.</li>
+                <li><strong>data-internal:</strong>
+                    The ID attribute of the tab panel container element within the same document.
+                    <br />
+                    Syntax of tab panels within the same document:
+                    <br />
+                    <code>
+                        &lt;div class="hidden"&gt;
+                        <br />
+                        <br />
+                        &lt;div id="tab1contentID"&gt;
+                        <br />
+                        ...
+                        <br />
+                        &lt;/div&gt;
+                        <br />
+                        <br />
+                        &lt;div id="tab2contentID"&gt;
+                        <br />
+                        ...
+                        <br />
+                        &lt;/div&gt;
+                        <br />
+                        <br />
+                        ...
+                        <br />
+                        <br />
+                        &lt;/div&gt;
+                    </code>
+                    <br />
+                    If <code class="inline">data-internal</code> is set, <code class="inline">data-src</code> should be blank or not included.
+                </li>
+                <li><strong>data-defaultopen="true":</strong>
+                    Specifies that the referenced tab will open automatically.
+                    Only one tab per group should include this attribute.</li>
+                <li><strong>data-role:</strong>
+                    The role name that is conveyed to screen reader users as beginning and ending boundary text for the tab panel content.
+                    "Tab" is set by default if no value is specified.</li>
+                <li><strong>data-insert:</strong>
+                    The ID attribute of the container element where tab panel content will be inserted.</li>
+                <li><strong>data-group:</strong>
+                    The shared group name for all related tabs.
+                    This is used to differentiate separate tab groups within the same document.</li>
+                <li><strong>data-headinglvl:</strong>
+                    The heading level of the tab panel section for screen reader users.
+                    This should reflect proper nesting.
+                    If the tab panel content is inserted within an H1, data-headinglvl should be set to '2', and so on.
+                    If no value is specified, and if no override is set within accdc_bootstrap.js via ariaLevel:#, '3' will be set by default.</li>
+                <li><strong>id:</strong>
+                    The unique ID of the element.
+                    This value is also registered as the ID of the individual tab AccDC Object, making it possible to invoke the object programmatically.
+                    <br />
+                    <code>
+                        $A.reg.uniqueID.open();
+                        <br />
+                        // All other AccDC API properties and methods are similarly available.
+                    </code>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
 </html>

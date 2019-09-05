@@ -1,68 +1,78 @@
 /* WHATSOCK, 2016 */
 /* Specific styles for Accessible Tree */
 
-
 /* API */
-div.viewport {margin: 2rem 0;}
+div.viewport {
+  margin: 2rem 0;
+}
 
-#map {width: 100%;}
+#map {
+  width: 100%;
+}
 
 div.TreeView ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-div.TreeView li {font-size: 1.1em;}
-div.TreeView li li {font-size: 100%;}
+div.TreeView li {
+  font-size: 1.1em;
+}
+div.TreeView li li {
+  font-size: 100%;
+}
 
-div.TreeView ul ul {margin-left: 2em;}
+div.TreeView ul ul {
+  margin-left: 2em;
+}
 
 div.TreeView ul > li > a {
-	display: inline-block;
-	text-decoration: none;
-	background: transparent;
-	padding: 0.3em 0.5em;
+  display: inline-block;
+  text-decoration: none;
+  background: transparent;
+  padding: 0.3em 0.5em;
 }
 
-div.TreeView ul > li > a.branch {}
+div.TreeView ul > li > a.branch {
+}
 
 div.TreeView ul > li > a.branch[aria-selected="true"] {
-	color: #000;
-	background: #F2D3A1;
+  color: #000;
+  background: #f2d3a1;
 }
 
 div.TreeView ul > li > a[aria-expanded="false"]:before {
-	color: red;
-	content: '+ \00A0';
+  color: red;
+  content: "+ \00A0";
 }
 
 div.TreeView ul > li > a[aria-expanded="true"]:before {
-	color: blue;
-	content: '- \00A0';
+  color: blue;
+  content: "- \00A0";
 }
 
-div.TreeView ul > li > a.leaf {}
+div.TreeView ul > li > a.leaf {
+}
 
 div.TreeView ul > li > a.leaf[aria-selected="true"] {
-	color: #000;
-	background: #F2D3A1;
+  color: #000;
+  background: #f2d3a1;
 }
-
 
 @media screen and (min-width: 1600px) {
-	#treeview {
-		display: -webkit-flex;
-		display: -ms-flex;
-		display: flex;
-	}
-	#treeview.demo-block {padding: 1rem 0;}
-	#tree {
-		flex: 1 0 25%;
-	}
-	#map {
-		flex: 1 0 75%;
-	}
-	
+  #treeview {
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+  }
+  #treeview.demo-block {
+    padding: 1rem 0;
+  }
+  #tree {
+    flex: 1 0 25%;
+  }
+  #map {
+    flex: 1 0 75%;
+  }
 }
-

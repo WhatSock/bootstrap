@@ -1,145 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-        <title>AccDC Bootstrap</title>
-        <meta name="Author" content="Bryan Garaventa" />
-        <link rel="stylesheet" type="text/css" href="css/global.css" />
-        <link rel="stylesheet" type="text/css" href="css/accordion.css" />
-        <link rel="stylesheet" type="text/css" href="css/banner.css" />
-        <link rel="stylesheet" type="text/css" href="css/calendar.css" />
-        <link rel="stylesheet" type="text/css" href="css/carousel.css" />
-        <link rel="stylesheet" type="text/css" href="css/menus.css" />
-        <link rel="stylesheet" type="text/css" href="css/modal.css" />
-        <link rel="stylesheet" type="text/css" href="css/popup.css" />
-        <link rel="stylesheet" type="text/css" href="css/slideshow.css" />
-        <link rel="stylesheet" type="text/css" href="css/tabs.css" />
-        <link rel="stylesheet" type="text/css" href="css/tooltip.css" />
-        <link rel="stylesheet" type="text/css" href="css/tree.css" />
-        <link rel="stylesheet" type="text/css" href="css/scroll.css" />
-        <link rel="stylesheet" type="text/css" href="css/toggle.css" />
-                <script type="text/javascript" src="js/Acc.DC.API.js"></script>
-                <script type="text/javascript" src="js/modules/aria_menu_module.min.js"></script>
-                <script type="text/javascript" src="js/modules/aria_tabs_module.min.js"></script>
-                <script type="text/javascript" src="js/modules/acordion_generator.min.js"></script>
-                <script type="text/javascript" src="js/modules/calendar_generator.min.js"></script>
-                <script type="text/javascript" src="js/modules/banner_module.min.js"></script>
-                <script type="text/javascript" src="js/modules/modal_module.min.js"></script>
-                <script type="text/javascript" src="js/modules/popup_module.min.js"></script>
-                <script type="text/javascript" src="js/modules/tooltip_module.min.js"></script>
-                <script type="text/javascript" src="js/modules/carousel_module.min.js"></script>
-                <script type="text/javascript" src="js/modules/aria_tree_module.min.js"></script>
-                <script type="text/javascript" src="js/modules/scrollable_div_generator.min.js"></script>
-                <script type="text/javascript" src="js/accdc_bootstrap.js"></script>
 
-                <script type="text/javascript">
-                  $A.bind(window, 'load', function(){
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AccDC Bootstrap</title>
+    <meta name="Author" content="Bryan Garaventa" />
+    <link rel="stylesheet" type="text/css" href="css/global.css" />
+    <link rel="stylesheet" type="text/css" href="css/accordion.css" />
+    <link rel="stylesheet" type="text/css" href="css/banner.css" />
+    <link rel="stylesheet" type="text/css" href="css/calendar.css" />
+    <link rel="stylesheet" type="text/css" href="css/carousel.css" />
+    <link rel="stylesheet" type="text/css" href="css/menus.css" />
+    <link rel="stylesheet" type="text/css" href="css/modal.css" />
+    <link rel="stylesheet" type="text/css" href="css/popup.css" />
+    <link rel="stylesheet" type="text/css" href="css/slideshow.css" />
+    <link rel="stylesheet" type="text/css" href="css/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="css/tooltip.css" />
+    <link rel="stylesheet" type="text/css" href="css/tree.css" />
+    <link rel="stylesheet" type="text/css" href="css/scroll.css" />
+    <link rel="stylesheet" type="text/css" href="css/toggle.css" />
+    <script type="text/javascript" src="js/Acc.DC.API.js"></script>
+    <script type="text/javascript" src="js/modules/aria_menu_module.min.js"></script>
+    <script type="text/javascript" src="js/modules/aria_tabs_module.min.js"></script>
+    <script type="text/javascript" src="js/modules/acordion_generator.min.js"></script>
+    <script type="text/javascript" src="js/modules/calendar_generator.min.js"></script>
+    <script type="text/javascript" src="js/modules/banner_module.min.js"></script>
+    <script type="text/javascript" src="js/modules/modal_module.min.js"></script>
+    <script type="text/javascript" src="js/modules/popup_module.min.js"></script>
+    <script type="text/javascript" src="js/modules/tooltip_module.min.js"></script>
+    <script type="text/javascript" src="js/modules/carousel_module.min.js"></script>
+    <script type="text/javascript" src="js/modules/aria_tree_module.min.js"></script>
+    <script type="text/javascript" src="js/modules/scrollable_div_generator.min.js"></script>
+    <script type="text/javascript" src="js/accdc_bootstrap.js"></script>
 
-                    $A.bind('p.topLink a', 'click', function(ev){
-                      $A.setFocus($A.query('h1')[0]);
-                      ev.preventDefault();
-                    });
+    <script type="text/javascript">
+        $A.bind(window, 'load', function() {
 
-                  $A.bind('#skipLink', 'click', function(ev){
-                    $A.setFocus($A.getEl('wrapper'));
-                    ev.preventDefault();
-                  });
-
-                  var verNode = $A.getEl('AccDCCurrentVerS1');
-
-                  if (verNode && $A.version) {
-                      verNode.innerHTML = $A.version;
-                  }
-
-                  if (window.navigator.onLine) {
-                    // Check for updates
-                    $A.getScript('http://api.whatsock.com/bootstrap-updates.js');
-                  }
-
-
-                  // Scroll to page title when interacting with main tabs
-                  let tabLink = document.querySelector('.contextual-menu');
-                  let contentY = document.getElementById('pgContent').offsetTop;
-
-                  tabLink.addEventListener('click', function() {
-                    window.scroll({
-                      top: contentY,
-                      behavior: "smooth"
-                    });
-                  });
+            $A.bind('p.topLink a', 'click', function(ev) {
+                $A.setFocus($A.query('h1')[0]);
+                ev.preventDefault();
             });
-        </script>
-    </head>
 
-    <body>
-    	<div id="container">
+            $A.bind('#skipLink', 'click', function(ev) {
+                $A.setFocus($A.getEl('wrapper'));
+                ev.preventDefault();
+            });
 
-			<header>
-				<h1><strong>AccDC</strong> Accelerated Dynamic Content</h1>
-				<p class="baseline version">AccDC <abbr title="Application Programming Interface">API</abbr> for Standalone, version: <span id="AccDCCurrentVerS1"></span></p>
-				<p class="logo"><img alt="WhatSock : Changing the world one step at a time" src="img/whatsock.svg" /></p>
+            var verNode = $A.getEl('AccDCCurrentVerS1');
 
-				<nav>
-					<h2>Main navigation <a id="skipLink" href="#wrapper">(Jump to main content)</a></h2>
-					<ul class="menuList">
-						<li><a href="http://whatsock.com/">Overview</a></li>
-						<li><a href="http://whatsock.com/tsg/">Technical Style Guide</a></li>
-						<li class="active"><a href="http://whatsock.com/bootstrap/">AccDC Bootstrap</a></li>
-					</ul>
-				</nav>
-			</header>
+            if (verNode && $A.version) {
+                verNode.innerHTML = $A.version;
+            }
 
-			<div id="wrapper">
-				<main>
-					<article>
-						<h2>AccDC Bootstrap </h2>
+            if (window.navigator.onLine) {
+                // Check for updates
+                $A.getScript('http://api.whatsock.com/bootstrap-updates.js');
+            }
 
-						<ul role="tablist" class="contextual-menu">
-			                <li role="presentation"><a id="tb1" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/intro.htm#pg-intro" data-defaultopen="true"><span> Bootstrap</span></a></li>
-			                <li role="presentation"><a id="tb2" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/accordion.htm#pg-accordion"><span> Accordion</span></a></li>
-			                <li role="presentation"><a id="tb3" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/banner.htm#pg-banner"><span> Banner</span></a></li>
-			                <li role="presentation"><a id="tb4" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/calendar.htm#pg-calendar"><span> Calendar</span></a></li>
-			                <li role="presentation"><a id="tb5" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/carousel.htm#pg-carousel"><span> Carousel</span></a></li>
-			                <li role="presentation"><a id="tb6" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/menus.htm#pg-menus"><span> Menus</span></a></li>
-			                <li role="presentation"><a id="tb7" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/modal.htm#pg-modal"><span> Modal</span></a></li>
-			                <li role="presentation"><a id="tb8" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/popup.htm#pg-popup"><span> Popup</span></a></li>
-			                <li role="presentation"><a id="tb13" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/scroll.htm#pg-scroll"><span> Scroll</span></a></li>
-			                <li role="presentation"><a id="tb9" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/slideshow.htm#pg-slideshow"><span> Slideshow</span></a></li>
-			                <li role="presentation"><a id="tb10" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/tabs.htm#pg-tabs"><span> Tabs</span></a></li>
-			                <li role="presentation"><a id="tb14" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/toggle.htm#pg-toggle"><span> Toggle</span></a></li>
-			                <li role="presentation"><a id="tb11" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/tooltip.htm#pg-tooltip"><span> Tooltip</span></a></li>
-			                <li role="presentation"><a id="tb12" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/tree.htm#pg-tree"><span> Tree</span></a></li>
-			            </ul>
-						<div class="cb" id="pgContent">
-			                <img src="img/clock.png" alt="Loading..." title="Loading..." class="loadIcon" />
-			            </div>
-					</article>
-				</main>
 
-				<aside>
-					<h2>Transversal content</h2>
-					<section class="honors">
-						<h3>The "Above and Beyond Accessibility Award" <a href="http://thersa.org" target="_blank">
-							<img src="img/rsa_fellowship_logo.jpg" alt="Supported by the Royal Society of Arts" title="Supported by the Royal Society of Arts" /></a></h3>
-							<p>AccDC was awarded the <strong>"Above and Beyond Accessibility Award"</strong> from the United States Department of Labor,
-								and was presented at the Developing with Accessibility Event, hosted by the Federal Communications
-								Commission in Washington DC in 2012.</p>
-					</section>
-					<section class="at-guide">
-						<h3><a href="http://whatsock.com/training">The Accessibility Tree Guide</a></h3>
-						<p>A Training Guide, if you want to learn how to be totally
-							awesome. <a href="http://whatsock.com/training">Check it out!</a></p>
-					</section>
-				</aside>
-			</div>
+            // Scroll to page title when interacting with main tabs
+            let tabLink = document.querySelector('.contextual-menu');
+            let contentY = document.getElementById('pgContent').offsetTop;
 
-			<p class="topLink"><a href="#"><img src="img/up.png" title="Back to Top" alt="Back to Top" /></a></p>
-			<footer>
-				<p class="copyright">&copy;<script type="text/javascript">document.write(new Date().getFullYear());</script> WhatSock. All rights reserved.</p>
-				<p>Visual design by <a href="http://gericci.me/">Angela Ricci</a>.</p>
-			</footer>
-		</div>
+            tabLink.addEventListener('click', function() {
+                window.scroll({
+                    top: contentY,
+                    behavior: "smooth"
+                });
+            });
+        });
+    </script>
+</head>
 
-    </body>
+<body>
+    <div id="container">
+
+        <header>
+            <h1><strong>AccDC</strong> Accelerated Dynamic Content</h1>
+            <p class="baseline version">AccDC <abbr title="Application Programming Interface">API</abbr> for Standalone, version: <span id="AccDCCurrentVerS1"></span></p>
+            <p class="logo"><img alt="WhatSock : Changing the world one step at a time" src="img/whatsock.svg" /></p>
+
+            <nav>
+                <h2>Main navigation <a id="skipLink" href="#wrapper">(Jump to main content)</a></h2>
+                <ul class="menuList">
+                    <li><a href="http://whatsock.com/">Overview</a></li>
+                    <li><a href="http://whatsock.com/tsg/">Technical Style Guide</a></li>
+                    <li class="active"><a href="http://whatsock.com/bootstrap/">AccDC Bootstrap</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div id="wrapper">
+            <main>
+                <article>
+                    <h2>AccDC Bootstrap </h2>
+
+                    <ul role="tablist" class="contextual-menu">
+                        <li role="presentation"><a id="tb1" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/intro.htm#pg-intro" data-defaultopen="true"><span> Bootstrap</span></a></li>
+                        <li role="presentation"><a id="tb2" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/accordion.htm#pg-accordion"><span> Accordion</span></a></li>
+                        <li role="presentation"><a id="tb3" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/banner.htm#pg-banner"><span> Banner</span></a></li>
+                        <li role="presentation"><a id="tb4" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/calendar.htm#pg-calendar"><span> Calendar</span></a></li>
+                        <li role="presentation"><a id="tb5" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/carousel.htm#pg-carousel"><span> Carousel</span></a></li>
+                        <li role="presentation"><a id="tb6" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/menus.htm#pg-menus"><span> Menus</span></a></li>
+                        <li role="presentation"><a id="tb7" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/modal.htm#pg-modal"><span> Modal</span></a></li>
+                        <li role="presentation"><a id="tb8" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/popup.htm#pg-popup"><span> Popup</span></a></li>
+                        <li role="presentation"><a id="tb13" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/scroll.htm#pg-scroll"><span> Scroll</span></a></li>
+                        <li role="presentation"><a id="tb9" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/slideshow.htm#pg-slideshow"><span> Slideshow</span></a></li>
+                        <li role="presentation"><a id="tb10" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/tabs.htm#pg-tabs"><span> Tabs</span></a></li>
+                        <li role="presentation"><a id="tb14" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/toggle.htm#pg-toggle"><span> Toggle</span></a></li>
+                        <li role="presentation"><a id="tb11" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/tooltip.htm#pg-tooltip"><span> Tooltip</span></a></li>
+                        <li role="presentation"><a id="tb12" role="tab" href="#" class="accTab" data-group="nav" data-headinglvl="3" data-role="Content" data-insert="pgContent" data-src="pages/tree.htm#pg-tree"><span> Tree</span></a></li>
+                    </ul>
+                    <div class="cb" id="pgContent">
+                        <img src="img/clock.png" alt="Loading..." title="Loading..." class="loadIcon" />
+                    </div>
+                </article>
+            </main>
+
+            <aside>
+                <h2>Transversal content</h2>
+                <section class="honors">
+                    <h3>The "Above and Beyond Accessibility Award" <a href="http://thersa.org" target="_blank">
+                            <img src="img/rsa_fellowship_logo.jpg" alt="Supported by the Royal Society of Arts" title="Supported by the Royal Society of Arts" /></a></h3>
+                    <p>AccDC was awarded the <strong>"Above and Beyond Accessibility Award"</strong> from the United States Department of Labor,
+                        and was presented at the Developing with Accessibility Event, hosted by the Federal Communications
+                        Commission in Washington DC in 2012.</p>
+                </section>
+                <section class="at-guide">
+                    <h3><a href="http://whatsock.com/training">The Accessibility Tree Guide</a></h3>
+                    <p>A Training Guide, if you want to learn how to be totally
+                        awesome. <a href="http://whatsock.com/training">Check it out!</a></p>
+                </section>
+            </aside>
+        </div>
+
+        <p class="topLink"><a href="#"><img src="img/up.png" title="Back to Top" alt="Back to Top" /></a></p>
+        <footer>
+            <p class="copyright">&copy;<script type="text/javascript">
+                    document.write(new Date().getFullYear());
+                </script> WhatSock. All rights reserved.</p>
+            <p>Visual design by <a href="http://gericci.me/">Angela Ricci</a>.</p>
+        </footer>
+    </div>
+
+</body>
+
 </html>
